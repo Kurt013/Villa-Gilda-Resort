@@ -42,12 +42,12 @@
   <div class="homepage-content">
     <div class="homepage-logo"><img class="home-logo" src="images/villa-gilda-logo2.png" alt="Villa Gilda Logo"></div>
     <div class="redirect-section">
-      <div><a href="#" class="redirect-button-1">MANAGE RESERVATIONS</a></div>
-      <div><a href="#" class="redirect-button-2">SEE RESERVATION LIST</a></div>
+      <div><a href="reserve.php" class="redirect-button-1">MANAGE RESERVATIONS</a></div>
+      <div><a href="ourlist.php" class="redirect-button-2">SEE RESERVATION LIST</a></div>
       <?php 
         if ($_SESSION['role'] == 'admin') {
           echo"
-          <div><a href='' class='redirect-button-3'>MONITOR DASHBOARD</a></div>
+          <div><a href='dashboard.php' class='redirect-button-3'>MONITOR DASHBOARD</a></div>
           ";
         }
       ?>
