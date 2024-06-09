@@ -114,7 +114,7 @@ class PDF extends FPDF
         $this->SetFont('Arial','B',12);
         $this->Cell(50,10,"Bill To: ",0,1);
         $this->SetFont('Arial','',12);
-        $this->Cell(50,7,$info["lastName"],0,1);
+        $this->Cell(50,7,$info["Name"],0,1);
         $this->Cell(50,7,$info["contactNo"],0,1);
 
         // Display Invoice no
@@ -204,7 +204,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         $row_invoice = $result_invoice->fetch_assoc();
 
         $info = [
-            "lastName" => $row_invoice["lastName"],
+            "Name" => $row_invoice["lastName"] . ', ' . $row_invoice["firstName"],
             "contactNo" => $row_invoice["contactNo"],
             "invoice_date" => date('d-m-Y'),
             "invoice_no" => str_pad($row_invoice["id"], 7, '0', STR_PAD_LEFT),
