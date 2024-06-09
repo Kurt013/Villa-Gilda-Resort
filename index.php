@@ -73,7 +73,7 @@
               
               ";
       } else {
-        $conn = new mysqli('localhost', 'root', '', 'user accounts');
+        $conn = new mysqli('localhost', 'root', '', 'villa gilda');
         
         $acc_username = $_POST['username'];
         $acc_password = $_POST['password'];
