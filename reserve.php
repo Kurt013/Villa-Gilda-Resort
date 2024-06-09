@@ -41,9 +41,6 @@
     include('header.php');
   ?>
 
-<!-- Put Code Here -->
-
-
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
@@ -76,5 +73,6 @@ $bookableCell->routeActions();
 echo $calendar->show();
 
 ?>
+
 </body>
 </html>

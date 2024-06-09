@@ -85,7 +85,6 @@ class Calendar
             '</div>' .
             '<div class="box-content">' .
             '<ul class="label">' . $this->_createLabels() . '</ul>';
-        $content .= '<div class="clear"></div>';
         $content .= '<ul class="dates">';
         for ($i = 0; $i < $this->_weeksInMonth($month, $year); $i++) {
             for ($j = 1; $j <= 7; $j++) {
@@ -93,8 +92,6 @@ class Calendar
             }
         }
         $content .= '</ul>';
-        $content .= '<div class="clear"></div>';
-        $content .= '</div>';
         $content .= '</div>';
         return $content;
     }
@@ -160,9 +157,11 @@ class Calendar
  
         return
             '<div class="header">' .
+            '<h1 class="title">' . date('M Y', strtotime($this->currentYear . '-' . $this->currentMonth . '-1')) . '</h1>' .
+            '<div class="month-nav">'.
             '<a class="prev" href="' . $this->naviHref . '?month=' . sprintf('%02d', $preMonth) . '&year=' . $preYear . '">&lt;</a>' .
-            '<span class="title">' . date('Y M', strtotime($this->currentYear . '-' . $this->currentMonth . '-1')) . '</span>' .
             '<a class="next" href="' . $this->naviHref . '?month=' . sprintf("%02d", $nextMonth) . '&year=' . $nextYear . '">&gt;</a>' .
+            '</div>'.
             '</div>';
     }
  

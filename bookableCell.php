@@ -280,10 +280,11 @@ private function bookingForm($date)
     } else {
         // Display only the "Book" button if it's not clicked
         return '
-        <form method="post" action="' . $this->currentURL . '">
+        <form method="post"  action="' . $this->currentURL . '">
             <input type="hidden" name="add" />
             <input type="hidden" name="date" value="' . $date . '" />
-            <input class="submit" type="submit" value="Book" />
+            <label for="submit"> APple</label>
+            <input class="submit" type="submit" id="submit" name="submit" value="" />
         </form>';
     }
 }
@@ -295,7 +296,7 @@ private function bookingForm($date)
             <form onsubmit="return confirm(\'Are you sure to cancel?\');" method="post" action="' . $this->currentURL . '">
                 <input type="hidden" name="delete" />
                 <input type="hidden" name="id" value="' . $id . '" />
-                <input class="submit" type="submit" value="Delete" />
+                <input class="submit" type="submit" value="" />
             </form>';
     }
 }

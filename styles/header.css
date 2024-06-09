@@ -33,6 +33,10 @@
   color: white;
 }
 
+body {
+  padding-top: 80px;
+}
+
 header {
   position: fixed;
   top: 0;
