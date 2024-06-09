@@ -264,7 +264,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         while ($row = mysqli_fetch_assoc($result)){
             echo '<tr>
                 <td>' .$number++. '</td>
-                <td>'.$row["lastName"] . " " . $row["firstName"].'</td>
+                <td>'.$row["lastName"] . ", " . $row["firstName"].'</td>
                 <td>'.$row["booking_date"].'</td>
                 <td>'.$row["time_slot"].'</td>
                 <td>'.$row["included"].'</td>

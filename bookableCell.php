@@ -269,22 +269,21 @@ private function bookingForm($date)
                 timeSlotSelect.addEventListener("change", updateAmount);
                 includedSelect.addEventListener("change", updateAmount);
                 updateAmount(); // Initialize amount
-
                 const closeBtn = document.querySelector(".close-btn");
                 closeBtn.addEventListener("click", function() {
                     // Redirect back to the calendar page
                     window.location.href = "' . $this->currentURL . '";
                 });
+
             });
         </script>';
     } else {
         // Display only the "Book" button if it's not clicked
         return '
-        <form method="post"  action="' . $this->currentURL . '">
+        <form method="post" action="' . $this->currentURL . '">
             <input type="hidden" name="add" />
             <input type="hidden" name="date" value="' . $date . '" />
-            <label for="submit"> APple</label>
-            <input class="submit" type="submit" id="submit" name="submit" value="" />
+            <input class="submit" type="submit" value="Book" />
         </form>';
     }
 }
@@ -296,7 +295,7 @@ private function bookingForm($date)
             <form onsubmit="return confirm(\'Are you sure to cancel?\');" method="post" action="' . $this->currentURL . '">
                 <input type="hidden" name="delete" />
                 <input type="hidden" name="id" value="' . $id . '" />
-                <input class="submit" type="submit" value="" />
+                <input class="submit" type="submit" value="Delete" />
             </form>';
     }
 }
