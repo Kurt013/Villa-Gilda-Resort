@@ -188,9 +188,9 @@ input {
   background-color: var(---dark-blue);
 }
 
-.login-form .field {
+/* .login-form .field {
   padding-right: 2.2em;
-}
+} */
 
 .login-form input:focus {
   outline-width: 0.5px;
@@ -226,16 +226,17 @@ input {
   font-family: 'Spotify Black';
 }
 
-input[type='password'] {
+/* input[type='password'] {
   font-family: 'Arial';
-}
-
+  padding-bottom: 12px;
+} */
+/* 
 .password {
   margin-bottom: 20px;
   padding-right: 40px;
-}
+} */
 
-.show-pass {
+/* .show-pass {
   cursor: pointer;
   position: relative;
 }
@@ -255,7 +256,7 @@ input[type='password'] {
   position: absolute;
   right: 7px;
   bottom: -2px;
-}
+} */
 
 .submit-btn {
   background-color: var(---yellow);

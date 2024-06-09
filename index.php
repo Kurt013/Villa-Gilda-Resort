@@ -24,7 +24,7 @@
     <div class="username-field"><input class="username" placeholder="Enter your username" type="text" name="username" required></div>
     <div class="password-field">
       <input placeholder="Enter your password" class="password" id="password" type="password" name="password" required>
-      <label class="show-pass">
+      <!-- <label class="show-pass">
         <i class='bx bx-hide passwordState'></i>
         <input onclick="
           const icon = document.querySelector('.passwordState').classList;
@@ -41,7 +41,7 @@
             text.type = 'text';
           }
         " type="checkbox" class="show-pass-toggle" id="show-pass-toggle">
-      </label>
+      </label> -->
     </div>
     <div class="login"><input class="submit-btn" type="submit" name="login" value="LOGIN"></div>
     <div class="forgot"><a class="forgot-redirect" href="#">FORGOT YOUR PASSWORD?</a></div>
