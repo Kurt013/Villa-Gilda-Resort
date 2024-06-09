@@ -244,6 +244,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 
 <?php
  $number = 1;
+
+    if ($resultCheck > 0){
 ?>
 <table border="1">
     <tr>
@@ -259,7 +261,6 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         <th>Receipt</th>
     </tr>
     <?php
-    if ($resultCheck > 0){
         while ($row = mysqli_fetch_assoc($result)){
             echo '<tr>
                 <td>' .$number++. '</td>
@@ -293,7 +294,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
             </tr>';
         }
     } else {
-        echo '<tr><td colspan="12"><center><h1>NO RESERVATION!!</h1></center></td></tr>';
+        echo '<center><h1>NO RESERVATION!!</h1></center>';
     }
     ?>
 </table>
