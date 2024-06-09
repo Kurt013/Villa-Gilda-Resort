@@ -123,6 +123,7 @@ if (isset($_POST['submit']) || empty($_SESSION['role'])) {
             }
             else if ($row['status'] == 'fully paid'){
                 $total_earnings += $row['amount'];
+                $total_earnings += $row['deposit_amount'];
             }
             $reserved_days[date('j', strtotime($row['booking_date']))] = true;
             $total_reservations++;
