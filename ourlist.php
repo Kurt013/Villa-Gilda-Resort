@@ -39,6 +39,7 @@
 <body>
   <?php 
     include('header.php');
+    require 'fpdf/fpdf.php';
   ?>
   <script>
     const checkTab = document.getElementById('menu');
@@ -49,8 +50,6 @@
   </script>
 
 <?php
-require 'fpdf/fpdf.php';
-
 // Define the current month
 $current_month = date('n');
 
