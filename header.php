@@ -87,7 +87,7 @@
   <nav class="nav-list">
     <ul class="list">
       <li>
-        <a href="" class="nav-block <?php 
+        <a href="homepage.php" class="nav-block <?php 
         if ($_SESSION['role'] == 'admin') {
           echo"nav-admin";
         }
@@ -100,7 +100,7 @@
         </a>
       </li>
       <li>
-        <a href="" class="nav-block <?php 
+        <a href="reserve.php" class="nav-block <?php 
           if ($_SESSION['role'] == 'admin') {
             echo"nav-admin";
           }
@@ -113,7 +113,7 @@
         </a>
       </li>
       <li>
-        <a href="" class="nav-block <?php 
+        <a href="ourlist.php" class="nav-block <?php 
             if ($_SESSION['role'] == 'admin') {
               echo"nav-admin";
             }
@@ -126,7 +126,7 @@
         </a>
       </li>
       <li>
-        <a href='' class='nav-block <?php 
+        <a href='dashboard.php' class='nav-block <?php 
             if ($_SESSION['role'] == 'admin') {
               echo"nav-admin";
             }
@@ -139,7 +139,7 @@
           </a>
         </li>
         <li>
-          <a href='' class='nav-block <?php 
+          <a href='staff.php' class='nav-block <?php 
             if ($_SESSION['role'] == 'admin') {
               echo"nav-admin";
             }
