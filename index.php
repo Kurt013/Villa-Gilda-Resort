@@ -61,7 +61,7 @@
       //Allows username or email
       if (empty($_POST["username"]) || $_POST["username"] != filter_input(INPUT_POST, "username", 
                                               FILTER_SANITIZE_SPECIAL_CHARS)) {
-        echo "<dialog>
+        echo "<dialog open>
                 <h1>Invalid Username/Password</h1>
                 <button id='exit' class='exit'>X</button>
               </dialog>
@@ -70,7 +70,6 @@
                 dialog = document.querySelector('dialog');
                 dialog.showModal();
               </script>
-              
               ";
       } else {
         $conn = new mysqli('localhost', 'root', '', 'villa gilda');
@@ -87,6 +86,9 @@
             $_SESSION['role'] = $row['Role'];
 
             header('Location: homepage.php');
+          }
+          else {
+            
           }
         }
       }

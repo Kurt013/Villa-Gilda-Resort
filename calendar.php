@@ -144,7 +144,7 @@ class Calendar
     $borderClass = ($cellNumber % 7 == 1 ? ' start' : ($cellNumber % 7 == 0 ? ' end' : ''));
 
     // Return the cell with the day number and original content
-    return '<li id="li-' . $this->currentDate . '" class="cell' . $borderClass . ($cellContent == null ? ' mask' : '') . $pastClass . '">' . '<span class="day-number">' . $dayNumber . '</span>' . ($cellContent ? '<div class="green-box">' . $cellContent . '</div>' : '') . '</li>';
+    return '<li id="li-' . $this->currentDate . '" class="cell' . $borderClass . ($cellContent == null ? ' mask' : '') . $pastClass . '">'. ($cellContent ? '<div class="green-box">' . $cellContent . '</div>' : '') . '<span class="day-number">' . $dayNumber . '</span>'. '</li>' ;
 }
 
     private function _createNavi()

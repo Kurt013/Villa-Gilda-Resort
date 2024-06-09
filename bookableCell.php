@@ -180,6 +180,7 @@ private function bookingForm($date)
                 <button type="button" class="close-btn">X</button>
                 <input type="hidden" name="add" value="1" />
                 <input type="hidden" name="date" value="' . $date . '" />
+                <div class="form-wrapper">
                 <div class="form-group">
                     <label for="time_slot">Time Slot:</label>
                     <select name="time_slot" id="time_slot" required">
@@ -228,6 +229,7 @@ private function bookingForm($date)
                         <label for="amount">Total Amount:</label>
                         <input type="text" name="amount" id="amount" value="' . number_format($amount, 2) . '" readonly>
                     </div>
+                </div>
                 <button class="submitReservation" type="submit">Submit</button>
             </form>
         </div>
@@ -283,7 +285,7 @@ private function bookingForm($date)
         <form method="post" action="' . $this->currentURL . '">
             <input type="hidden" name="add" />
             <input type="hidden" name="date" value="' . $date . '" />
-            <input class="submit" type="submit" value="Book" />
+            <input class="submit" id="submit" type="submit" value="Book" />
         </form>';
     }
 }

@@ -73,6 +73,10 @@ $bookableCell->routeActions();
 echo $calendar->show();
 
 ?>
+<div class="legends">
+  <p class="available">Available</p>
+  <p class="reserved">Reserved</p>
+</div>
 
 </body>
 </html>

@@ -2,20 +2,27 @@ body {
     background-color: #419999;
     height: 100vh;
     height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #calendar {
-    height: 80%;
+    height: 85%;
     font-family: 'Montserrat', sans-serif;
     width: 85%;
     overflow: hidden;
     border: 4px solid #226060;
     background-color: #226060;
     border-radius: 10px;
-    margin: 50px auto auto;
+    margin: 5% auto auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .box {
+    display: flex;
+    flex-basis: 50px;
     background-color: #F4CF3A;
 }
 
@@ -25,7 +32,6 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    height: 50px;
 }
 
 h1.title {
@@ -56,9 +62,9 @@ h1.title {
 }
 
 .box-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 .label, .dates {
@@ -70,25 +76,27 @@ h1.title {
 }
 
 .label {
-    height: 35px
+    height: 35px;
 }
 
 .dates {
     flex: 1;
     background-color: #F0F1F0;
+    overflow: hidden;
 }
 
 .cell {
-    border: 1px solid black;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .day-number {
     color: #226060;
+    z-index: 2;
 }
 
 @media only screen and (max-width: 418px) {
@@ -97,16 +105,84 @@ h1.title {
     }
 }
 
-.green-box {
+.past {
+    background-color: #CCCCCC;
+}
+
+.green-box + .day-number { 
+    color: white;
+}
+
+.open::before, .booked::before {
+    z-index: 1;
+    content: '';
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.open::before {
+    background-color: #00BF63;
+}
+
+.booked::before {
+    background-color: #FF0007;
+}
+
+.form-wrapper {
+    z-index: 1300;
+    background-color: blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.submit {   
+    z-index: 2;
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+}
+
+.legends {
+    flex-basis: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.legends p {
+    background-color: #F0F1F0;
+    color: #226060;
+    font-family: 'Spotify Bold';
+    margin-left: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 2px 20px 2px 35px;
     position: relative;
 }
 
-.booked {
+.legends p::before {
     position: absolute;
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: 3px;
+    left: 5px;
 }
 
-.submit {
-    background-color: transparent;
-    height: 50px;
-    width: 50px;
+.available::before {
+    background-color: #00BF63;
+}
+
+.reserved::before {
+    background-color: #FF0007;
 }
