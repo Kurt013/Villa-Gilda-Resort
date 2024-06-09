@@ -177,6 +177,7 @@ private function bookingForm($date)
         return '
         <div class="reservation-box">
             <form class="reservation_form" method="post" action="' . $this->currentURL . '">
+                <button type="button" class="close-btn">X</button>
                 <input type="hidden" name="add" value="1" />
                 <input type="hidden" name="date" value="' . $date . '" />
                 <div class="form-group">
@@ -227,7 +228,7 @@ private function bookingForm($date)
                         <label for="amount">Total Amount:</label>
                         <input type="text" name="amount" id="amount" value="' . number_format($amount, 2) . '" readonly>
                     </div>
-                <button class="submitReservation" type="submit" onclick="openPopup()">Submit</button>
+                <button class="submitReservation" type="submit">Submit</button>
             </form>
         </div>
         <script>
@@ -269,23 +270,12 @@ private function bookingForm($date)
                 includedSelect.addEventListener("change", updateAmount);
                 updateAmount(); // Initialize amount
 
+                const closeBtn = document.querySelector(".close-btn");
+                closeBtn.addEventListener("click", function() {
+                    // Redirect back to the calendar page
+                    window.location.href = "' . $this->currentURL . '";
+                });
             });
-        </script>   
-
-        <div class="popup" id="popup">
-                <h2> Reservation Successful! </h2>
-                <p>Booking successful for ' . $date . '.</p>
-                <button type="button" onclick="closePopup()"> OK </button>
-        </div>
-
-        <script>
-            let popup = document.getElementById("popup");
-            function openPopup(){
-            popup.classList.add("open-popup");
-            }
-            function closePopup(){
-            popup.classList.remove("open-popup");
-            }   
         </script>';
     } else {
         // Display only the "Book" button if it's not clicked
