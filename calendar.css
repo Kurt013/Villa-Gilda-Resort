@@ -4,11 +4,11 @@ body {
     height: 100dvh;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 #calendar {
     height: 85%;
+    min-height: 350px;
     font-family: 'Montserrat', sans-serif;
     width: 85%;
     overflow: hidden;
@@ -96,7 +96,7 @@ h1.title {
 
 .day-number {
     color: #226060;
-    z-index: 2;
+    z-index: 1;
 }
 
 @media only screen and (max-width: 418px) {
@@ -150,6 +150,7 @@ h1.title {
     bottom: 0;
     left: 0;
     top: 0;
+    transition: background-color 0.05s;
 }
 
 .legends {
@@ -186,3 +187,21 @@ h1.title {
 .reserved::before {
     background-color: #FF0007;
 }
+
+@media only screen and (min-width: 992px) {
+    .open .submit:hover {
+        background-color: #00BF63;
+    }
+    .booked .submit:hover {
+        background-color: #FF0007;
+    }
+
+
+}
+
+@media only screen and (max-width: 991px) {
+    ul.label li span {
+        display: none;
+    }
+}
+

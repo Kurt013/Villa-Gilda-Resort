@@ -1,0 +1,161 @@
+body {
+  background-color: #419999;
+}
+
+table {
+  width: 95%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 3px solid #226060;
+}
+
+
+.child td span {
+  height: 50px;
+}
+
+th:first-child, td:first-child {
+  width: 30px;
+}
+
+th {
+  padding: 10px 10px;
+  font-weight: 500;
+  background-color: #226060;
+}
+
+.child {
+}
+
+.child td:first-child {
+  color: white;
+  font-weight: bold;
+  background-color: #226060; 
+}
+
+.child td {
+  /* text-wrap: nowrap; */
+  text-align: left;
+}
+
+.child td * {
+  font-size: 14px;
+  color: #000000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;   
+}
+
+td {
+  text-wrap: wrap;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #000000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  background-color: #FFFFFF;
+  
+}
+
+.row td {
+  border: 3px solid #226060;
+}
+
+select {
+  border: 2px solid #368686;
+  background-color: #EBF0EA;
+  color: #737373;
+  font-style: italic;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+
+option {
+  border: 2px solid #368686;
+  background-color: #EBF0EA;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: #737373;
+}
+
+
+.id {
+  text-align: end;
+  font-weight: bold;
+  padding-right: 3px;
+}
+
+.name {
+  text-align: start;
+}
+
+.email {
+  width: 15%;
+}
+
+.name, .email {
+  word-break: break-all;
+}
+
+.hidden {
+  display: none;
+}
+
+
+@media only screen and (min-width: 992px) {
+  .name {
+    width: 15%;
+  }
+
+  .time {
+    width: 10%;
+  }
+
+  .child {
+    display: none;
+  }
+
+  .show {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .tablet {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .slot {
+    display: none;
+  }  
+
+  .filler {
+    display: none;
+ }
+ .name {
+  width: 50%;
+ }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .mobile {
+    display: none;
+  }
+  .name {
+    width: 50%;
+  }
+}
+
+.fully-paid {
+  color: #226060;
+  font-size: 25px;
+}
+
+.pending {
+  color: #737373;
+  font-size: 25px;
+}

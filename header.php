@@ -216,12 +216,12 @@ function showMenu(togglePara) {
   toggleMenu.classList.toggle('hide');
 }
 
- window.addEventListener('click', function(event) {
-    // Get the pane element
-    const toggleMenu = document.querySelector('.pane');
-    // Check if the click occurred outside of the pane
-    if (!toggleMenu.contains(event.document.querySelector('pane'))) {
-      toggleMenu.classList.add('hide');
-    }
-  });
+//  window.addEventListener('click', function(event) {
+//     // Get the pane element
+//     const toggleMenu = document.querySelector('.pane');
+//     // Check if the click occurred outside of the pane
+//     if (!toggleMenu.contains(event.document.querySelector('pane'))) {
+//       toggleMenu.classList.add('hide');
+//     }
+//   });
 </script>

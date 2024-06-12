@@ -244,59 +244,125 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 
 <?php
  $number = 1;
+ $child = 1;
 
     if ($resultCheck > 0){
 ?>
-<table border="1">
-    <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Booking Date</th>
-        <th>Time Slot</th>
-        <th>Inclusion</th>
-        <th>Contact Number</th>
-        <th>Email</th>
-        <th>Total Amount</th>
-        <th>Status</th>
-        <th>Receipt</th>
+<table id="myTable">
+    <thead>
+    <tr class="headerRow">
     </tr>
+    </thead>
+    <tbody>
     <?php
         while ($row = mysqli_fetch_assoc($result)){
-            echo '<tr>
-                <td>' .$number++. '</td>
-                <td>'.$row["lastName"] . ", " . $row["firstName"].'</td>
+            echo '<tr class="row">
+                <td class="id"><button class="btn" onclick="toggleSub('.$child.');">+</button>'.$number++. '</td>
+                <td class="name">'.$row["lastName"] . ", " . $row["firstName"].'</td>
                 <td>'.$row["booking_date"].'</td>
-                <td>'.$row["time_slot"].'</td>
-                <td>'.$row["included"].'</td>
-                <td>'.$row["contactNo"].'</td>
-                <td>'.$row["email"].'</td>
-                <td>'.$row["amount"].'</td>
-                <td>
-                <form method="POST" action="">
-                    <input type="hidden" name="booking_id" value="'.$row["id"].'">
-                    <input type="hidden" name="month" value="'.$selected_month.'">
-                    <label for="status"></label>
-                    <select id="status" name="status" onchange="this.form.submit()">
-                        <option value="pending" '.($row["status"] == "pending" ? "selected" : "").'>Pending</option>
-                        <option value="fully paid" '.($row["status"] == "fully paid" ? "selected" : "").'>Fully Paid</option>
-                        <option value="cancelled" '.($row["status"] == "cancelled" ? "selected" : "").'>Cancelled</option>
-                    </select>
+                <td class="time mobile">'.$row["time_slot"].'</td>
+                <td class="tablet">'.$row["included"].'</td>
+                <td class="tablet">'.$row["contactNo"].'</td>
+                <td class="email tablet">'.$row["email"].'</td>
+                <td class="tablet">'.$row["amount"].'.00</td>
+                <td class="tablet">
+                    <form method="POST" action="">
+                        <input type="hidden" name="booking_id" value="'.$row["id"].'">
+                        <input type="hidden" name="month" value="'.$selected_month.'">
+                        <label for="status"></label>
+                        <select id="status" name="status" onchange="this.form.submit()">
+                            <option value="pending" '.($row["status"] == "pending" ? "selected" : "").'>Pending</option>
+                            <option value="fully paid" '.($row["status"] == "fully paid" ? "selected" : "").'>Fully Paid</option>
+                            <option value="cancelled" '.($row["status"] == "cancelled" ? "selected" : "").'>Cancelled</option>
+                        </select>
                 </form>
                 </td>
-                <td>';
-            if ($row["status"] == "fully paid") {
-                echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank">Download Receipt</a>';
+                <td class="tablet">';
+            if ($row["status"] === "fully paid") {
+                echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank"><i class="ri-receipt-fill fully-paid"></i></a>';
             }
             else {
-                echo "Download Receipt";
+                echo "<i class='ri-receipt-fill pending'></i>";
             }
-            echo '</td>
+
+
+            echo'</td>
+            </tr>
+            <tr class="child num-'.$child.' hidden">
+                <td class="slot" colspan="2">
+                    Time Slot:
+                </td>
+                <td class="slot" colspan="3">
+                    '.$row["time_slot"].'
+                </td>
+            </tr>
+            <tr class="child num-'.$child.' hidden">
+                <td colspan="2">
+                    Inclusion:
+                </td>
+                <td colspan="3">
+                    '.$row["included"].'
+                </td>
+            </tr>
+            <tr class="child num-'.$child.' hidden">
+                <td colspan="2">
+                    Contact Number:
+                </td>
+                <td colspan="3">
+                    '.$row["contactNo"].'
+                </td>
+            </tr>
+            <tr class="child num-'.$child.' hidden">
+                <td colspan="2">
+                    Email:
+                </td>
+                <td colspan="3">
+                    '.$row["email"].'
+                </td>
+            </tr>
+            <tr class="child num-'.$child.' hidden">
+                <td colspan="2">
+                    Total Amount:
+                </td>
+                <td colspan="3">
+                    '.$row["amount"].'.00
+                </td>
+            </tr>
+            <tr class="child num-'.$child.' hidden">
+                <td colspan="2">
+                    Status:
+                </td>
+                <td colspan="3">
+                    <form method="POST" action="">
+                        <input type="hidden" name="booking_id" value="'.$row["id"].'">
+                        <input type="hidden" name="month" value="'.$selected_month.'">
+                        <label for="status"></label>
+                        <select id="status" name="status" onchange="this.form.submit()">
+                            <option value="pending" '.($row["status"] == "pending" ? "selected" : "").'>Pending</option>
+                            <option value="fully paid" '.($row["status"] == "fully paid" ? "selected" : "").'>Fully Paid</option>
+                            <option value="cancelled" '.($row["status"] == "cancelled" ? "selected" : "").'>Cancelled</option>
+                        </select>
+                    </form>
+                </td>
+            <tr class="child num-'.$child++.' hidden">
+                <td colspan="2">
+                    Receipt:
+                </td>
+                <td colspan="3">';
+                    if ($row["status"] == "fully paid") {
+                    echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank"><i class="ri-receipt-fill fully-paid"></i></a>';
+                }
+                else {
+                    echo "<i class='ri-receipt-fill pending'></i>";
+                }
+                echo'</td>
             </tr>';
         }
     } else {
         echo '<center><h1>NO RESERVATION!!</h1></center>';
     }
     ?>
+    </body>
 </table>
 <script>
 $(document).ready(function(){
@@ -320,6 +386,75 @@ $(document).ready(function(){
         });
     });
 });
+
+
+function toggleSub(n) {
+    let selectorName = '.num-' + n;
+    const btn = document.querySelectorAll(selectorName);
+
+    for (let i=0; i < btn.length; i++)
+        btn[i].classList.toggle('hidden');
+}
+
+function onPageReloadOrResize() {
+    let screenWidth = window.innerWidth;
+    const colspan = document.querySelectorAll('.name');
+    const contentHeader = document.querySelector('.headerRow');
+
+    const btn = document.querySelectorAll('.btn');
+
+    if (screenWidth >= 992) {
+        for (let i=0; i < btn.length; i++) {
+            btn[i].classList.add('hidden');
+        }
+    }
+    else {
+        for (let i=0; i < btn.length; i++) {
+            btn[i].classList.remove('hidden');
+        }
+    }
+
+
+    if (screenWidth >= 768 && screenWidth <= 991) {
+        for (let i=0; i < colspan.length; i++) {
+            colspan[i].colSpan = '1';
+        }
+        contentHeader.innerHTML = `
+            <th>#</th>
+            <th>Name</th>
+            <th>Booking Date</th>
+            <th class="mobile">Time Slot</th>
+            <th class="tablet">Inclusion</th>
+            <th class="tablet">Contact Number</th>
+            <th class="tablet">Email</th>
+            <th class="tablet">Total Amount</th>
+            <th class="tablet">Status</th>
+            <th class="tablet">Receipt</th>
+        `;
+    }
+    else {
+        for (let i=0; i < colspan.length; i++) {
+            colspan[i].colSpan = '2';
+        }
+        contentHeader.innerHTML = `
+            <th>#</th>
+            <th>Name</th>
+            <th></th>
+            <th>Booking Date</th>
+            <th class="mobile">Time Slot</th>
+            <th class="tablet">Inclusion</th>
+            <th class="tablet">Contact Number</th>
+            <th class="tablet">Email</th>
+            <th class="tablet">Total Amount</th>
+            <th class="tablet">Status</th>
+            <th class="tablet">Receipt</th>
+        `;
+    }
+}
+
+window.addEventListener('load', onPageReloadOrResize);
+
+window.addEventListener('resize', onPageReloadOrResize);
 </script>
 </body>
 </html>

@@ -14,8 +14,8 @@ class Calendar
     /********************* PROPERTY ********************/
     public $cellContent = '';
     protected $observers = array();
- 
-    private $dayLabels = array("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+
+    private $dayLabels = array("Mon<span>day</span>", "Tue<span>sday</span>", "Wed<span>nesday</span>", "Thu<span>rsday</span>", "Fri<span>day</span>", "Sat<span>urday</span>", "Sun<span>day</span>");
     private $currentYear = 0;
     private $currentMonth = 0;
     private $currentDay = 0;
@@ -157,7 +157,7 @@ class Calendar
  
         return
             '<div class="header">' .
-            '<h1 class="title">' . date('M Y', strtotime($this->currentYear . '-' . $this->currentMonth . '-1')) . '</h1>' .
+            '<h1 class="title">' . date('F Y', strtotime($this->currentYear . '-' . $this->currentMonth . '-1')) . '</h1>' .
             '<div class="month-nav">'.
             '<a class="prev" href="' . $this->naviHref . '?month=' . sprintf('%02d', $preMonth) . '&year=' . $preYear . '">&lt;</a>' .
             '<a class="next" href="' . $this->naviHref . '?month=' . sprintf("%02d", $nextMonth) . '&year=' . $nextYear . '">&gt;</a>' .
@@ -247,5 +247,4 @@ class Calendar
     }
  
 }
-
 ?>
