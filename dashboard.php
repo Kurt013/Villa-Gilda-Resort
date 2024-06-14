@@ -4,9 +4,78 @@ session_start();
 if (isset($_POST['submit']) || empty($_SESSION['role'])) {
     session_destroy();
     header('Location: index.php');
-    exit();
+    exit(); 
+  }
+
+$current_month = isset($_POST['month']) ? $_POST['month'] : date('n');
+
+// Initialize variables
+$total_pending = 0;
+$total_reservations = 0;
+$total_earnings = 0;
+$pending_payment = 0;
+$reserved_days = [];
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "villa gilda";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
+// Prepare and execute SQL statement to retrieve data for the selected month
+$sql = "SELECT * FROM bookings WHERE MONTH(booking_date) = ? ORDER BY booking_date DESC;";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $current_month);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result) {
+    // Get the number of rows in the result set
+    $resultCheck = $result->num_rows;
+}
+
+$total_days_in_month = cal_days_in_month(CAL_GREGORIAN, $current_month, date('Y'));
+
+
+if ($resultCheck > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if ($row['status'] == 'pending') {
+            $total_pending++;
+            $pending_payment += $row['balance_amount'];
+            $total_earnings += $row['deposit_amount'];
+        } else if ($row['status'] == 'fully paid') {
+            $total_earnings += $row['amount'];
+        }
+        $reserved_days[date('j', strtotime($row['booking_date']))] = true;
+        $total_reservations++;
+    }
+    $available_days = $total_days_in_month - count($reserved_days);
+} else {
+    $available_days = $total_days_in_month;
+}
+
+//$monthly_sales = $total_pending + $total_earnings;
+
+$months = [];
+$total_sales = [];
+for ($i = 1; $i <= date('n'); $i++) {
+    $months[] = date('F', mktime(0, 0, 0, $i, 10));
+    $sql_sales = "SELECT SUM(amount) as total_sales FROM bookings WHERE MONTH(booking_date) = ?";
+    $stmt_sales = $conn->prepare($sql_sales);
+    $stmt_sales->bind_param("i", $i);
+    $stmt_sales->execute();
+    $result_sales = $stmt_sales->get_result();
+    $row_sales = $result_sales->fetch_assoc();
+    $total_sales[] = $row_sales['total_sales'] ?? 0;
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +106,8 @@ if (isset($_POST['submit']) || empty($_SESSION['role'])) {
 </head>
 
 <body>
-    <?php
-    include('header.php');
-    ?>
+    <?php include('header.php'); ?>
+
     <script>
         const checkTab = document.getElementById('menu');
         const checkText = document.querySelector('.home-text');
@@ -48,98 +116,60 @@ if (isset($_POST['submit']) || empty($_SESSION['role'])) {
         checkText.innerHTML = 'Dashboard';
     </script>
 
-    <?php
-
-    $current_month = date('n');
-
-    // Initialize other variables
-    $resultCheck = 0; // Initialize result check
-    $selected_month = $current_month;
-
-    if (isset($_POST['month'])) {
-        // If month is selected, filter bookings for that month
-        $selected_month = $_POST['month'];
-        $_POST['selected_month'] = $selected_month; // Store the selected month
-        $sql = "SELECT * FROM bookings WHERE MONTH(booking_date) = ? ORDER BY booking_date DESC;";
-    } else {
-        // If form is not submitted, default to current month
-        $selected_month = isset($_POST['selected_month']) ? $_POST['selected_month'] : $current_month; // Get the stored or current month
-        $sql = "SELECT * FROM bookings WHERE MONTH(booking_date) = ? ORDER BY booking_date DESC;";
-    }
-
-    // Database connection
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "villa gilda";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Prepare and bind SQL statement
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $selected_month);
-
-    // Execute SQL statement
-    $stmt->execute();
-
-    // Get result
-    $result = $stmt->get_result();
-
-    if ($result) {
-        // Get the number of rows in the result set
-        $resultCheck = $result->num_rows;
-    }
-
-    ?>
     <form method="POST" action="">
         <label for="month">Select Month:</label>
         <select id="month" name="month" onchange="this.form.submit()">
             <?php
             for ($i = 1; $i <= 12; $i++) {
-                $selected = ($i == $selected_month) ? 'selected' : '';
+                $selected = ($i == $current_month) ? 'selected' : '';
                 echo '<option value="' . $i . '" ' . $selected . '>' . date('F', mktime(0, 0, 0, $i, 10)) . '</option>';
             }
             ?>
         </select>
-        <input type="hidden" name="selected_month" value="<?php echo $selected_month; ?>">
     </form>
 
-    <?php
-    $total_pending = 0;
-    $total_reservations = 0;
-    $total_days_in_month = cal_days_in_month(CAL_GREGORIAN, $selected_month, date('Y'));
-    $pending_payment = 0;
-    $total_earnings = 0;
-    if ($resultCheck > 0) {
-        $reserved_days = [];
-        while ($row = $result->fetch_assoc()) {
-            if ($row['status'] == 'pending') { // Assuming the status column is 'status'
-                $total_pending++;
-                $pending_payment += $row['balance_amount'];
-            }
-            else if ($row['status'] == 'fully paid'){
-                $total_earnings += $row['amount'];
-                $total_earnings += $row['deposit_amount'];
-            }
-            $reserved_days[date('j', strtotime($row['booking_date']))] = true;
-            $total_reservations++;
-        }
-        $available_days = $total_days_in_month - count($reserved_days);
-    } else {
-        $available_days = $total_days_in_month;
-    }
+    <div>
+        <h3>Statistics for <?php echo date('F', mktime(0, 0, 0, $current_month, 10)); ?></h3>
+        <p>Total pending payment: <?php echo $total_pending; ?></p>
+        <p>Total reservations: <?php echo $total_reservations; ?></p>
+        <p>Total available days: <?php echo $available_days; ?></p>
+        <p>Total earnings: <?php echo $total_earnings; ?></p>
+        <p>Pending Payment: <?php echo $pending_payment; ?></p>
+    </div>
 
-    echo "Total pending payment: $total_pending<br>";
-    echo "Total reservations: $total_reservations<br>";
-    echo "Total available days: $available_days <br>";
-    echo "Total eanings: $total_earnings <br>";
-    echo "Pending Payment: $pending_payment <br>";
+    <div style="width:50%;height:20%;text-align:center">
+        <h2 class="page-header">Analytics Sales Report</h2>
+        <canvas id="chartjs_line"></canvas>
+    </div>
 
-    ?>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+        var ctx = document.getElementById("chartjs_line").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($months); ?>,
+                datasets: [{
+                    label: 'Monthly Sales',
+                    backgroundColor: 'rgba(89, 105, 255, 0.5)',
+                    borderColor: 'rgba(89, 105, 255, 1)',
+                    data: <?php echo json_encode($total_sales); ?>,
+                }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        fontColor: '#71748d',
+                        fontFamily: 'Circular Std Book',
+                        fontSize: 14,
+                    }
+                },
+            }
+        });
+    </script>
 </body>
 
 </html>
