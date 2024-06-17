@@ -175,64 +175,82 @@ private function bookingForm($date)
     // Form HTML
     if (isset($_POST['add']) && $_POST['date'] === $date) {
         return '
-        <div class="reservation-box">
             <form class="reservation_form" method="post" action="' . $this->currentURL . '">
-                <button type="button" class="close-btn">X</button>
-                <input type="hidden" name="add" value="1" />
-                <input type="hidden" name="date" value="' . $date . '" />
-                <div class="form-wrapper">
-                <div class="form-group">
-                    <label for="time_slot">Time Slot:</label>
-                    <select name="time_slot" id="time_slot" required">
-                    <option value="" disabled selected>Select a time slot</option>
-                        <option value="8am - 5pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '8am - 5pm' ? ' selected' : '') . '>8am - 5pm</option>
-                        <option value="12nn - 8pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '12nn - 8pm' ? ' selected' : '') . '>12nn - 8pm</option>
-                        <option value="2pm - 10pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '2pm - 10pm' ? ' selected' : '') . '>2pm - 10pm</option>
-                        <option value="overnight"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === 'overnight' ? ' selected' : '') . '>Overnight</option>
-                        <option value="22 hours"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '22 hours' ? ' selected' : '') . '>22 hours</option>
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="included">Include Others:</label>
-                    <select name="included" id="included" required">
-                        <option value="" disabled' . (empty($_POST['included']) ? ' selected' : '') . '>Select an option</option>
-                        <option value="LPG gas and Stove"' . (isset($_POST['included']) && $_POST['included'] === 'LPG gas and Stove' ? ' selected' : '') . '>LPG gas and Stove (+250)</option>
-                        <option value="N/A"' . (isset($_POST['included']) && $_POST['included'] === 'N/A' ? ' selected' : '') . '>N/A</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" name="firstName" id="firstName" value="' . ($_POST['firstName'] ?? '') . '" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" name="lastName" id="lastName" value="' . ($_POST['lastName'] ?? '') . '" required>
-                </div>
-                <div class="form-group">
-                    <label for="contactNo">Contact No.:</label>
-                    <input type="number" name="contactNo" id="contactNo" value="' . ($_POST['contactNo'] ?? '') . '" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" id="email" value="' . ($_POST['email'] ?? '') . '" required>
-                </div>
-                <div class="form-group">
-                        <label for="deposit_amount">Deposit Amount:</label>
-                        <input type="text" name="deposit_amount" id="deposit_amount" value="' . number_format($deposit_amount, 2) . '" readonly>
+                <div class="reservation-header"> 
+                    <div class="form-first-half">
+                        <div>
+                            <img class="logos" src="images/villa-gilda-logo2.png" alt="Villa Gilda Logo">
+                        </div>
+                        <h1>Resort Booking</h1>
                     </div>
-                    <div class="form-group">
-                        <label for="balance_amount">Balance Amount:</label>
-                        <input type="text" name="balance_amount" id="balance_amount" value="' . number_format($balance_amount, 2) . '" readonly>
+                    <div class="form-second-half">
+                        <p>Date Selected: June 25, 2024</p>
+                        <button type="button" class="close-btn"><i class="bx bx-x"></i></button>
+                        <input type="hidden" name="add" value="1" />
+                        <input type="hidden" name="date" value="' . $date . '" />
+                    </div>        
+                </div>
+                <div class="reservation-body">
+                    <div class="first-column">
+                        <div class="name">
+                            <div class="form-group first-name">
+                                <label for="firstName">First Name:</br></label>
+                                <input type="text" name="firstName" id="firstName" value="' . ($_POST['firstName'] ?? '') . '" required>
+                            </div>
+                            <div class="form-group last-name">
+                                <label for="lastName">Last Name:</br></label>
+                                <input type="text" name="lastName" id="lastName" value="' . ($_POST['lastName'] ?? '') . '" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="time_slot">Time Slot:</br></label>
+                            <select class="select-text" name="time_slot" id="time_slot" required">
+                            <option value="" disabled selected>Select a time slot</option>
+                                <option value="8am - 5pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '8am - 5pm' ? ' selected' : '') . '>8am - 5pm</option>
+                                <option value="12nn - 8pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '12nn - 8pm' ? ' selected' : '') . '>12nn - 8pm</option>
+                                <option valuxe="2pm - 10pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '2pm - 10pm' ? ' selected' : '') . '>2pm - 10pm</option>
+                                <option value="overnight"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === 'overnight' ? ' selected' : '') . '>Overnight</option>
+                                <option value="22 hours"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '22 hours' ? ' selected' : '') . '>22 hours</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="included">Inclusion:<br></label>
+                            <select class="inclusion-text" name="included" id="included" required">
+                                <option value="" disabled' . (empty($_POST['included']) ? ' selected' : '') . '>Select an option</option>
+                                <option value="LPG gas and Stove"' . (isset($_POST['included']) && $_POST['included'] === 'LPG gas and Stove' ? ' selected' : '') . '>LPG gas and Stove (+250)</option>
+                                <option value="N/A"' . (isset($_POST['included']) && $_POST['included'] === 'N/A' ? ' selected' : '') . '>N/A</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactNo">Contact Number:<br></label>
+                            <input class="contact-text" type="number" name="contactNo" id="contactNo" value="' . ($_POST['contactNo'] ?? '') . '" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="amount">Total Amount:</label>
-                        <input type="text" name="amount" id="amount" value="' . number_format($amount, 2) . '" readonly>
+                    <div class="second-column">
+                        <div class="form-group">
+                            <label for="email">Email:<br></label>
+                            <input type="text" class="email-text" name="email" id="email" value="' . ($_POST['email'] ?? '') . '" required>
+                        </div>
+                        <div class="price">
+                            <div class="form-group deposit-field">
+                                <label for="deposit_amount">Deposit Amount:<br></label>
+                                <input type="text" name="deposit_amount" id="deposit_amount" value="' . number_format($deposit_amount, 2) . '" readonly>
+                            </div>
+                            <div class="form-group balance-field">
+                                <label for="balance_amount">Balance Amount:<br></label>
+                                <input type="text" name="balance_amount" id="balance_amount" value="' . number_format($balance_amount, 2) . '" readonly>
+                            </div>
+                            <div class="form-group total-field">
+                                <label for="amount">Total Amount:<br></label>
+                                <input type="text" name="amount" id="amount" value="' . number_format($amount, 2) . '" readonly>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button class="submitReservation" type="submit">Submit</button>
-            </form>
-        </div>
+                <div class="reservation-footer">
+                    <button class="submitReservation" type="submit">SUBMIT</button>
+                </div>    
+                </form>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const timeSlotSelect = document.getElementById("time_slot");
@@ -285,7 +303,7 @@ private function bookingForm($date)
         <form method="post" action="' . $this->currentURL . '">
             <input type="hidden" name="add" />
             <input type="hidden" name="date" value="' . $date . '" />
-            <input class="submit" id="submit" type="submit" value="Book" />
+            <input class="submit" name="submit "id="submit" type="submit" value="Book" />
         </form>';
     }
 }
@@ -297,7 +315,7 @@ private function bookingForm($date)
             <form onsubmit="return confirm(\'Are you sure to cancel?\');" method="post" action="' . $this->currentURL . '">
                 <input type="hidden" name="delete" />
                 <input type="hidden" name="id" value="' . $id . '" />
-                <input class="submit" type="submit" value="Delete" />
+                <input class="submit" name="submit" type="submit" value="Delete" />
             </form>';
     }
 }

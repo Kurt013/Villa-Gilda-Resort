@@ -2,13 +2,18 @@ body {
   background-color: #419999;
 }
 
+.select-month {
+  background-color: #226060;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+
 table {
   width: 95%;
   margin: 0 auto;
   border-collapse: collapse;
   border: 3px solid #226060;
 }
-
 
 .child td span {
   height: 50px;
@@ -22,9 +27,6 @@ th {
   padding: 10px 10px;
   font-weight: 500;
   background-color: #226060;
-}
-
-.child {
 }
 
 .child td:first-child {
@@ -121,6 +123,7 @@ option {
   }
 }
 
+
 @media only screen and (max-width: 991px) {
   .tablet {
     display: none;
@@ -134,10 +137,11 @@ option {
 
   .filler {
     display: none;
- }
- .name {
-  width: 50%;
- }
+  }
+
+  .name {
+    width: 50%;
+  }
 }
 
 

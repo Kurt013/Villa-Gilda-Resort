@@ -21,9 +21,9 @@
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
   ?>" method="post" class="login-form">
     <div><img src="images/villa-gilda-logo2.png" class="logo" alt="Villa Gilda Resort Logo"></div>
-    <div class="username-field"><input class="username" placeholder="Enter your username" type="text" name="username" required></div>
+    <div class="username-field"><input class="username" placeholder="Enter your username" type="text" name="username" readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly','');" required></div>
     <div class="password-field">
-      <input placeholder="Enter your password" class="password" id="password" type="password" name="password" required>
+      <input placeholder="Enter your password" class="password" id="password" type="password" name="password" readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly','');" required>
       <!-- <label class="show-pass">
         <i class='bx bx-hide passwordState'></i>
         <input onclick="
@@ -59,7 +59,7 @@
   <?php 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       //Allows username or email
-      if (empty($_POST["username"]) || $_POST["username"] != filter_input(INPUT_POST, "username", 
+      if (empty($_POST["username"]) || $_POST["username"] !== filter_input(INPUT_POST, "username", 
                                               FILTER_SANITIZE_SPECIAL_CHARS)) {
         echo "<dialog open>
                 <h1>Invalid Username/Password</h1>
@@ -81,7 +81,7 @@
         $result = $conn->query($sql);
 
         while($row = $result->fetch_assoc()) {
-          if ($acc_username == $row['Username'] && $acc_password == $row['Password']) {
+          if ($acc_username == $row['Username'] && password_verify($acc_password, $row['Password'])) {
             $_SESSION['username'] = $row['Username'];
             $_SESSION['role'] = $row['Role'];
 

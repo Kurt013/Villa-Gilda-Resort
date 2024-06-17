@@ -37,19 +37,11 @@
   <link href="calendar.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-  <?php 
-    include('header.php');
-  ?>
 
-  <script>
-    const checkTab = document.getElementById('menu');
-    const checkText = document.querySelector('.home-text');
-
-    checkTab.classList.add('bx-calendar');
-    checkText.innerHTML = 'Reserve';
-  </script>
+<span class="reserve-banner"> Select a date to reserve </span>
 
 <?php
+include('header.php');
 include 'Calendar.php';
 include 'Booking.php';
 include 'BookableCell.php';
@@ -73,10 +65,17 @@ $bookableCell->routeActions();
 echo $calendar->show();
 
 ?>
-<div class="legends">
-  <p class="available">Available</p>
-  <p class="reserved">Reserved</p>
-</div>
+  <div class="legends">
+    <p class="available">Available</p>
+    <p class="reserved">Reserved</p>
+  </div>
 
+<script>
+    const checkTab = document.getElementById('menu');
+    const checkText = document.querySelector('.home-text');
+
+    checkTab.classList.add('bx-calendar');
+    checkText.innerHTML = 'Reserve';
+  </script>
 </body>
 </html>

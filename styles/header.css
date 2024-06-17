@@ -114,7 +114,6 @@ i + p, .menu-text {
 
 .navigation-pane {
   background-color: #226060;
-  position: absolute;
   cursor: default;
   z-index: 1001;
 }
@@ -287,11 +286,11 @@ i + p, .menu-text {
 }
 
 .redirect-alternate {
-  background-color: #EBF0EA;
+  background-color: #226060;
 }
 
 .redirect-alternate > * {
-  color: #226060;
+  color: #EBF0EA;
 }
 
 .user-submit {
@@ -320,6 +319,8 @@ i + p, .menu-text {
     left: 0;
     width: 100%;
     height: calc(100% - 38px);
+    position: absolute;
+
   }
 
   .user-detail {  
@@ -409,6 +410,8 @@ i + p, .menu-text {
     left: 0;
     top: 80px;
     height: calc(100% - 80px);
+    position: fixed;
+    overflow-y: auto;
   }
 
   .navigation-pane-admin::after {
@@ -468,11 +471,11 @@ i + p, .menu-text {
   }
 
   .redirect-alternate:hover {
-    background-color: #226060;
+    background-color: #EBF0EA;
   }
 
   .redirect-alternate:hover > * {
-    color: #EBF0EA;    
+    color: #226060;    
   }
 
 }

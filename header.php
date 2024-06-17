@@ -19,6 +19,7 @@
             menuColor.style.backgroundColor = '#226060';
             menuIcon.remove('bx-menu');
             menuIcon.add('bx-x');
+            openLeft = true;
           }
           else {
             icon.classList.remove('bxs-up-arrow');
@@ -26,6 +27,7 @@
             menuColor.style.backgroundColor = '#4CABAB';
             menuIcon.remove('bx-x');
             menuIcon.add('bx-menu');
+            openLeft = false;
           }
         ">
         <div class="menu-appear"><i class="bx bx-menu menu-icon"></i></div>
@@ -45,9 +47,11 @@
 
         if (checkToggle.checked) {
           changeBtnUser.style.backgroundColor = '#226060';
+          openRight = true;
         }
         else {
           changeBtnUser.style.backgroundColor = '#4CABAB';
+          openRight = false;
         }
       ">
       <i class="bx bx-user-circle"></i>
@@ -100,7 +104,7 @@
         </a>
       </li>
       <li>
-        <a href="reserve.php" class="nav-block <?php 
+        <a href="reserve.php" class="nav-block active-admin <?php 
           if ($_SESSION['role'] == 'admin') {
             echo"nav-admin";
           }
@@ -208,7 +212,6 @@
   </nav>
 </div>
 <script>
-
 const checkToggle = document.querySelector('.user-prof-toggle');
 
 function showMenu(togglePara) {
@@ -216,12 +219,51 @@ function showMenu(togglePara) {
   toggleMenu.classList.toggle('hide');
 }
 
-//  window.addEventListener('click', function(event) {
-//     // Get the pane element
-//     const toggleMenu = document.querySelector('.pane');
-//     // Check if the click occurred outside of the pane
-//     if (!toggleMenu.contains(event.document.querySelector('pane'))) {
-//       toggleMenu.classList.add('hide');
-//     }
-//   });
+document.addEventListener('DOMContentLoaded', function() {
+    // Variables to track toggle state
+    let openLeft = false;
+    let openRight = false;
+
+    // Event listener to hide panes and update toggle button appearance
+    window.addEventListener('click', function(event) {
+        const navigationPane = document.querySelector('.navigation-pane');
+        const userPane = document.querySelector('.pane');
+        const menuToggle = document.querySelector('.menu-field');
+        const userToggle = document.querySelector('.third-div');
+
+        // Check if click occurred outside navigation pane or its toggle button
+        if (!navigationPane.contains(event.target) && !menuToggle.contains(event.target)) {
+            navigationPane.classList.add('hide');
+            // Update toggle button appearance
+            const icon = document.querySelector('.change');
+            const menuColor = document.querySelector('.menu-color');
+            const menuIcon = document.querySelector('.menu-icon').classList;
+            const toggleCheck = document.querySelector('.menu-toggle');
+
+            icon.classList.remove('bxs-up-arrow');
+            icon.classList.add('bxs-down-arrow');
+            menuColor.style.backgroundColor = '#4CABAB';
+            menuIcon.remove('bx-x');
+            menuIcon.add('bx-menu');
+            openLeft = false;
+            toggleCheck.checked = false; // Uncheck the checkbox input
+        }
+
+        // Check if click occurred outside user pane or its toggle button
+        if (!userPane.contains(event.target) && !userToggle.contains(event.target)) {
+            userPane.classList.add('hide');
+            // Update toggle button appearance
+            const changeBtnUser = document.querySelector('.third-color');
+            const checkToggle = document.querySelector('.user-prof-toggle');
+
+            changeBtnUser.style.backgroundColor = '#4CABAB';
+            openRight = false;
+            checkToggle.checked = false; // Uncheck the checkbox input
+        }
+    });
+});
+</script>
+
+</script>
+
 </script>

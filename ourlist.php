@@ -229,7 +229,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 }
 ?>
 
-<form method="POST" action="">
+
+<form class="select-month" method="POST" action="">
     <label for="month">Select Month:</label>
     <select id="month" name="month" onchange="this.form.submit()">
         <?php

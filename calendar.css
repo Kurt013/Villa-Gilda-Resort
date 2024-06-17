@@ -2,8 +2,14 @@ body {
     background-color: #419999;
     height: 100vh;
     height: 100dvh;
-    display: flex;
-    justify-content: center;
+}
+
+.reserve-banner {
+    background-color: #226060;
+    padding: 3px 15px;
+    position: fixed;
+    left: 30px;
+    border-radius: 0 0 10px 10px;
 }
 
 #calendar {
@@ -15,7 +21,7 @@ body {
     border: 4px solid #226060;
     background-color: #226060;
     border-radius: 10px;
-    margin: 5% auto auto;
+    margin: 50px auto auto;
     display: flex;
     flex-direction: column;
 }
@@ -59,6 +65,9 @@ h1.title {
     background-color: white;
     border-radius: 50%;
     width: 20px;
+    height: 20px;
+    transition: background-color 0.05s,
+        color 0.05s;
 }
 
 .box-content {
@@ -91,12 +100,10 @@ h1.title {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
 .day-number {
     color: #226060;
-    z-index: 1;
 }
 
 @media only screen and (max-width: 418px) {
@@ -109,47 +116,160 @@ h1.title {
     background-color: #CCCCCC;
 }
 
+
 .green-box + .day-number { 
+    color: black;
+    position: relative;
+}
+
+.day-number {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation_form {
+    background-color: #FFDE59;
+    width: 90%;
+    height: 90%;
+    z-index: 3000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation_form * {
+    color: #226060;
+    font-family: "Montserrat", sans-serif;
+}
+
+.reservation-header {
+    flex: 0 1 90px;
+    display: flex;
+    background-color: #226060;
+}
+
+.reservation-header * {
     color: white;
 }
 
-.open::before, .booked::before {
-    z-index: 1;
-    content: '';
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
+.form-first-half, .form-second-half {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.form-first-half {
+    padding-left: 20px;
+}
+
+.form-first-half h1 {
+    font-size: clamp(16px, 2vw, 25px);
+    text-wrap: nowrap;
+}
+
+.form-second-half p {
+    text-align: center;
+    margin: auto;
+    text-wrap: nowrap;
+    background-color: #4CABAB;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: clamp(14px, 2vw, 22px);
+    font-weight: 700;
+}
+
+.logos {
+    margin-top: 6px;
+    margin-right: 10px;
+    width: clamp(40px, 10vw, 65px);
+}
+
+.close-btn {
     position: absolute;
-    transform: translate(-50%, -50%);
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
 }
 
-.open::before {
-    background-color: #00BF63;
-}
-
-.booked::before {
+.close-btn:hover {
     background-color: #FF0007;
 }
 
-.form-wrapper {
-    z-index: 1300;
-    background-color: blue;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.reservation-body {
+    height: calc(100% - 170px);
+    column-gap: 30px;
+    padding: 30px;
+    display: flex;
+    overflow-y: auto;
+}
+
+.name, .price {
+    text-wrap: nowrap;
+}
+
+.name {
+    display: flex;
+    column-gap: 10px;
+}
+
+.first-name, .last-name {
+    flex: 1;
+}
+
+/* Sizing for each input */
+.name input, .price input, .email-text {
+    width: 100%;
+}
+
+.select-text {
+    width: 55%;
+    min-width: 160px;
+}
+
+.inclusion-text {
+    min-width: 145px;
+    width: 60%;
+}
+
+.contact-text {
+    width: 57%;
+    min-width: 150px;
+}
+
+.reservation-body label {
+    font-weight: bold;
+}
+
+.reservation-body input, .reservation-body select {
+    padding: 8px 5px;
+    border-radius: 0;
+    border: 2px solid #226060;
+}
+
+.reservation-footer {
+    flex: 0 1 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #226060;
+}
+
+.submitReservation {
+    padding: 6px 30px;
+    font-weight: bold;
+    color: white;
 }
 
 .submit {   
     z-index: 2;
-    background-color: transparent;
-    color: transparent;
-    border: none;
     position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    top: 0;
     transition: background-color 0.05s;
 }
 
@@ -187,6 +307,7 @@ h1.title {
 .reserved::before {
     background-color: #FF0007;
 }
+ 
 
 @media only screen and (min-width: 992px) {
     .open .submit:hover {
@@ -196,12 +317,63 @@ h1.title {
         background-color: #FF0007;
     }
 
+    .first-column, .second-column {
+        flex: 1;
+    }
 
+    .form-group {
+        height: 70px;
+    }
+    
+    .price input {
+        width: 50%;
+    }
+
+    .submitReservation {
+        border: 6px solid white;
+        background-color: #F4CF3A;
+        border-radius: 30px;
+    }
+
+    .prev:hover, .next:hover {
+        background-color: #F4CF3A;
+        color: #F0F1F0;
+    }
 }
+
 
 @media only screen and (max-width: 991px) {
     ul.label li span {
         display: none;
     }
+
+    .reservation-header {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .form-first-half, .form-second-half {
+        justify-content: center;
+    }
+
+    .reservation-body {
+        flex-direction: column;
+    }
+
+    .price {
+        column-gap: 10px;
+    }
+
+    .prev:active, .next:active {
+        background-color: #F4CF3A;
+        color: #F0F1F0;
+    }
 }
+
+@media only screen and (min-width: 380px) and (max-width: 991px) {
+    .price {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 
