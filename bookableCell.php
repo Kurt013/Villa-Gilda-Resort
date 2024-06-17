@@ -153,6 +153,7 @@ private function bookingForm($date)
     $amount = 0.00; // Initialize amount
     $deposit_amount = 0.00;
     $balance_amount = 0.00;
+    $formattedDate = date('F j, Y', strtotime($date));
 
     // Check if date matches POST data and calculate amount
     if (isset($_POST['date']) && $_POST['date'] === $date && isset($_POST['included'])) {
@@ -184,7 +185,7 @@ private function bookingForm($date)
                         <h1>Resort Booking</h1>
                     </div>
                     <div class="form-second-half">
-                        <p>Date Selected: June 25, 2024</p>
+                        <p>Date Selected:  ' . htmlentities($formattedDate) . '</p>
                         <button type="button" class="close-btn"><i class="bx bx-x"></i></button>
                         <input type="hidden" name="add" value="1" />
                         <input type="hidden" name="date" value="' . $date . '" />
@@ -217,7 +218,7 @@ private function bookingForm($date)
                             <label for="included">Inclusion:<br></label>
                             <select class="inclusion-text" name="included" id="included" required">
                                 <option value="" disabled' . (empty($_POST['included']) ? ' selected' : '') . '>Select an option</option>
-                                <option value="LPG gas and Stove"' . (isset($_POST['included']) && $_POST['included'] === 'LPG gas and Stove' ? ' selected' : '') . '>LPG gas and Stove (+250)</option>
+                                <option value="LPG gas and Stove"' . (isset($_POST['included']) && $_POST['included'] === 'LPG gas and Stove' ? ' selected' : '') . '>LPG gas and Stove (+300)</option>
                                 <option value="N/A"' . (isset($_POST['included']) && $_POST['included'] === 'N/A' ? ' selected' : '') . '>N/A</option>
                             </select>
                         </div>

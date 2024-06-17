@@ -78,10 +78,10 @@
   // Establish Connection 
   $conn = new mysqli('localhost', 'root', '', 'villa gilda');
 
-  
+  /*
   $password = 'VillaGildaResort';
   $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
-  $sql = "INSERT INTO `user accounts` (`First name`, `Last name`, `Username`, `Password`, `Role`) VALUES ('Celine', 'Almodovar', 'CelineAlmodovar01', '{$encryptedPass}', 'admin')";
+  $sql = "INSERT INTO `user accounts` (`First name`, `Last name`, `Username`, `Password`, `Role`) VALUES ('Celine', 'Almodovar', 'CelineAlmodovar01', '{$encryptedPass}', 'Admin')";
   
   $conn->query($sql);
 
@@ -100,7 +100,7 @@
     if ($confirmPassword === $password) {
       $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
 
-      $sqlAdd = "INSERT INTO `user accounts` (`First name`, `Last Name`, `Username`, `Password`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$role}')";
+      $sqlAdd = "INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$role}')";
       $conn->query($sqlAdd);
 
       // if ($conn->query($sqlAdd) === TRUE) {
@@ -112,7 +112,7 @@
   /* Show the list of staffs*/
   $sqlShow = 'SELECT ID, `First Name`, `Last Name`, Username FROM `user accounts` WHERE Role = "staff"';
   $result = $conn->query($sqlShow);
-
+  $number = 1;
   echo '
       <table>
         <thead>
@@ -127,7 +127,7 @@
   while ($row = $result->fetch_assoc()) {
       echo "
         <tr>
-          <td>{$row['ID']}</td>
+          <td>".$number++."</td>
           <td>{$row['Last Name']}, {$row['First Name']}</td>
           <td class='username-td'>{$row['Username']}</td>
           <td class='remove'>

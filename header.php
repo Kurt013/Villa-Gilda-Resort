@@ -1,6 +1,6 @@
 <header>
   <div class="first-section">
-    <div><img class="logo" src="images/villa-gilda-logo2.png" alt="Villa Gilda Logo"></div>
+    <a href="homepage.php"><div><img class="logo" src="images/villa-gilda-logo2.png" alt="Villa Gilda Logo"></div></a>
     <h1>RESERVATION SYSTEM</h1>
   </div>
   <div class="second-section">
