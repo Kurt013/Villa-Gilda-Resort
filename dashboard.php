@@ -70,7 +70,7 @@ if ($result_annual && $row_annual = $result_annual->fetch_assoc()) {
 
 $months = [];
 $total_sales = [];
-for ($i = 1; $i <= date('n'); $i++) {
+for ($i = 1; $i <= $current_month; $i++) {
     $months[] = date('F', mktime(0, 0, 0, $i, 10));
     $sql_sales = "SELECT SUM(amount) as total_sales FROM bookings WHERE MONTH(booking_date) = ? AND YEAR(booking_date) = YEAR(CURDATE())";
     $stmt_sales = $conn->prepare($sql_sales);
@@ -97,9 +97,136 @@ foreach ($time_slots as $slot) {
 while ($row = $result_time_slots->fetch_assoc()) {
     $time_slot_data[$row['time_slot']] = $row['count'];
 }
+/*
+require 'fpdf/fpdf.php';
+
+class reportPDF extends FPDF
+{
+    function Header()
+    {
+        global $info;
+        // Display Company Info
+        $this->SetFont('Arial', 'B', 14);
+        $this->Cell(50, 10, "VILLA GILDA RESORT", 0, 1);
+        $this->SetFont('Arial', '', 14);
+        $this->Cell(50, 7, "Brgy. Caingin", 0, 1);
+        $this->Cell(50, 7, "0955 311 3451", 0, 1);
+
+        // Display INVOICE text
+        $this->SetY(15);
+        $this->SetX(-60);
+        $this->SetFont('Arial', 'B', 18);
+        $this->Cell(50, 10, "Monthly Sales", 0, 1);
+
+        $this->SetY(25);
+        $this->SetX(-85);
+        $this->Cell(50, 7, "Report Date: " . $info["report_date"]);
+
+        // Display Horizontal line
+        $this->Line(0, 48, 210, 48);
+    }
+
+    function body($info)
+{
+    // Set square dimensions and properties
+    $squareWidth = 57;
+    $squareHeight = 20;
+    $startX = 10;
+    $startY = 70;
+
+    // Bordered square for Total pending payment
+    $this->SetTextColor(255, 255, 255);
+    $this->SetFillColor(250, 201, 0); // RGB values for '#fac900'
+    $this->SetDrawColor(200, 200, 200); // Light gray border
+    $this->SetLineWidth(0.2); // Border width
+    $this->Rect($startX, $startY, $squareWidth, $squareHeight, 'DF');
+    $this->SetFont('Arial', 'B', 12);
+    $this->SetXY($startX, $startY);
+    $this->Cell($squareWidth, $squareHeight / 2, "Total pending payment", 0, 1, 'C');
+    $this->SetFont('Arial', '', 12);
+    $this->SetXY($startX, $startY + $squareHeight / 2);
+    $this->Cell($squareWidth, $squareHeight / 2, $info["totalPending"], 0, 1, 'C');
+
+    // Bordered square for Total Reservations
+    $this->SetFillColor(12, 192, 223); // RGB values for '#fac900'
+    $this->Rect($startX + $squareWidth + 10, $startY, $squareWidth, $squareHeight, 'DF');
+    $this->SetFont('Arial', 'B', 12);
+    $this->SetXY($startX + $squareWidth + 10, $startY);
+    $this->Cell($squareWidth, $squareHeight / 2, "Total Reservations", 0, 1, 'C');
+    $this->SetFont('Arial', '', 12);
+    $this->SetXY($startX + $squareWidth + 10, $startY + $squareHeight / 2);
+    $this->Cell($squareWidth, $squareHeight / 2, $info["reservation"], 0, 1, 'C');
+
+    // Bordered square for Available Days
+    $this->SetFillColor(255, 145, 77); // RGB values for '#fac900'
+    $this->Rect($startX + 2 * ($squareWidth + 10), $startY, $squareWidth, $squareHeight, 'DF');
+    $this->SetFont('Arial', 'B', 12);
+    $this->SetXY($startX + 2 * ($squareWidth + 10), $startY);
+    $this->Cell($squareWidth, $squareHeight / 2, "Available Days", 0, 1, 'C');
+    $this->SetFont('Arial', '', 12);
+    $this->SetXY($startX + 2 * ($squareWidth + 10), $startY + $squareHeight / 2);
+    $this->Cell($squareWidth, $squareHeight / 2, $info["available"], 0, 1, 'C');
+
+    $startX = 45;
+
+    // Bordered square for Total Earnings
+    $this->SetFillColor(0, 191, 99); // RGB values for '#fac900'
+    $this->Rect($startX, $startY + $squareHeight + 10, $squareWidth, $squareHeight, 'DF');
+    $this->SetFont('Arial', 'B', 12);
+    $this->SetXY($startX, $startY + $squareHeight + 10);
+    $this->Cell($squareWidth, $squareHeight / 2, "Total Earnings", 0, 1, 'C');
+    $this->SetFont('Arial', '', 12);
+    $this->SetXY($startX, $startY + $squareHeight + 10 + $squareHeight / 2);
+    $this->Cell($squareWidth, $squareHeight / 2, $info["totalEarnings"], 0, 1, 'C');
+
+    // Bordered square for Pending Payment
+    $this->SetFillColor(255, 58, 64); // RGB values for '#fac900'
+
+    $this->Rect($startX + $squareWidth + 10, $startY + $squareHeight + 10, $squareWidth, $squareHeight, 'DF');
+    $this->SetFont('Arial', 'B', 12);
+    $this->SetXY($startX + $squareWidth + 10, $startY + $squareHeight + 10);
+    $this->Cell($squareWidth, $squareHeight / 2, "Pending Payment", 0, 1, 'C');
+    $this->SetFont('Arial', '', 12);
+    $this->SetXY($startX + $squareWidth + 10, $startY + $squareHeight + 10 + $squareHeight / 2);
+    $this->Cell($squareWidth, $squareHeight / 2, $info["pendingPayment"], 0, 1, 'C');
+}
 
 
+    function Footer()
+    {
+        // Set footer position
+        $this->SetY(-50);
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(0, 10, "for VILLA GILDA RESORT", 0, 1, "R");
+        $this->Ln(15);
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 10, "Authorized Signature", 0, 1, "R");
+        $this->SetFont('Arial', '', 10);
+
+        // Display Footer Text
+        $this->Cell(0, 10, "This is a computer generated report", 0, 1, "C");
+    }
+}
+$info = [
+    "report_date" => date('d-m-Y'),
+    "totalPending" => $total_pending,
+    "reservation" => $total_reservations,
+    "available" => $available_days,
+    "totalEarnings" => $total_earnings,
+    "pendingPayment" => $pending_payment,
+];
+
+$reportpdf = new reportPDF();
+$reportpdf->AddPage();
+$reportpdf->body($info);
+
+if (isset($_GET['generate_pdf'])) {
+    $reportpdf->Output('I', 'monthly_report.pdf'); // Output to browser
+    exit;
+}
+*/
 $conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +257,8 @@ $conn->close();
 </head>
 
 <body>
-    <?php include('header.php'); ?>
+    <?php include('header.php'); 
+        ?>
 
     <script>
         const checkTab = document.getElementById('menu');
@@ -151,7 +279,11 @@ $conn->close();
             ?>
         </select>
     </form>
-
+    
+    <!--
+    <a href="?generate_pdf=true&month=<?php echo $current_month; ?>" target="_blank">Generate PDF Report</a>
+    -->
+    
     <div>
         <h3>Statistics for <?php echo date('F', mktime(0, 0, 0, $current_month, 10)); ?></h3>
         <p>Total pending payment: <?php echo $total_pending; ?></p>
@@ -162,7 +294,6 @@ $conn->close();
         <p>Earnings Annuallly: <?php echo $earnings_annually; ?></p>
     </div>
 
-    <?php if ($resultCheck > 0): ?>
         <div style="width:50%;height:20%;text-align:center">
             <h2 class="page-header">Analytics Sales Report</h2>
             <canvas id="chartjs_line"></canvas>
@@ -231,7 +362,6 @@ $conn->close();
                 }
             });
         </script>
-    <?php endif; ?>
-</body>
+    </body>
 
 </html>
