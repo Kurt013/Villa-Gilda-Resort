@@ -1,3 +1,5 @@
+
+
 @media only screen and (max-width: 767px) {
   body {
     align-items: flex-end;
@@ -198,12 +200,39 @@ input {
 }
 
 .logo {
-  width: clamp(150px, 25vw, 220px);
-  margin-bottom: 30px;
+  width: clamp(170px, 25vw, 220px);
 }
 
-.username-field, .password-field {
-  margin-bottom: 15px;
+.visibility {
+  visibility: hidden;
+}
+
+.error-message {
+  overflow: hidden;
+  position: relative;
+  padding: 10px;
+  font-size: clamp(12px, 2vw, 15px);
+  width: 80%;
+  max-width: 400px;
+  background-color: #FAB4B6;
+  color: #B6050A;
+  margin: 0px auto 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.error-message::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 10px;
+  background-color: #B6050A;
+}
+
+.username-field + .password-field {
+  margin-top: 20px;
 }
 
 .username, .password, .submit-btn {
@@ -264,8 +293,8 @@ input {
   font-family: 'Spotify Black';
   letter-spacing: 5px;
   width: 50%; 
-  padding-top: 12px;
-  padding-bottom: 12px;
+  margin-top: 40px;
+  padding: 15px 0;
   min-width: 150px;
   max-width: 220px;
 }
@@ -343,9 +372,9 @@ input {
 }
 
 /* Responsiveness of Curved border*/
-@media only screen and (max-width: 350px) and (max-width: 620px){
+@media only screen and (max-width: 620px){
   .custom-shape-divider-bottom-1717433957 {
-    top: -85px;
+    top: -84px;
     left: 0;
     width: 100%;
   }
@@ -354,6 +383,7 @@ input {
     height: 85px;
   }  
 }
+
 
 @media only screen and (min-width: 351px) and (max-width: 620px) {
   .custom-shape-divider-bottom-1717433957 {

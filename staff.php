@@ -78,13 +78,13 @@
   // Establish Connection 
   $conn = new mysqli('localhost', 'root', '', 'villa gilda');
 
-  /*
+  
   $password = 'VillaGildaResort';
   $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
-  $sql = "INSERT INTO `user accounts` (`First name`, `Last name`, `Username`, `Password`, `Role`) VALUES ('Celine', 'Almodovar', 'CelineAlmodovar01', '{$encryptedPass}', 'Admin')";
+  $sql = "INSERT INTO `user accounts` (`First name`, `Last name`, `Username`, `Password`, `Role`) VALUES ('Celine', 'Almodovar', 'CelineAlmodovar01', '{$encryptedPass}', 'admin')";
   
   $conn->query($sql);
-  */
+
 
   /* Add Staffs */
   if (isset($_POST['addStaff'])) {

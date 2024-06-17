@@ -1,5 +1,16 @@
-<?php 
-  session_start();
+<?php
+session_start();
+
+
+    // echo "<dialog open>
+    //         <p>The pass</p>
+    //         <button id='exit' class='exit'>X</button>
+    //       </dialog>
+          
+    //       <script> 
+    //         dialog = document.querySelector('dialog');
+    //         dialog.showModal();
+    //       </script>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +27,69 @@
 
   <!-- Boxicon Link -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+<!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
-  ?>" method="post" class="login-form">
-    <div><img src="images/villa-gilda-logo2.png" class="logo" alt="Villa Gilda Resort Logo"></div>
+<form action='' method="post" class="login-form">
+    <div><img src="images/villa-gilda-logo2.png" class="logo" alt="Villa Gilda Resort Logo"></div>   
+    <p class='error-message visibility'>The password or username you entered is incorrect. Please try again. </p>
+    
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Validate and sanitize username
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+
+    if (empty($username)) {
+        displayErrorDialog();
+    } else {
+        $password = $_POST['password']; // For demonstration purposes; validate/sanitize as needed
+
+        // Connect to database (replace with your actual database credentials)
+        $conn = new mysqli('localhost', 'root', '', 'villa gilda');
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Prepare statement
+        $stmt = $conn->prepare("SELECT Username, Password, Role FROM `user accounts` WHERE Username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 1) {
+            // Bind result variables
+            $stmt->bind_result($db_username, $db_password_hash, $role);
+            $stmt->fetch();
+
+            // Verify password
+            if (password_verify($password, $db_password_hash)) {
+                // Password is correct, start session
+                $_SESSION['username'] = $db_username;
+                $_SESSION['role'] = $role;
+
+                $stmt->close();
+                $conn->close();
+                header("Location: homepage.php"); // Redirect to homepage or another secure page
+                exit();
+            } else {
+                displayErrorDialog();
+            }
+        } else {
+            displayErrorDialog();
+        }
+
+        // Close statement and connection
+        $stmt->close();
+        $conn->close();
+    }
+}
+?>  
     <div class="username-field"><input class="username" placeholder="Enter your username" type="text" name="username" readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly','');" required></div>
     <div class="password-field">
       <input placeholder="Enter your password" class="password" id="password" type="password" name="password" readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly','');" required>
@@ -56,43 +125,21 @@
       </svg>
     </div>
   </form>
-  <?php 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      //Allows username or email
-      if (empty($_POST["username"]) || $_POST["username"] !== filter_input(INPUT_POST, "username", 
-                                              FILTER_SANITIZE_SPECIAL_CHARS)) {
-        echo "<dialog open>
-                <h1>Invalid Username/Password</h1>
-                <button id='exit' class='exit'>X</button>
-              </dialog>
-              
-              <script> 
-                dialog = document.querySelector('dialog');
-                dialog.showModal();
-              </script>
-              ";
-      } else {
-        $conn = new mysqli('localhost', 'root', '', 'villa gilda');
-        
-        $acc_username = $_POST['username'];
-        $acc_password = $_POST['password'];
+  <?php
+  //   $conn = new mysqli('localhost', 'root', '', 'villa gilda');
 
-        $sql = 'SELECT Username, Password, Role FROM `user accounts`';
-        $result = $conn->query($sql);
-
-        while($row = $result->fetch_assoc()) {
-          if ($acc_username == $row['Username'] && password_verify($acc_password, $row['Password'])) {
-            $_SESSION['username'] = $row['Username'];
-            $_SESSION['role'] = $row['Role'];
-
-            header('Location: homepage.php');
-          }
-          else {
-            
-          }
-        }
-      }
-    }
+  
+  // $password = 'VillaGildaResort';
+  // $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
+  // $sql = "INSERT INTO `user accounts` (`First name`, `Last name`, `Username`, `Password`, `Role`) VALUES ('Celine', 'Almodovar', 'CelineAlmodovar01', '{$encryptedPass}', 'admin')";
+  
+  // $conn->query($sql);
+  function displayErrorDialog() {
+    echo "<script>
+        errorMessage = document.querySelector('.error-message');
+        errorMessage.classList.remove('visibility');
+        </script>";
+  }
   ?>
   <script src="login.js"></script>
 </body>
