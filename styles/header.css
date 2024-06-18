@@ -156,7 +156,7 @@ i + p, .menu-text {
 }
 
 .user-username, .user-role {
-  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(2px 0px 0px rgb(8, 58, 58));
 }
 
 .user-username {
@@ -220,7 +220,8 @@ i + p, .menu-text {
 }
 
 .pane {
-  position: absolute;
+  background-color: #296D6D;
+  position: fixed;
 }
 
 .user-pane {
@@ -228,7 +229,6 @@ i + p, .menu-text {
   align-items: center;
   padding: 10px 15px;
   column-gap: 14px;
-  background-color: #296D6D;
 }
 
 .wrapper-pane {
@@ -408,8 +408,8 @@ i + p, .menu-text {
   .navigation-pane {
     width: 350px;
     left: 0;
-    top: 80px;
-    height: calc(100% - 80px);
+    top: 79px;
+    height: calc(100% - 79px);
     position: fixed;
     overflow-y: auto;
   }
@@ -431,7 +431,7 @@ i + p, .menu-text {
   }
 
   .pane {
-    top: 80px;
+    top: 79px;
     right: 0;
     width: 280px;
   }
