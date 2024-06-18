@@ -169,7 +169,7 @@ h1.title {
 }
 
 .form-first-half h1 {
-    font-size: clamp(16px, 2vw, 25px);
+    font-size: clamp(25px, 2vw, 35px);
     text-wrap: nowrap;
 }
 
@@ -187,7 +187,7 @@ h1.title {
 .logos {
     margin-top: 6px;
     margin-right: 10px;
-    width: clamp(40px, 10vw, 65px);
+    width: clamp(55px, 10vw, 65px);
 }
 
 .close-btn {
@@ -254,17 +254,18 @@ h1.title {
 }
 
 .reservation-footer {
-    flex: 0 1 80px;
+    flex: 0 1 90px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #226060;
 }
 
 .submitReservation {
-    padding: 6px 30px;
+    text-transform: uppercase;
+    padding: 10px 35px;
     font-weight: bold;
     color: white;
+    font-size: clamp(20px, 2vw, 25px);
 }
 
 .submit {   
@@ -329,10 +330,20 @@ h1.title {
         width: 50%;
     }
 
+    .reservation-footer {
+        background-color: #226060;
+    }
+
     .submitReservation {
         border: 6px solid white;
-        background-color: #F4CF3A;
-        border-radius: 30px;
+        background-color: #E1B500;
+        border-radius: 40px;
+        transition: background-color 0.05s;
+    }
+
+    .submitReservation:hover {
+        color: #E1B500;
+        background-color: #F0F1F0;
     }
 
     .prev:hover, .next:hover {
@@ -352,7 +363,15 @@ h1.title {
         flex-wrap: wrap;
     }
     .form-first-half, .form-second-half {
-        justify-content: center;
+        margin: auto;
+    }
+
+    .form-first-half h1 {
+        padding-right: 60px;
+    }
+
+    .form-second-half p {
+        margin-bottom: 15px;
     }
 
     .reservation-body {
@@ -361,6 +380,16 @@ h1.title {
 
     .price {
         column-gap: 10px;
+    }
+
+    .submitReservation {
+        background-color: #226060;
+        border: none;
+    }
+
+    .submitReservation:active {
+        color: #226060;
+        background-color: #F0F1F0;
     }
 
     .prev:active, .next:active {
