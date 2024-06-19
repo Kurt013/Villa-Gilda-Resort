@@ -22,7 +22,7 @@ table {
 }
 
 th:first-child, td:first-child {
-  width: 30px;
+  width: 60px;
 }
 
 th {
@@ -84,9 +84,32 @@ option {
 
 
 .id {
-  text-align: end;
   font-weight: bold;
-  padding-right: 3px;
+}
+
+.btn {
+  margin-bottom: 2px;
+  margin-right: 2px;
+  padding-top: 3px;
+  padding-left: 1px;
+  vertical-align: middle;
+  font-size: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: #E1B500;
+  border-radius: 50%;
+  border: none;
+}
+
+.id span {
+  vertical-align: middle;
+  display: inline-block;
+  width: 10px;
+  color: black;
+}
+
+.minimize {
+  background-color: #FF0007;
 }
 
 .name {
@@ -152,10 +175,11 @@ option {
 
 
 
-
-
-
 @media only screen and (min-width: 992px) {
+  .id {
+    text-align: end;
+  }
+
   .name {
     width: 15%;
   }
@@ -219,12 +243,12 @@ option {
   }
 }
 
-.fully-paid {
+td .fully-paid {
   color: #226060;
   font-size: 25px;
 }
 
-.pending {
+td .pending {
   color: #737373;
   font-size: 25px;
 }

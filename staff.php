@@ -62,7 +62,7 @@
         </div>
         <div class="addStaff-container">
           <input type="submit" name="addStaff" value="ADD STAFF" class="addStaff-submit">
-        </div>
+          </div>
       </form>
     </div>
 
@@ -112,39 +112,45 @@
   /* Show the list of staffs*/
   $sqlShow = 'SELECT ID, `First Name`, `Last Name`, Username FROM `user accounts` WHERE Role = "staff"';
   $result = $conn->query($sqlShow);
+  $numStaff = mysqli_num_rows($result);
   $number = 1;
   echo '
-      <table>
-        <thead>
-          <th>#</th>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Remove</th>
-        </thead>
-        <tbody>
-  ';
+  <div class="staff-list">
+    <div class="list-title">
+      <h2>Staff List( '.$numStaff.' )</h2> <hr class="line">
+    </div>
+    <div class="list-body">
+    ';
 
   while ($row = $result->fetch_assoc()) {
       echo "
-        <tr>
-          <td>".$number++."</td>
-          <td>{$row['Last Name']}, {$row['First Name']}</td>
-          <td class='username-td'>{$row['Username']}</td>
-          <td class='remove'>
-            <form action='' method='post'>
-              <input type='hidden' name='deleteID' value='{$row['ID']}'>
-              <button type='submit' name='deleteButton' class='delete-button'>
-                <i class='bx bxs-trash'></i>
-              </button>
-            </form>
-          </td>
-        </tr>
+      <div class='staff-card'>
+        <h3>S".$number++."</h3>
+        <div class='staff-info'>
+          <div class='list-prof'>
+            <div class='wrapper-pane staff-size'>
+              <i class='bx bxs-user user-2 user-staff icon-staff-size'></i>
+            </div>
+            <div class='info'>
+              <p>{$row['First Name']} {$row['Last Name']}</td>
+              <p class='username-staff'>{$row['Username']}</p>
+            </div>
+          </div>
+          <form class='delete' action='' method='post'>
+            <input type='hidden' name='deleteID' value='{$row['ID']}'>
+            <button type='submit' name='deleteButton' class='delete-button'>
+              <i class='bx bxs-trash'></i>
+            </button>
+          </form>
+        </div>
+      </div>
       ";
   }
 
   echo '
-        </tbody>
-      </table>
+      </div>
+
+    </div>
   ';
 
   // Handle deletion logic

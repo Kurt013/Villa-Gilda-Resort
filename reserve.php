@@ -70,12 +70,19 @@ echo $calendar->show();
     <p class="reserved">Reserved</p>
   </div>
 
-<script>
+  <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
 
     checkTab.classList.add('bx-calendar');
     checkText.innerHTML = 'Reserve';
+
+    const iden = document.querySelectorAll('.cell');
+
+    for (let i=0; i < iden.length; i++) {
+      if (iden[i].querySelector('.green-box'))
+        iden[i].classList.add('hasForm');
+    }
   </script>
 </body>
 </html>

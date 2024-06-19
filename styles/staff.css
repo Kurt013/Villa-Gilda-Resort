@@ -3,13 +3,12 @@ body {
 }
 
 .form-wrapper {
-  padding: 10px 0 50px;
+  padding: 10px 0 30px;
 }
 
 .addStaff {
-  padding: 15px 20px;
-  background-color: #F0F1F0;
-  border: 4px solid #226060;
+  padding: 40px 20px 20px;
+  background-color: #296D6D;
   border-radius: 0 0 10px 10px;
   width: 98%;
   margin: auto;
@@ -18,17 +17,102 @@ body {
 }
 
 .form-group label {
-  color: #226060;
   text-wrap: nowrap;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.form-group input {
+  font-size: 16px;
+  margin-top: 5px;
+  color: black;
+  width: 100%;
+  padding: 10px 10px;
 }
 
 .addStaff-submit {
-  cursor: pointer;
-  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+}
+
+.list-title {
+  padding: 0 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.list-title h2 {
+  flex-basis: 170px;
+}
+
+.line {
+  flex: 1;
+  display: inline-block;
+}
+
+.staff-list {
+  padding: 0 15px;
+}
+
+.staff-card {
+  height: 120px;
+  display: flex;
+  background-color: #2D7474;
+  overflow: hidden;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+}
+
+.staff-card h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 70px;
+  font-size: 25px;
+  height: 100%;
+  background-color:#368686;
+}
+
+.staff-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;   
+  align-items: center;
+  padding: 10px 15px 10px 25px;
+}
+
+.list-prof {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+}
+
+.staff-size {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.icon-staff-size {
+  font-size: 50px !important;
+}
+
+.username-staff {
+  font-weight: 700;
+  font-style: italic;
+}
+
+.delete-button {
   background-color: #226060;
   border: none;
-  padding: 10px 60px;
+  padding: 24px;
+  border-radius: 50%;
 }
+
+.bxs-trash {
+  font-size: 20px;
+}
+
 
 @media only screen and (min-width: 992px) {
   .addStaff {
@@ -40,124 +124,30 @@ body {
   .addStaff-submit {
     cursor: pointer;
     font-size: 20px;
-    background-color: #226060;
+    background-color: #4CABAB;
     border: none;
-    padding: 10px 60px;
+    padding: 10px 30px;
+    margin-top: 45px;
+    transition: background-color 0.05s,
+      color 0.05s;
+  }
+
+  .addStaff-submit:hover {
+    color: #4CABAB;
+    background-color: white;
   }
 
   .addStaff-container {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+  }
+
+  .delete-button:hover {
+    background-color: #E7191F;
   }
 }
 
 @media only screen and (max-width: 991px) {
   .addStaff {
-    display: grid;
-    place-items: center;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: "f f"
-                         "s s"
-                         "u u"
-                         "p c"
-                         "a a";
-  }
-
-  .first {
-    grid-area: f;
-  }
-
-  .second {
-    grid-area: s;
-  }
-
-  .user {
-    grid-area: u;
-  }
-
-  .password {
-    grid-area: p;
-  }
-
-  .confirm-pass {
-    grid-area: c;
-  }
-
-  .addStaff-container {
-    grid-area: a;
-  }
-}
-
-.form-group input {
-  border: 3px solid #226060; 
-  color: black;
-  width: 100%;
-  padding: 10px 10px;
-}
-
-
-table {
-  width: 95%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  border: 3px solid #226060;
-}
-
-th:first-child, td:first-child {
-  width: 30px;
-}
-
-th {
-  padding: 10px 10px;
-  font-weight: 500;
-  background-color: #226060;
-}
-
-td * {
-  font-size: 14px;
-  color: #000000;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;   
-}
-
-td {
-  text-wrap: wrap;
-  text-align: center;
-  font-size: 14px;
-  color: #000000;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  background-color: #FFFFFF;
-  border: 3px solid #226060;
-  height: 100%;
-}
-
-.remove {
-  position: relative;
-  width: 50px;
-  height: 100%;
-}
-
-#removeRow {
-  position: absolute;
-  left: -9990px;
-}
-
-.removeRow {
-
-}
-
-.bxs-trash {
-  display: block;
-  color: #E7191F;
-  width: 100%;
-}
-
-@media only screen and (min-width: 992px) {
-  .bxs-trash:hover {
-    color: #F0F1F0;
-    background-color: #E7191F;
   }
 }

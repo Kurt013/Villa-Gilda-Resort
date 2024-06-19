@@ -252,13 +252,23 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 <table id="myTable">
     <thead>
     <tr class="headerRow">
+        <th>#</th>
+        <th>Name</th>
+        <th>Booking Date</th>
+        <th class="mobile">Time Slot</th>
+        <th class="tablet">Inclusion</th>
+        <th class="tablet">Contact Number</th>
+        <th class="tablet">Email</th>
+        <th class="tablet">Total Amount</th>
+        <th class="tablet">Status</th>
+        <th class="tablet">Receipt</th>
     </tr>
     </thead>
     <tbody>
     <?php
         while ($row = mysqli_fetch_assoc($result)){
             echo '<tr class="row">
-                <td class="id"><button class="btn" onclick="toggleSub('.$child.');">+</button>'.$number++. '</td>
+                <td class="id"><button class="btn toggle-'.$child.'" onclick="toggleSub('.$child.');">+</button><span>'.$number++. '</span></td>
                 <td class="name">'.$row["lastName"] . ", " . $row["firstName"].'</td>
                 <td>'.$row["booking_date"].'</td>
                 <td class="time mobile">'.$row["time_slot"].'</td>
@@ -400,8 +410,21 @@ function toggleSub(n) {
     let selectorName = '.num-' + n;
     const btn = document.querySelectorAll(selectorName);
 
-    for (let i=0; i < btn.length; i++)
+    let maximize = '.toggle-' + n;
+    const maxBtn = document.querySelectorAll(maximize);
+
+    for (let i=0; i < btn.length; i++) {
         btn[i].classList.toggle('hidden');
+    }
+
+    for (let i=0; i < maxBtn.length; i++) {
+        maxBtn[i].classList.toggle('minimize');
+
+        if (maxBtn[i].innerHTML === '+')
+            maxBtn[i].innerHTML = '-';
+        else
+            maxBtn[i].innerHTML = '+';
+    }
 }
 
 function onPageReloadOrResize() {
@@ -423,7 +446,7 @@ function onPageReloadOrResize() {
     }
 
 
-    if (screenWidth >= 768 && screenWidth <= 991) {
+    if (screenWidth >= 768) {
         for (let i=0; i < colspan.length; i++) {
             colspan[i].colSpan = '1';
         }
@@ -450,12 +473,6 @@ function onPageReloadOrResize() {
             <th></th>
             <th>Booking Date</th>
             <th class="mobile">Time Slot</th>
-            <th class="tablet">Inclusion</th>
-            <th class="tablet">Contact Number</th>
-            <th class="tablet">Email</th>
-            <th class="tablet">Total Amount</th>
-            <th class="tablet">Status</th>
-            <th class="tablet">Receipt</th>
         `;
     }
 }

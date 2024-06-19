@@ -91,20 +91,25 @@ h1.title {
 .dates {
     flex: 1;
     background-color: #F0F1F0;
-    overflow: hidden;
 }
 
 .cell {
     height: 100%;
+    min-height: 45px;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.hasForm {
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .day-number {
+    z-index: 1;
     color: #226060;
 }
+
 
 @media only screen and (max-width: 418px) {
     .label {
@@ -114,20 +119,6 @@ h1.title {
 
 .past {
     background-color: #CCCCCC;
-}
-
-
-.green-box + .day-number { 
-    color: black;
-    position: relative;
-}
-
-.day-number {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .reservation_form {
@@ -169,7 +160,7 @@ h1.title {
 }
 
 .form-first-half h1 {
-    font-size: clamp(25px, 2vw, 35px);
+    font-size: clamp(18px, 2vw, 35px);
     text-wrap: nowrap;
 }
 
@@ -268,10 +259,33 @@ h1.title {
     font-size: clamp(20px, 2vw, 25px);
 }
 
-.submit {   
+.green-box {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.submit {
+    background-color: transparent;
+    height: 50px;
+    width: clamp(10px, 5vw, 50px);
+    border: none;
     z-index: 2;
-    position: absolute;
+    /* width: clamp(30px, 5vw, 40px);
+    height: 50px; */
+    /* border-radius: 0 50% 0 0; */
     transition: background-color 0.05s;
+    border-radius: 100% 0% 0% 100% / 100% 30% 70% 0%;
+}
+
+.open {
+    background-color: #00BF63;
+    border-radius: 100% 0% 0% 100% / 100% 30% 70% 0%;
+}
+
+.booked {
+    background-color: #FF0007;
+    border-radius:100% 0% 0% 100% / 100% 30% 70% 0%;
 }
 
 .legends {
