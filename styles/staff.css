@@ -22,7 +22,7 @@ body {
 }
 
 .form-group input {
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 5px;
   color: black;
   width: 100%;
@@ -170,10 +170,7 @@ i.bxs-trash {
 
 @media only screen and (max-width: 991px) {
   .form-group input {
-    display: block;
-    width: 80%;
-    min-width: 240px;
-    margin-bottom: 20px;
+    font-size: 12px;
   }
   
   .addStaff {
@@ -192,4 +189,18 @@ i.bxs-trash {
     margin-top: 40px;
     margin-bottom: 10px;
   }
+
+  .icon-staff-size {
+    font-size: 30px !important;
+  }
+
+  .staff-size {
+    flex: 0 0 auto;
+    width: 50px;
+    height: 50px;
+  }
+  .staff-info{
+    font-size: 11px;
+  }
+
 }
