@@ -100,13 +100,46 @@ h1.title {
     display: flex;
 }
 
-.hasForm {
+.hasOpen, .hasBooked {
     flex-direction: row-reverse;
     justify-content: space-between;
 }
 
+.hasOpen {
+    background-color: #00BF63;
+}
+
+.hasBooked {
+    background-color: #FF0007;
+}
+
+.submit {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin: 0 5px 5px 0;
+    border: 3px solid #F0F1F0;
+    transition: background-color 0.05s;
+}
+
+.hasOpen .submit {
+    color: #00BF63;
+    background-color: #F0F1F0;
+}
+
+.hasBooked .submit {
+    color: #FF0007;
+    background-color: #F0F1F0;
+}
+
+.green-box + .day-number {
+    color: white;
+}
+
 .day-number {
-    z-index: 1;
+    padding-left: 5px;
+    align-self: center;
     color: #226060;
 }
 
@@ -265,28 +298,6 @@ h1.title {
     align-items: end;
 }
 
-.submit {
-    background-color: transparent;
-    height: 50px;
-    width: clamp(10px, 5vw, 50px);
-    border: none;
-    z-index: 2;
-    /* width: clamp(30px, 5vw, 40px);
-    height: 50px; */
-    /* border-radius: 0 50% 0 0; */
-    transition: background-color 0.05s;
-    border-radius: 100% 0% 0% 100% / 100% 30% 70% 0%;
-}
-
-.open {
-    background-color: #00BF63;
-    border-radius: 100% 0% 0% 100% / 100% 30% 70% 0%;
-}
-
-.booked {
-    background-color: #FF0007;
-    border-radius:100% 0% 0% 100% / 100% 30% 70% 0%;
-}
 
 .legends {
     flex-basis: 40px;
@@ -364,6 +375,16 @@ h1.title {
         background-color: #F4CF3A;
         color: #F0F1F0;
     }
+
+    .hasOpen .submit:hover {
+        background-color: #00BF63;
+        color: #F0F1F0;
+    }
+    
+    .hasBooked .submit:hover {
+        background-color: #FF0007;
+        color: #F0F1F0;
+    }
 }
 
 
@@ -409,6 +430,16 @@ h1.title {
     .prev:active, .next:active {
         background-color: #F4CF3A;
         color: #F0F1F0;
+    }
+
+    .hasOpen .submit:active {
+        background-color: #FF0007;
+        color: #F0F1F0;
+    }
+    
+    .hasBooked .submit:active {
+        color: #FF0007;
+        background-color: #F0F1F0;
     }
 }
 

@@ -104,6 +104,19 @@
         </a>
       </li>
       <li>
+        <a href='dashboard.php' class='nav-block <?php 
+            if ($_SESSION['role'] == 'admin') {
+              echo"nav-admin";
+            }
+            else {
+              echo"invisible";
+            }
+            ?>'>
+          <i class='bx bxs-dashboard'></i>
+          <p class='loc'>Dashboard</p>
+        </a>
+      </li>
+      <li>
         <a href="reserve.php" class="nav-block active-admin <?php 
           if ($_SESSION['role'] == 'admin') {
             echo"nav-admin";
@@ -129,19 +142,6 @@
           <p class="loc">Reservation List</p>
         </a>
       </li>
-      <li>
-        <a href='dashboard.php' class='nav-block <?php 
-            if ($_SESSION['role'] == 'admin') {
-              echo"nav-admin";
-            }
-            else {
-              echo"invisible";
-            }
-            ?>'>
-            <i class='bx bxs-dashboard'></i>
-            <p class='loc'>Dashboard</p>
-          </a>
-        </li>
         <li>
           <a href='staff.php' class='nav-block <?php 
             if ($_SESSION['role'] == 'admin') {

@@ -80,8 +80,11 @@ echo $calendar->show();
     const iden = document.querySelectorAll('.cell');
 
     for (let i=0; i < iden.length; i++) {
-      if (iden[i].querySelector('.green-box'))
-        iden[i].classList.add('hasForm');
+      if (iden[i].querySelector('.open'))
+        iden[i].classList.add('hasOpen');
+      else if (iden[i].querySelector('.booked'))
+        iden[i].classList.add('hasBooked');
+
     }
   </script>
 </body>

@@ -302,7 +302,7 @@ private function bookingForm($date)
         <form method="post" action="' . $this->currentURL . '">
             <input type="hidden" name="add" />
             <input type="hidden" name="date" value="' . $date . '" />
-            <input class="submit" id="submit" type="submit" value="Book" />
+            <button class="submit" id="submit" type="submit" value="Book">B</button>
         </form>';
     }
 }
@@ -314,7 +314,7 @@ private function bookingForm($date)
             <form onsubmit="return confirm(\'Are you sure to cancel?\');" method="post" action="' . $this->currentURL . '">
                 <input type="hidden" name="delete" />
                 <input type="hidden" name="id" value="' . $id . '" />
-                <input class="submit" type="submit" value="Delete" />
+                <button class="submit" type="submit" value="Delete">D</button>
             </form>';
     }
 }
