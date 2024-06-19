@@ -117,7 +117,7 @@
   echo '
   <div class="staff-list">
     <div class="list-title">
-      <h2>Staff List( '.$numStaff.' )</h2> <hr class="line">
+      <h2>Staff List ( '.$numStaff.' )</h2> <hr class="line">
     </div>
     <div class="list-body">
     ';

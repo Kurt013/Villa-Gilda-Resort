@@ -179,7 +179,7 @@
 <!-- Right Side Bar -->
 <div class="pane hide">
   <div class="user-pane">
-    <div class="wrapper-pane"><i class="bx bxs-user user-2 <?php 
+    <div class="wrapper-pane wrapper-size"><i class="bx bxs-user user-2 <?php 
       if ($_SESSION['role'] == 'admin') {
         echo'user-admin';
       }

@@ -3,14 +3,13 @@ body {
 }
 
 .form-wrapper {
-  padding: 10px 0 30px;
+  padding: 10px 15px 30px;
 }
 
 .addStaff {
-  padding: 40px 20px 20px;
   background-color: #296D6D;
   border-radius: 0 0 10px 10px;
-  width: 98%;
+  width: 100%;
   margin: auto;
   gap: 15px;
 
@@ -33,6 +32,13 @@ body {
 .addStaff-submit {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #4CABAB;
+  border: none;
+  padding: 10px 30px;
+  transition: background-color 0.05s,
+    color 0.05s;
 }
 
 .list-title {
@@ -42,11 +48,16 @@ body {
 }
 
 .list-title h2 {
-  flex-basis: 170px;
+  flex-basis: 180px;
+  color: #2D7474;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
 }
 
 .line {
   flex: 1;
+  border: 3px solid #2D7474;
+  color: #2D7474;
   display: inline-block;
 }
 
@@ -62,13 +73,23 @@ body {
   border-radius: 10px;
   border: none;
   width: 100%;
+  margin-bottom: 15px;
+  overflow-x: auto;
+}
+
+p {
+  color: #EBF0EA;
 }
 
 .staff-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  color: #D0DFCE;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-basis: 70px;
+  flex: 0 0 70px;
   font-size: 25px;
   height: 100%;
   background-color:#368686;
@@ -77,6 +98,7 @@ body {
 .staff-info {
   flex: 1;
   display: flex;
+  column-gap: 15px;
   justify-content: space-between;   
   align-items: center;
   padding: 10px 15px 10px 25px;
@@ -89,8 +111,9 @@ body {
 }
 
 .staff-size {
-  width: 80px !important;
-  height: 80px !important;
+  flex: 0 0 auto;
+  width: 80px;
+  height: 80px;
 }
 
 .icon-staff-size {
@@ -105,12 +128,12 @@ body {
 .delete-button {
   background-color: #226060;
   border: none;
-  padding: 24px;
+  padding: clamp(16px, 2vw, 24px);
   border-radius: 50%;
 }
 
-.bxs-trash {
-  font-size: 20px;
+i.bxs-trash {
+  font-size: clamp(25px, 2vw, 30px);
 }
 
 
@@ -121,20 +144,18 @@ body {
     grid-template-rows: repeat(2, auto);
   }
 
+  .addStaff {
+    padding: 40px 20px 20px;
+  }
+
   .addStaff-submit {
-    cursor: pointer;
-    font-size: 20px;
-    background-color: #4CABAB;
-    border: none;
-    padding: 10px 30px;
     margin-top: 45px;
-    transition: background-color 0.05s,
-      color 0.05s;
+
   }
 
   .addStaff-submit:hover {
     color: #4CABAB;
-    background-color: white;
+    background-color: #EBF0EA;
   }
 
   .addStaff-container {
@@ -148,6 +169,27 @@ body {
 }
 
 @media only screen and (max-width: 991px) {
+  .form-group input {
+    display: block;
+    width: 80%;
+    min-width: 240px;
+    margin-bottom: 20px;
+  }
+  
   .addStaff {
+    padding: 20px;
+  }
+
+  .addStaff-submit:active {
+    color: #4CABAB;
+    background-color: #EBF0EA;
+  }
+
+  .addStaff-submit {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 40px;
+    margin-bottom: 10px;
   }
 }
