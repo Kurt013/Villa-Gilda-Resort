@@ -115,8 +115,8 @@ h1.title {
 
 .submit {
     cursor: pointer;
-    height: 30px;
-    width: 30px;
+    height: clamp(18px, 2vw, 40px);
+    width: clamp(18px, 2vw, 40px);
     border-radius: 50%;
     margin: 0 5px 5px 0;
     border: 3px solid #F0F1F0;
@@ -138,6 +138,7 @@ h1.title {
 }
 
 .day-number {
+    font-size: clamp(12px, 2vw, 16px);
     padding-left: 5px;
     align-self: center;
     color: #226060;
@@ -300,12 +301,19 @@ h1.title {
 
 
 .legends {
-    flex-basis: 40px;
+    padding: 10px 10px; 
     display: flex;
     align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.legends p {
+.left-side {
+    display: flex;
+}
+
+.left-side p {
     background-color: #F0F1F0;
     color: #226060;
     font-family: 'Spotify Bold';
@@ -316,7 +324,7 @@ h1.title {
     position: relative;
 }
 
-.legends p::before {
+.left-side p::before {
     position: absolute;
     content: '';
     width: 15px;
@@ -332,6 +340,44 @@ h1.title {
 
 .reserved::before {
     background-color: #FF0007;
+}
+
+.right-side {
+    display: flex;
+    text-wrap: nowrap;
+}
+
+.right-side p + p {
+    padding-left: 25px;
+}
+
+.right-side p {
+    font-size: clamp(12px, 2vw, 16px);
+    position: relative
+}
+
+.deleteReserve::before, .bookReserve::before {
+    position: absolute;
+    background-color: #F0F1F0;
+    border-radius: 50%;
+    width: 18px;
+    border: none;
+    height: 18px;
+    left: 6px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deleteReserve::before {
+    content: 'D';
+    color: #FF0007;
+}
+
+.bookReserve::before {
+    content: 'B';
+    color: #00BF63;
 }
  
 
@@ -393,6 +439,8 @@ h1.title {
         display: none;
     }
 
+  
+
     .reservation-header {
         flex-direction: column;
         flex-wrap: wrap;
@@ -447,6 +495,19 @@ h1.title {
     .price {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }    
+}
+
+/* Block dates responsiveness */
+@media only screen and (max-width: 550px) {
+    #calendar {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #calendar {
+        width: 100%;
     }
 }
 

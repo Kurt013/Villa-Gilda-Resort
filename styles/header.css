@@ -317,13 +317,13 @@ i + p, .menu-text {
   }
 
   .navigation-pane {
+    overflow-y: auto;
     z-index: 1001;
     top: 38px;
     left: 0;
     width: 100%;
     height: calc(100% - 38px);
-    position: absolute;
-
+    position: fixed;
   }
 
   .user-detail {  

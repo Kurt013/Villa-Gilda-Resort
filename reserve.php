@@ -66,8 +66,15 @@ echo $calendar->show();
 
 ?>
   <div class="legends">
-    <p class="available">Available</p>
-    <p class="reserved">Reserved</p>
+    <div class="left-side">
+      <p class="available">Available</p>
+      <p class="reserved">Reserved</p>
+    </div>
+    <div class="right-side">
+      <p>Buttons:</p>
+      <p class="deleteReserve">Delete Reservation</p>
+      <p class="bookReserve">Book Reservation</p>
+    </div>
   </div>
 
   <script>
