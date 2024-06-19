@@ -20,7 +20,23 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
+    function is_valid_password($password) {
+        // Length check
+        if (strlen($password) < 8) {
+            return false;
+        }
+        
+        // Character types check
+        if (!preg_match('/[A-Za-z]/', $password) || // contains at least one letter
+            !preg_match('/\d/', $password) ||      // contains at least one number
+            !preg_match('/[^A-Za-z\d]/', $password) // contains at least one special character
+        ) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     if (isset($_POST['op']) && isset($_POST['np']) && isset($_POST['c_np'])) {
 
         function validate($data) {
@@ -40,8 +56,11 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
         } else if (empty($np)) {
             header("Location: change-password.php?error=New Password is required");
             exit();
+        } else if (!is_valid_password($np)) {
+            header("Location: change-password.php?error=Choose a more secure password.");
+            exit();
         } else if ($np !== $c_np) {
-            header("Location: change-password.php?error=The confirmation password does not match");
+            header("Location: change-password.php?error=New password does not match. Try again.");
             exit();
         } else {
             $id = $_SESSION['ID'];
