@@ -57,19 +57,20 @@ session_start();
         }
 
         // Prepare statement
-        $stmt = $conn->prepare("SELECT `First name`, `Last name`, Username, Password, Role FROM `user accounts` WHERE Username = ?");
+        $stmt = $conn->prepare("SELECT ID, `First name`, `Last name`, Username, Password, Role FROM `user accounts` WHERE Username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows == 1) {
             // Bind result variables
-            $stmt->bind_result($first_name, $last_name, $db_username, $db_password_hash, $role);
+            $stmt->bind_result($id, $first_name, $last_name, $db_username, $db_password_hash, $role);
             $stmt->fetch();
 
             // Verify password
             if (password_verify($password, $db_password_hash)) {
                 // Password is correct, start session
+                $_SESSION['ID'] = $id;
                 $_SESSION['username'] = "{$last_name}, {$first_name}";
                 $_SESSION['role'] = $role;
 

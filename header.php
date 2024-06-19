@@ -160,7 +160,7 @@
     <!-- Duplicate of Right Side Bar (for Mobile or Smaller Screen Versions) -->
     <ul class="user-settings">
       <li>
-        <a class="user-redirect-dup redirect" href="">
+        <a class="user-redirect-dup redirect" href="change-password.php">
           <i class='bx bx-lock'></i>
           <p class="loc">Change Password</p>
         </a>
@@ -202,7 +202,7 @@
   <nav class="user-nav-list">
     <ul class="user-list">
       <li class="user-block">
-        <a class="user-redirect redirect-alternate" href="">
+        <a class="user-redirect redirect-alternate" href="change-password.php">
           <i class='bx bx-lock'></i>
           <p>Change Password</p>
         </a>
