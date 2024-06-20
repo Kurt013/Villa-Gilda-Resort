@@ -66,7 +66,6 @@ body {
 }
 
 .staff-card {
-  height: 120px;
   display: flex;
   background-color: #2D7474;
   overflow: hidden;
@@ -91,7 +90,6 @@ p {
   justify-content: center;
   flex: 0 0 70px;
   font-size: 25px;
-  height: 100%;
   background-color:#368686;
 }
 
