@@ -1,0 +1,261 @@
+body {
+  background-color: #419999;
+}
+
+.select-wrapper {
+  position: fixed;
+  width: 17.5rem;
+  z-index: 1;
+  top: 76px;
+  padding: 1.25rem 1.625rem;
+  border-radius: 0 0 1.25rem 1.25rem;
+  background-color: #419999;
+}
+
+.select-month label {
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.select-month select {
+  letter-spacing: 2px;
+  display: block;
+  font-size: 0.9375rem;
+  width: 100%;
+  margin-top: 0.625rem;
+  padding: 0.625rem 0.625rem;
+  border-radius: 1.875rem;
+  border: none;
+  position: relative;
+  color: #EBF0EA;
+}
+
+.select-month select, .select-month option {
+  color: #296D6D;
+  background-color: #EBF0EA;
+}
+
+.analytics * {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.analytics {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  padding: 0 0.9375rem;
+  row-gap: 1.25rem;
+  height: 100%;
+}
+
+.statistics-wrapper, .visual-wrapper {
+  width: 100%;
+  height: 50%;
+  background-color: #296D6D;
+}
+
+.statistics-wrapper {
+  padding: 1.25rem 1.875rem;
+  border-radius: 0 0 1.5625rem 1.5625rem;
+  position: relative;
+}
+
+
+.statistics-desc {
+  gap: 0.625rem; 
+}
+
+.statistics-desc .box {
+  flex: 1 0 30%;
+}
+
+.box p, .visual-box p {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.875rem;
+}
+
+.box p:last-child {
+  font-family: 'Spotify Black';
+  font-size: 1.5625rem;
+  margin-top: 0.4375rem;
+}
+
+.visual-box p:last-child {
+  font-size: 1.5625rem;
+  font-family: 'Spotify Black';
+}
+
+.box {
+  padding: 0.625rem 0.625rem;
+  border-radius: 0.3125rem;
+  border: none;
+}
+
+.box-1 {
+  background-color: #4EB1CB;
+}
+
+.box-2 {
+  background-color: #CF5C60;
+}
+
+.box-3 {
+  background-color: #717ECD;
+}
+
+.box-4 {
+  background-color: #4AB471;
+}
+
+.box-5 {
+  background-color: #F4CB26;
+}
+
+.visual-wrapper {
+  border-radius: 1.5625rem 1.5625rem 0 0;
+  padding: 0.625rem 1.625rem 0;
+}
+
+.visual-desc {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  column-gap: 20px;
+}
+
+.visual-box{
+  margin-top: 0.9375rem;
+  border-radius: 0.625rem;
+  background-color: #52C8C8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.visual-box {
+  flex: 1 0 150px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.75rem;
+}
+
+.coin {
+  font-size: 50px;
+}
+
+.pie-sizing {
+  border-color: #419999;
+  border-style: solid;
+  border-width: 0.75rem 0.9375rem;
+  border-radius: 1.25rem;
+  position: absolute;
+  width: 17.5rem;
+  height: 20.625rem;
+  padding: 0.625rem 0;
+  text-align: center;
+  background-color: #296D6D;
+}
+
+.page-header {
+  font-size: 1.25rem;
+  margin-bottom: 0.625rem;
+}
+
+@media only screen and (min-width: 992px) {
+  body {
+    height: 100vh;
+  }
+
+  .statistics-desc {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 320px);
+  }  
+
+  .select-wrapper {
+    right: 45px;
+  }
+
+  .visual-desc {
+    width: calc(100% - 320px);
+  }
+
+  .line-sizing {
+    flex-basis: 420px;
+  }
+
+  .pie-sizing {
+    right: 30px;
+    bottom: -200px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .statistics-desc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .box-1 {
+    grid-column: 2 / 3;
+  }
+
+  .select-wrapper {
+    left: 45px;
+  }
+
+  .statistics-wrapper {
+    padding-bottom: 125px;
+  }
+
+  .visual-wrapper {
+    padding-top: 125px;
+  }
+
+  .visual-desc {
+    justify-content: center;
+  }
+  
+  .line-sizing {
+    flex-basis: 100px;
+  }
+
+  .pie-sizing {
+    left: 50%;
+    bottom: -140px;
+    transform: translateX(-50%);    
+  }
+
+  .visual-wrapper {
+    padding-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 690px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .select-wrapper {
+    width: 130px;
+    left: 40px;
+  }
+
+  .line-sizing {
+    width: 300px;
+  }
+
+  .visual-desc {
+    overflow-x: auto;
+  }
+}

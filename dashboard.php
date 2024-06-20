@@ -4,8 +4,8 @@ session_start();
 if (isset($_POST['submit']) || empty($_SESSION['role'])) {
     session_destroy();
     header('Location: index.php');
-    exit(); 
-  }
+    exit();
+}
 //$cancelled_count = isset($_SESSION['cancelled_count']) ? $_SESSION['cancelled_count'] : 0;
 $current_month = isset($_POST['month']) ? $_POST['month'] : date('n');
 
@@ -257,8 +257,8 @@ $conn->close();
 </head>
 
 <body>
-    <?php include('header.php'); 
-        ?>
+    <?php include('header.php');
+    ?>
 
     <script>
         const checkTab = document.getElementById('menu');
@@ -268,100 +268,157 @@ $conn->close();
         checkText.innerHTML = 'Dashboard';
     </script>
 
-    <form method="POST" action="">
-        <label for="month">Select Month:</label>
-        <select id="month" name="month" onchange="this.form.submit()">
-            <?php
-            for ($i = 1; $i <= 12; $i++) {
-                $selected = ($i == $current_month) ? 'selected' : '';
-                echo '<option value="' . $i . '" ' . $selected . '>' . date('F', mktime(0, 0, 0, $i, 10)) . '</option>';
-            }
-            ?>
-        </select>
-    </form>
-    
+    <div class="select-wrapper">
+        <form class="select-month" method="POST" action="">
+            <label for="month">Select Month:</label>
+            <select id="month" name="month" onchange="this.form.submit()">
+                <?php
+                for ($i = 1; $i <= 12; $i++) {
+                    $selected = ($i == $current_month) ? 'selected' : '';
+                    echo '<option value="' . $i . '" ' . $selected . '>' . date('F', mktime(0, 0, 0, $i, 10)) . '</option>';
+                }
+                ?>
+            </select>
+        </form>
+    </div>
+
     <!--
     <a href="?generate_pdf=true&month=<?php echo $current_month; ?>" target="_blank">Generate PDF Report</a>
     -->
-    
-    <div>
-        <h3>Statistics for <?php echo date('F', mktime(0, 0, 0, $current_month, 10)); ?></h3>
-        <p>Total pending payment: <?php echo $total_pending; ?></p>
-        <p>Total reservations: <?php echo $total_reservations; ?></p>
-        <p>Total available days: <?php echo $available_days; ?></p>
-        <p>Total earnings: <?php echo $total_earnings; ?></p>
-        <p>Pending Payment: <?php echo $pending_payment; ?></p>
-        <p>Earnings Annuallly: <?php echo $earnings_annually; ?></p>
+
+    <div class="analytics">
+        <div class="statistics-wrapper">
+            <div class="statistics-desc">
+                <!-- <h3>Statistics for <?php echo date('F', mktime(0, 0, 0, $current_month, 10)); ?></h3> -->
+                <div class="box box-1">
+                    <i class='bx bx-timer'></i>
+                    <p>Total pending payment:</p>
+                    <p><?php echo $total_pending; ?></p>
+                </div>
+                <div class="box box-2">
+                    <i class="bx bx-calendar"></i>
+                    <p>Total reservations:</p>
+                    <p><?php echo $total_reservations; ?></p>
+                </div>
+                <div class="box box-3">
+                    <i class='bx bxs-bookmark'></i>
+                    <p>Total available days:</p>
+                    <p><?php echo $available_days; ?></p>
+                </div>
+                <div class="box box-4">
+                    <i class='bx bx-money'></i>
+                    <p>Total earnings:</p>
+                    <p><?php echo $total_earnings; ?></p>
+                </div>
+                <div class="box box-5">
+                    <i class='bx bx-credit-card'></i>
+                    <p>Pending Payment:</p>
+                    <p><?php echo $pending_payment; ?></p>
+                </div>
+            </div>
+            <div class="pie-sizing">
+                <h2 class="page-header">Time Slot Chart</h2>
+                <canvas id="chartjs_pie"></canvas>
+            </div>
+        </div>
+        <div class="visual-wrapper">
+            <div class="visual-desc">
+                <div class="line-sizing">
+                    <canvas id="chartjs_line"></canvas>
+                </div>
+                <div class="visual-box">
+                    <i class="ri-hand-coin-fill coin"></i>
+                    <p>Earnings<br> Annually</p>
+                    <p><?php echo $earnings_annually; ?></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-        <div style="width:50%;height:20%;text-align:center">
-            <h2 class="page-header">Analytics Sales Report</h2>
-            <canvas id="chartjs_line"></canvas>
-        </div>
-
-        <div style="width:30%;height:20%;text-align:center">
-            <h2 class="page-header">Time Slot Distribution</h2>
-            <canvas id="chartjs_pie"></canvas>
-        </div>
-
-        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-        <script type="text/javascript">
-            var ctx = document.getElementById("chartjs_line").getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: <?php echo json_encode($months); ?>,
-                    datasets: [{
-                        label: 'Monthly Sales',
-                        backgroundColor: 'rgba(89, 105, 255, 0.5)',
-                        borderColor: 'rgba(89, 105, 255, 1)',
-                        data: <?php echo json_encode($total_sales); ?>,
-                    }]
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+        var ctx = document.getElementById("chartjs_line").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($months); ?>,
+                datasets: [{
+                    label: 'Monthly Sales',
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgba(82, 200, 200, 1)',
+                    data: <?php echo json_encode($total_sales); ?>,
+                }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        fontColor: 'white',
+                        fontFamily: 'Montserrat',
+                        fontSize: 14,
+                    }
                 },
-                options: {
-                    legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                            fontColor: '#71748d',
-                            fontFamily: 'Circular Std Book',
-                            fontSize: 14,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: 'white', // change font color here
                         }
-                    },
-                }
-            });
-
-            var ctxPie = document.getElementById("chartjs_pie").getContext('2d');
-            var myPieChart = new Chart(ctxPie, {
-                type: 'doughnut', // Change from 'pie' to 'doughnut'
-                data: {
-                    labels: <?php echo json_encode(array_keys($time_slot_data)); ?>,
-                    datasets: [{
-                        backgroundColor: [
-                            "#5969ff",
-                            "#ff407b",
-                            "#25d5f2",
-                            "#ffc750",
-                            "#2ec551"
-                        ],
-                        data: <?php echo json_encode(array_values($time_slot_data)); ?>,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            fontColor: 'white', // change font color here
+                        }
                     }]
-                },
-                options: {
-                    cutoutPercentage: 50, // Add this option for the donut hole
-                    legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                            fontColor: '#71748d',
-                            fontFamily: 'Circular Std Book',
-                            fontSize: 14,
-                        }
-                    },
                 }
-            });
-        </script>
-    </body>
+            }
+        });
+
+
+        var ctxPie = document.getElementById("chartjs_pie").getContext('2d');
+        var myPieChart = new Chart(ctxPie, {
+            type: 'doughnut', // Change from 'pie' to 'doughnut'
+            data: {
+                labels: <?php echo json_encode(array_keys($time_slot_data)); ?>,
+                datasets: [{
+                    backgroundColor: [
+                        "#4EB1CB",
+                        "#CF5C60",
+                        "#717ECD",
+                        "#4AB471",
+                        "#F4CB26"
+                    ],
+                    hoverBackgroundColor: [
+                        "rgba(78, 177, 203, 0.8)",
+                        "rgba(207, 92, 96, 0.8)",
+                        "rgba(113, 126, 205, 0.8)",
+                        "rgba(74, 180, 113, 0.8)",
+                        "rgba(244, 203, 38, 0.8)"
+                    ],
+                    data: <?php echo json_encode(array_values($time_slot_data)); ?>,
+                }]
+            },
+            options: {
+                cutoutPercentage: 50, // Add this option for the donut hole
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'white',
+                        fontFamily: 'Montserrat',
+                        fontSize: 13,
+                        fontWeight: 700
+                    }
+                },
+                elements: {
+                    arc: {
+                        borderWidth: 0 // Ensure no border around the arc
+                    }
+                },
+            }
+        });
+    </script>
+</body>
 
 </html>

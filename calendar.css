@@ -119,7 +119,7 @@ h1.title {
     width: clamp(18px, 2vw, 40px);
     border-radius: 50%;
     margin: 0 5px 5px 0;
-    border: 3px solid #F0F1F0;
+    border: none;
     transition: background-color 0.05s;
 }
 

@@ -70,7 +70,13 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
      </form>
 </body>
 </html>
+<script>
+ const checkTab = document.getElementById('menu');
+    const checkText = document.querySelector('.home-text');
 
+    checkTab.classList.add('bx-lock');
+    checkText.innerHTML = 'Change Password';
+</script>
 <?php 
 }
  ?>
