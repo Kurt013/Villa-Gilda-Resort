@@ -118,6 +118,10 @@ i + p, .menu-text {
   z-index: 1001;
 }
 
+.pane {
+  z-index: 1001;
+}
+
 .navigation-pane-admin::before, .navigation-pane-admin::after {
   position: absolute;
   content: '';

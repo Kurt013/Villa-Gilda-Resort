@@ -354,6 +354,7 @@ $conn->close();
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 legend: {
                     display: true,
                     position: 'top',
@@ -427,6 +428,8 @@ $conn->close();
                 },
             }
         });
+
+
     </script>
 </body>
 
