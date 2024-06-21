@@ -18,7 +18,7 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
   <link rel="icon" href="images/villa-gilda-logo.png">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" type="text/css" href="styles/staff.css">
+  <link rel="stylesheet" type="text/css" href="styles/change-password.css">
   <link rel="stylesheet" type="text/css" href="styles/header.css">
 
   <!-- Boxicon Link -->
@@ -38,44 +38,84 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
 <body>
 <?php 
     include('header.php');?>
-    <form action="change-p.php" method="post">
-     	<h2>Change Password</h2>
-     	<?php if (isset($_GET['error'])) { ?>
-     		<p class="error"><?php echo $_GET['error']; ?></p>
-     	<?php } ?>
+           <div class="change-password-wrapper">
+                  <form class="change-password-form" action="change-p.php" method="post">
+                     <div class="form-header">
+                            <h2>Please complete the following input fields to change your password.</h2>
+                     </div>
+                     <!-- <?php if (isset($_GET['error'])) { ?>
+                            <p class="error"><?php echo $_GET['error']; ?></p>
+                     <?php } ?>
+                     <?php if (isset($_GET['success'])) { ?>
+                          <p class="success"><?php echo $_GET['success']; ?></p>
+                      <?php } ?> -->
+                     <div class="form-body">
+                            <div class="group group-1">
+                                   <label>Current Password:</label>
+                                   <div class="field">
+                                          <input type="password"
+                                                 name="op"
+                                                 placeholder="Old Password">
+                                          <p class="guide-text"></p>
+                                   </div>
+                            </div>
+                            <div class="group group-2">
+                                   <label>New Password:</label>
+                                   <div class="field">
+                                          <input type="password"
+                                                 name="np"
+                                                 placeholder="New Password">
+                                          <p class="guide-text">Password must be 8 characters or more, and include letters, numbers, and special characters</p>
+                                   </div>
+                            </div>
+                            <div class="group group-3">
+                                   <label>Confirm New Password: </label>
+                                   <div class="field">
+                                          <input type="password"
+                                                 name="c_np"
+                                                 placeholder="Confirm New Password">
+                                          <p class="guide-text">Both passwords must match</p>
+                                   </div>
+                            </div>
+                       </div>
+                       <div class="form-submit">
+                                   <button class="submitBtn" type="submit">SAVE PASSWORD</button>
+                            </div>
+                     </form>
+           </div>
 
-     	<?php if (isset($_GET['success'])) { ?>
-            <p class="success"><?php echo $_GET['success']; ?></p>
-        <?php } ?>
-
-     	<label>Old Password</label>
-     	<input type="password" 
-     	       name="op" 
-     	       placeholder="Old Password">
-     	       <br>
-
-     	<label>New Password</label>
-     	<input type="password" 
-     	       name="np" 
-     	       placeholder="New Password">
-     	       <br>
-
-     	<label>Confirm New Password</label>
-     	<input type="password" 
-     	       name="c_np" 
-     	       placeholder="Confirm New Password">
-     	       <br>
-
-     	<button type="submit">SAVE PASSWORD</button>
-     </form>
+     <div id="tree-container"></div>
 </body>
 </html>
 <script>
- const checkTab = document.getElementById('menu');
-    const checkText = document.querySelector('.home-text');
+const checkTab = document.getElementById('menu');
+const checkText = document.querySelector('.home-text');
 
-    checkTab.classList.add('bx-lock');
-    checkText.innerHTML = 'Change Password';
+checkTab.classList.add('bx-lock');
+checkText.innerHTML = 'Change Password';
+
+function generateTrees() {
+  const treeContainer = document.getElementById('tree-container');
+  treeContainer.innerHTML = ''; // Clear previous content
+
+
+  const screenWidth = window.innerWidth;
+  let numberOfTrees = Math.ceil(screenWidth / 550); // Adjust 100 according to your tree width + margin
+
+  for (let i = 0; i < numberOfTrees; i++) {
+    const tree = document.createElement('img');
+    tree.src = 'elements/trees-change-password.png'; // Apply your tree class or inline styles here 
+    tree.className = 'tree';
+    treeContainer.appendChild(tree);
+  }
+
+  const sizeImage = document.querySelector('.tree').clientWidth;
+}
+
+// Call generateTrees initially and on window resize
+generateTrees();
+window.addEventListener('resize', generateTrees);
+
 </script>
 <?php 
 }
