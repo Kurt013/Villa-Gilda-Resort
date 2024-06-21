@@ -110,7 +110,7 @@ h1.title {
 }
 
 .hasBooked {
-    background-color: #FF0007;
+    background-color: #FF3A40;
 }
 
 .submit {
@@ -121,16 +121,19 @@ h1.title {
     margin: 0 5px 5px 0;
     border: none;
     transition: background-color 0.05s;
+    overflow: hidden;
 }
 
-.hasOpen .submit {
+.book, .del {
+    font-size: clamp(12px, 2vw, 20px);
+}
+
+.book {
     color: #00BF63;
-    background-color: #F0F1F0;
-}
+}   
 
-.hasBooked .submit {
-    color: #FF0007;
-    background-color: #F0F1F0;
+.del {
+    color: #FF3A40;    
 }
 
 .green-box + .day-number {
@@ -224,7 +227,7 @@ h1.title {
 }
 
 .close-btn:hover {
-    background-color: #FF0007;
+    background-color: #FF3A40;
 }
 
 .reservation-body {
@@ -313,6 +316,17 @@ h1.title {
     flex: 1;
 }
 
+.left-side p::before {
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: 3px;
+    left: 5px;
+}
+
+
 .left-side p {
     background-color: #F0F1F0;
     color: #226060;
@@ -324,31 +338,19 @@ h1.title {
     position: relative;
 }
 
-.left-side p::before {
-    position: absolute;
-    content: '';
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    top: 3px;
-    left: 5px;
-}
-
 .available::before {
     background-color: #00BF63;
 }
 
 .reserved::before {
-    background-color: #FF0007;
+    background-color: #FF3A40;
 }
 
 .right-side {
     display: flex;
     text-wrap: nowrap;
-}
-
-.right-side p + p {
-    margin-left: 7px;
+    align-items: center;
+    column-gap: 10px;
 }
 
 .right-side p {
@@ -356,37 +358,37 @@ h1.title {
     display: flex;
 }
 
-.deleteReserve::before, .bookReserve::before {
-    margin-right: 4px;
-    background-color: #F0F1F0;
-    border-radius: 50%;
-    border: none;
-    height: clamp(14px, 2vw, 17px);
-    width: clamp(14px, 2vw, 17px);
-    font-size: clamp(9px, 1vw, 10px);
+.deleteReserve, .bookReserve {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
-.deleteReserve::before {
-    content: 'D';
-    color: #FF0007;
-}
-
-.bookReserve::before {
-    content: 'B';
-    color: #00BF63;
+.right-side span {
+    margin-right: 3px;
+    margin-bottom: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(16px, 2vw, 22px);
+    height: clamp(16px, 2vw, 22px);
+    background-color:#E0E8DF;
+    border-radius: 50%;
+    overflow: hidden;
 }
  
-@media only screen and (min-width: 992px) {
-    .open .submit:hover {
-        background-color: #00BF63;
-    }
-    .booked .submit:hover {
-        background-color: #FF0007;
-    }
+.legend-book, .legend-del {
+    font-size: clamp(14px, 2vw, 18px);
+}
 
+.legend-book {
+    color: #00BF63;
+}
+
+.legend-del {
+    color:#FF3A40;
+}
+
+@media only screen and (min-width: 992px) {
     .first-column, .second-column {
         flex: 1;
     }
@@ -421,13 +423,15 @@ h1.title {
     }
 
     .hasOpen .submit:hover {
-        background-color: #00BF63;
-        color: #F0F1F0;
+        background-color: #04723D;
     }
     
-    .hasBooked .submit:hover {
-        background-color: #FF0007;
-        color: #F0F1F0;
+    .hasBooked .submit:hover, .submit:hover .del {
+        background-color: #B6050A;
+    }
+
+    .submit:hover .del, .submit:hover .book {
+        color: white;
     }
 }
 
@@ -479,13 +483,15 @@ h1.title {
     }
 
     .hasOpen .submit:active {
-        background-color: #FF0007;
-        color: #F0F1F0;
+        background-color: #04723D;
     }
     
-    .hasBooked .submit:active {
-        color: #FF0007;
-        background-color: #F0F1F0;
+    .hasBooked .submit:active, .submit:active .del {
+        background-color: #B6050A;
+    }
+
+    .submit:active .del, .submit:active .book {
+        color: white;
     }
 }
 

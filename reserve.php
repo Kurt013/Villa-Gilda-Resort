@@ -72,8 +72,8 @@ echo $calendar->show();
     </div>
     <div class="right-side">
       <p>Buttons:</p>
-      <p class="deleteReserve">Delete Reservation</p>
-      <p class="bookReserve">Book Reservation</p>
+      <p class="deleteReserve"><span><i class="bx bxs-trash legend-del"></i></span>Delete Reservation</p>
+      <p class="bookReserve"><span><i class="bx bx-calendar legend-book"></i></span>Book Reservation</p>
     </div>
   </div>
 
