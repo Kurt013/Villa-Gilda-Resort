@@ -348,6 +348,9 @@ $conn->close();
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(82, 200, 200, 1)',
                     data: <?php echo json_encode($total_sales); ?>,
+                    pointRadius: 5, 
+                    pointBackgroundColor: 'rgba(82, 200, 200, 1)', 
+                    pointBorderColor: 'rgba(82, 200, 200, 1)', 
                 }]
             },
             options: {
@@ -364,12 +367,18 @@ $conn->close();
                     xAxes: [{
                         ticks: {
                             fontColor: 'white', // change font color here
-                        }
+                        },
+                        gridLines: {
+                            color: "#EBF0EA"
+                            },
                     }],
                     yAxes: [{
                         ticks: {
                             fontColor: 'white', // change font color here
-                        }
+                        },
+                        gridLines: {
+                            color: "#EBF0EA"
+                            },
                     }]
                 }
             }
