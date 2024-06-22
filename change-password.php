@@ -55,26 +55,27 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
                                    <div class="field">
                                           <input type="password"
                                                  name="op"
-                                                 placeholder="Old Password">
+                                                 placeholder="Current Password">
                                           <p class="guide-text"></p>
                                    </div>
                             </div>
                             <div class="group group-2">
                                    <label>New Password:</label>
                                    <div class="field">
+                                   <p class="guide-text">Password must be 8 characters or more, and include letters, numbers, and special characters</p>
                                           <input type="password"
                                                  name="np"
                                                  placeholder="New Password">
-                                          <p class="guide-text">Password must be 8 characters or more, and include letters, numbers, and special characters</p>
                                    </div>
                             </div>
                             <div class="group group-3">
                                    <label>Confirm New Password: </label>
                                    <div class="field">
+                                          <p class="guide-text">Both passwords must match</p>
+                                          
                                           <input type="password"
                                                  name="c_np"
                                                  placeholder="Confirm New Password">
-                                          <p class="guide-text">Both passwords must match</p>
                                    </div>
                             </div>
                        </div>
@@ -84,7 +85,8 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
                      </form>
            </div>
 
-     <div id="tree-container"></div>
+     <div id="tree-container">
+     </div>
 </body>
 </html>
 <script>
@@ -96,11 +98,13 @@ checkText.innerHTML = 'Change Password';
 
 function generateTrees() {
   const treeContainer = document.getElementById('tree-container');
-  treeContainer.innerHTML = ''; // Clear previous content
+  treeContainer.innerHTML = `
+       <img class="tree" src="elements/starting-tree-change-password.png">
+  `;
 
 
   const screenWidth = window.innerWidth;
-  let numberOfTrees = Math.ceil(screenWidth / 550); // Adjust 100 according to your tree width + margin
+  let numberOfTrees = Math.floor(screenWidth / 600); // Adjust 100 according to your tree width + margin
 
   for (let i = 0; i < numberOfTrees; i++) {
     const tree = document.createElement('img');
