@@ -173,6 +173,15 @@ class PDF extends FPDF
     }
 }
 
+require 'vendor/autoload.php';
+use \Mailjet\Client;
+use \Mailjet\Resources;
+
+// Replace with your Mailjet API credentials
+$apikey = '6b8cdf4ca54d43ee5c75b5e0e66e8b15';
+$apisecret = '2fdf18e2ab4653c4d4e1296e3d775af8';
+
+$mj = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
 
 if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     $status = $_POST['status'];
@@ -225,6 +234,67 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 
         $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
         $pdf->Output('F', $invoice_filename);
+
+        $body = [
+            'Messages' => [
+                [
+                    'From' => [
+                        'Email' => 'ResortVillaGilda@gmail.com'
+                    ],
+                    'To' => [
+                        [
+                            'Email' => $row_invoice['email']
+                        ]
+                    ],
+                    'Subject' => 'Your Booking Invoice',
+                    'TextPart' => 'Thank you for your reservation at Villa Gilda Resort. Please find your receipt attached.' . "\n\n" .
+                'Best regards,' . "\n" .
+                'The Villa Gilda Resort Team',
+
+                    'HTMLPart' => "
+                    <div>
+                        <h1>Booking Invoice</h1>
+                        <p>Dear {$row_invoice["firstName"]} {$row_invoice["lastName"]},</p>
+                        <p>Thank you for your reservation at Villa Gilda Resort. Please find your receipt attached. <br>
+                Best regards, <br>
+                The Villa Gilda Resort Team </p>
+                    </div>
+                    ",
+                    'Attachments' => [
+                        [
+                            'ContentType' => 'application/pdf',
+                            'Filename' => $invoice_filename,
+                            'Base64Content' => base64_encode(file_get_contents($invoice_filename))
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        try {
+            // Send email via Mailjet API
+            $response = $mj->post(Resources::$Email, ['body' => $body]);
+
+            if ($response->success()) {
+                echo '<div id="emailSuccessMessage" class="message-box">
+                        <div class="message-content">
+                            <h1>Receipt sent successfully</h1>
+                            <button class="okay-btn" onclick="closeMessage()">Okay</button>
+                        </div>
+                      </div>';
+            } else {
+                echo '<div id="emailSuccessMessage" class="message-box">
+                        <div class="message-content">
+                            <h1>Failed to send receipt!</h1>
+                            <button class="okay-btn" onclick="closeMessage()">Okay</button>
+                        </div>
+                      </div>';
+                //var_dump($response->getData()); // Output Mailjet API response for debugging
+            }
+        } catch (Exception $e) {
+            echo '<h1>Error sending email</h1>';
+            echo 'Caught exception: ' . $e->getMessage();
+        }
     }
 }
 ?>
@@ -290,7 +360,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 </td>
                 <td class="tablet">';
             if ($row["status"] === "fully paid") {
-                echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank"><i class="ri-receipt-fill fully-paid"></i></a>';
+                echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
             }
             else {
                 echo "<i class='ri-receipt-fill pending'></i>";
@@ -361,8 +431,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 </td>
                 <td colspan="3">';
                     if ($row["status"] == "fully paid") {
-                    echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank"><i class="ri-receipt-fill fully-paid"></i></a>';
-                }
+                        echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
+                    }
                 else {
                     echo "<i class='ri-receipt-fill pending'></i>";
                 }
@@ -382,6 +452,12 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     ?>
     </body>
 </table>
+
+<script>
+function closeMessage() {
+    document.getElementById('emailSuccessMessage').style.display = 'none';
+}
+</script>
 <script>
 $(document).ready(function(){
     $('select[name="status"]').change(function(){
@@ -405,6 +481,19 @@ $(document).ready(function(){
     });
 });
 
+function sendEmail(booking_id, email) {
+    $.ajax({
+        url: 'send_invoice.php', 
+        method: 'POST',
+        data: {booking_id: booking_id, email: email},
+        success: function(response){
+            console.log('Email sent successfully.');
+        },
+        error: function(xhr, status, error){
+            console.error('Error occurred while sending email: ' + error);
+        }
+    });
+}
 
 function toggleSub(n) {
     let selectorName = '.num-' + n;
