@@ -1,64 +1,83 @@
-<?php
-require 'vendor/autoload.php';
-use \Mailjet\Client;
-use \Mailjet\Resources;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villa Gilda Resort</title>
 
-// Replace with your Mailjet API credentials
-$apikey = '6b8cdf4ca54d43ee5c75b5e0e66e8b15';
-$apisecret = '2fdf18e2ab4653c4d4e1296e3d775af8';
+  <!-- Favicon -->
+  <link rel="icon" href="images/villa-gilda-logo.png">
 
-$mj = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/forgot-password.css">
 
-if (isset($_POST['submit'])) {
-    // Sanitize and use $_POST['email'] as the recipient
-    $recipient_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+  <!-- Boxicon Link -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-    $body = [
-        'Messages' => [
-            [
-                'From' => [
-                    'Email' => 'ResortVillaGilda@gmail.com'
-                ],
-                'To' => [
-                    [
-                        'Email' => $recipient_email
-                    ]
-                ],
-                'Subject' => 'Verification Code --- DO NOT SHARE!',
-                'TextPart' => "{$_POST['username']}'s Verification Code: 123456",
-                'HTMLPart' => "
-                <div style='
-                    display: flex;
-                    justify-content: center;
-                    flex-direction: column;
-                    align-items: center;
-                    width: 300px;
-                    height: 500px;
-                    color: white;
-                    background-color: black;
-                '>
-                    <h1>Verification Code: 123456</h1>
-                    <p>Villa Gilda Resort</p>
-                </div>
-                ",
-            ]
-        ]
-    ];
+  <!-- Remixicon Link -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
 
-    try {
-        // Send email via Mailjet API
-        $response = $mj->post(Resources::$Email, ['body' => $body]);
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <form action="verification-form.php" method="post">
+      <div class="username-field">
+        <label for="username">Username</label>
+        <input name="username" id="username" type="text">
+      </div>
+      <div class="email-field">
+        <label for="email">Email</label>
+        <input name="email" id="email" type="text">
+      </div>
+      <input name="submit" value="submit" type="submit">
+    </form>
 
-        // Handle the response
-        if ($response->success()) {
-            echo '<h1>Email sent successfully</h1>';
-        } else {
-            echo '<h1>Failed to send email</h1>';
-            var_dump($response->getData()); // Output Mailjet API response for debugging
-        }
-    } catch (Exception $e) {
-        echo '<h1>Error sending email</h1>';
-        echo 'Caught exception: ' . $e->getMessage();
-    }
+  <?php 
+  //Check each column's email address to see if it matches one of the accounts
+// Establish Database Connection
+$conn = new mysqli('localhost', 'root', '', 'villa gilda');
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-?>
+
+// // Prepare statement
+// $sql = 'SELECT `ID`, `verification_id` FROM `user accounts`';
+// $result = $conn->query($sql);
+
+// // Check if there are any results
+// if ($result->num_rows > 0) {
+//     // Output data of each row
+//     while ($row = $result->fetch_assoc()) {
+//         do {
+//             $rand_num = mt_rand(100000, 999999);
+//             // Check if the generated number already exists in the table
+//             $check_sql = "SELECT COUNT(*) AS count FROM `user accounts` WHERE `verification_id` = {$rand_num}";
+//             $check_result = $conn->query($check_sql);
+//             $check_row = $check_result->fetch_assoc();
+//         } while ($check_row['count'] > 0); // Repeat if the number exists
+        
+//         // Update the verification_id for the current row
+//         $user_id = $row['ID'];
+//         $update_sql = "UPDATE `user accounts` SET `verification_id` = {$rand_num} WHERE `ID` = {$user_id}";
+//         $conn->query($update_sql);
+//     }
+// } else {
+//     echo "0 results";
+// }
+
+// // Close connection
+// $conn->close();
+
+
+
+  ?>
+</body>
+</html>

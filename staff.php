@@ -7,7 +7,6 @@
     exit(); 
   }
 
-  ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -158,12 +157,8 @@
       $deleteID = $_POST['deleteID'];
       // Perform deletion query
       $sqlDelete = "DELETE FROM `user accounts` WHERE ID = $deleteID";
-      if ($conn->query($sqlDelete) === TRUE ) {
-        header("Location: {$_SERVER['PHP_SELF']}");
-        exit;
-      } else {
-          echo "Error deleting record: " . $conn->error;
-      }
+      if (!$conn->query($sqlDelete))
+        echo "Error deleting record: " . $conn->error;
   }
 
   ?>
@@ -178,5 +173,4 @@
 </body>
 </html>
 <?php 
-  ob_end_flush();
 ?>
