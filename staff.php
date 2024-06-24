@@ -100,8 +100,12 @@
       $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
 
       $sqlAdd = "INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$role}')";
-      $conn->query($sqlAdd);
+      try {
+        $conn->query($sqlAdd);
+      }
+      catch(mysqli_sql_exception $e) {
 
+      }
       // if ($conn->query($sqlAdd) === TRUE) {
       // Dito dialog
       // }
