@@ -17,14 +17,16 @@ $message = "";
 $showVerificationForm = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+
     $recipient_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $username = $_POST['username'];
 
-    $verification_code = mt_rand(100000, 999999);
     $email_reg = mysqli_real_escape_string($dbconfig, $_POST['email']);
     $details = mysqli_query($dbconfig, "SELECT `First Name`, `Last Name`, email FROM `user accounts` WHERE email='$email_reg'");
     
     if (mysqli_num_rows($details) > 0) {
+        mysqli_query($dbconfig, "DELETE FROM forget_password WHERE email='$email_reg'");
+        $verification_code = mt_rand(100000, 999999);
         $sql_insert = mysqli_query($dbconfig, "INSERT INTO forget_password(email, temp_key) VALUES('$email_reg', '$verification_code')");
         
         $body = [
