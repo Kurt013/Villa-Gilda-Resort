@@ -114,7 +114,7 @@ session_start();
       </label> -->
     </div>
     <div class="login"><input class="submit-btn" type="submit" name="login" value="LOGIN"></div>
-    <div class="forgot"><a class="forgot-redirect" href="forgot-password.php">FORGOT YOUR PASSWORD?</a></div>
+    <div class="forgot"><a class="forgot-redirect" href="forget_password.php">FORGOT YOUR PASSWORD?</a></div>
 
     <!-- Icons or Design for the form -->
     <div class="tree-1"><img class="tree-pos" src="elements/tree.png" alt="A tree made as a background for the border"></div>
