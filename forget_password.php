@@ -77,22 +77,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
-    <title>Forgot Password</title>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villa Gilda Resort || Forgot Password</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/villa-gilda-logo.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/forget-password.css">
+
+  <!-- Boxicon Link -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <!-- Remixicon Link -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="container">
-    <div class="row"><br><br><br>
-        <div class="col-md-4"></div>
-        <div class="col-md-4" style="background-color: #D2D1D1; border-radius:15px;">
-            <br><br>
             <?php if (!$showVerificationForm) : ?>
-                <form role="form" method="POST">
+                <form class="form-field" role="form" method="POST">
+                    <div class="lock-container"><i class="bx bxs-lock lock-icon"></i></div>
+
                     <div class="form-group">
-                        <label>Please enter your username and email to recover your password</label><br><br>
-                        <input class="form-control" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>" placeholder="Username">
-                        <br>
-                        <input class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Email">
+                        <h1>Forgot Your Password?</h1>
+                        <p>Not to worry, enter the username and email address you registered with and we’ll help you reset your password</p>
+                        <div class="input-wrapper">
+                            <i class="bx bxs-user icon"></i>
+                            <input class="form-control" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>" placeholder="Username">
+                        </div>
+                        <div class="input-wrapper">
+                            <i class="bx bxs-envelope icon"></i>
+                            <input class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Email">
+                        </div>
                     </div>
 
                     <?php if ($message <> "") {
@@ -105,15 +130,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                               <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>
                               <span class='sr-only'>Success:</span>" . $message_success . "</div>";
                     } ?>
-                    <button type="submit" class="btn btn-primary pull-right" name="submit" style="display: block; width: 100%;">Send Email</button>
-                    <br><br>
-                    <center><a href="index.php">Back to Login</a></center>
-                    <br>
+                    <div class="bottom-part">
+                        <button type="submit" class="btn" name="submit">Send Email</button>
+                        <div><a href="index.php">Back to Login</a></div>
+                    </div>
                 </form>
             <?php else : ?>
-                <form role="form" method="POST" action="forgot_password_reset.php">
+                <form class="form-field" role="form" method="POST" action="forgot_password_reset.php">
                     <div class="form-group">
-                        <label>Please enter the verification code sent to your email</label><br><br>
+                        <label>Please enter the verification code sent to your email</label>
                         <input class="form-control" id="verification_code" name="verification_code" placeholder="Verification Code">
                     </div>
 
@@ -122,14 +147,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                               <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                               <span class='sr-only'>Error:</span>" . $message . "</div>";
                     } ?>
-                    <button type="submit" class="btn btn-primary pull-right" name="submit_verification_code" style="display: block; width: 100%;">Verify Code</button>
-                    <br><br>
-                    <center><a href="index.php">Back to Login</a></center>
-                    <br>
+                    <div class="bottom-part">
+                        <button type="submit" class="btn" name="submit_verification_code">Verify Code</button>
+                        <a href="index.php">Back to Login</a>
+                    </div>
                 </form>
             <?php endif; ?>
-        </div>
-    </div>
 </div>
 </body>
 </html>

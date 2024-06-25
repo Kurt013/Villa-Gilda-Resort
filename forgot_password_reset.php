@@ -75,16 +75,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
-    <title>Reset Password</title>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villa Gilda Resort || Reset Password</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/villa-gilda-logo.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/forgot_password_reset.css">
+
+  <!-- Boxicon Link -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <!-- Remixicon Link -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-    <div class="row"><br><br><br>
-        <div class="col-md-4"></div>
-        <div class="col-md-4" style="background-color: #D2D1D1; border-radius:15px;">
-            <br><br>
+    <div class="row">   
+        <div class="col-md-4">
             <form role="form" method="POST">
                 <label>Please enter your new password</label><br><br>
                 <div class="form-group">
@@ -104,10 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     <span class='sr-only'>Success:</span>" . $message_success . "</div>";
                 } ?>
                 <button type="submit" class="btn btn-primary pull-right" name="submit" style="display: block; width: 100%;">Save Password</button>
-                <br><br>
                 <label>This link will work only once for a limited time period.</label>
-                <center><a href="index.php">Back to Login</a></center>
-                <br>
+                <div><a href="index.php">Back to Login</a></div>
             </form>
         </div>
     </div>
