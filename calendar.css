@@ -162,9 +162,10 @@ h1.title {
 }
 
 .reservation_form {
+    overflow: hidden;
     background-color: #FFDE59;
     width: 90%;
-    height: 90%;
+    max-height: 90%;
     z-index: 3000;
     position: absolute;
     top: 50%;
@@ -180,7 +181,7 @@ h1.title {
 }
 
 .reservation-header {
-    flex: 0 1 90px;
+    flex: 0 1 70px;
     display: flex;
     background-color: #226060;
 }
@@ -201,7 +202,7 @@ h1.title {
 }
 
 .form-first-half h1 {
-    font-size: clamp(18px, 2vw, 35px);
+    font-size: clamp(19px, 2vw, 35px);
     text-wrap: nowrap;
 }
 
@@ -212,14 +213,14 @@ h1.title {
     background-color: #4CABAB;
     padding: 5px 20px;
     border-radius: 20px;
-    font-size: clamp(14px, 2vw, 22px);
+    font-size: clamp(12px, 2vw, 22px);
     font-weight: 700;
 }
 
 .logos {
     margin-top: 6px;
     margin-right: 10px;
-    width: clamp(55px, 10vw, 65px);
+    width: clamp(50px, 10vw, 65px);
 }
 
 .close-btn {
@@ -235,22 +236,28 @@ h1.title {
 }
 
 .reservation-body {
+    flex: 1;
     position: relative;
     height: calc(100% - 170px);
-    padding: 30px;
+    padding: 40px;
     display: flex;
-    column-gap: 15px;
-    flex-wrap: wrap;
+    gap: 0.9375em;
     overflow-y: auto;
+    overflow-x: hidden;
+    flex-wrap: wrap;
 }
+
 
 .first-column, .second-column {
-    flex: 1;
-    width: 50%;
-    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    flex: 1 1 auto;
 }
 
-.price {
+.price, .name {
+    display: grid;
+    row-gap: 15px;
     text-wrap: nowrap;
 }
 
@@ -263,27 +270,25 @@ input {
     width: 100%;
 }
 
-.first, .second {
+.first, .last {
     width: 70%;
 }
 
 .select-text {
     width: 55%;
-    min-width: 160px;
 }
 
 .inclusion-text {
-    min-width: 145px;
     width: 60%;
 }
 
 .contact-text {
     width: 82%;
-    min-width: 150px;
 }
 
 .reservation-body label {
     font-weight: bold;
+    font-size: 1em;
 }
 
 .reservation-body input, .reservation-body select {
@@ -292,6 +297,9 @@ input {
     border: 2px solid #226060;
 }
 
+.submitContainer {
+    padding: 10px 30px;
+}
 
 .submitReservation {
     display: inline-block;
@@ -305,7 +313,7 @@ input {
 }
 
 .leaves-1, .leaves-2 {
-    width: clamp(330px, 50vw, 670px);
+    width: clamp(220px, 50vw, 670px);
     position: absolute;
     opacity: 0.25;
     z-index: -1;
@@ -329,10 +337,7 @@ input {
 .legends {
     padding: 10px 5px 5px;
     display: flex;
-    column-gap: 10px;
-    row-gap: 10px;
-    align-items: flex-end;
-    flex-wrap: wrap;
+    column-gap: 5px;
 }
 
 .legends p::before {
@@ -394,21 +399,17 @@ input {
     color:#FF3A40;
 }
 
-@media only screen and (min-width: 992px) {
-
-
-    .form-group {
-        height: 70px;
-    }
-    
+@media only screen and (min-width: 992px) {    
     .price input {
         width: 50%;
     }
 
-    .submitReservation {
+    .submitContainer {
         position: absolute;
-        right: 60px;
-        bottom: 20px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        text-align: end;
     }
 
     .submitReservation:hover {
@@ -438,6 +439,14 @@ input {
 @media only screen and (max-width: 991px) {
     ul.label li span {
         display: none;
+    }
+
+    .reservation-body {
+        font-size: 14px;
+    }
+
+    .submitContainer {
+        text-align: center;
     }
 
     .submitReservation:active {
@@ -474,6 +483,8 @@ input {
 
     .price {
         column-gap: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 
     .prev:active, .next:active {
@@ -494,24 +505,5 @@ input {
     }
 }
 
-@media only screen and (min-width: 380px) and (max-width: 991px) {
-    .price {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }    
-}
-
-/* Block dates responsiveness */
-@media only screen and (max-width: 550px) {
-    #calendar {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 450px) {
-    #calendar {
-        width: 100%;
-    }
-}
 
 

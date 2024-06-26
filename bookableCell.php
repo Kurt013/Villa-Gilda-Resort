@@ -198,7 +198,7 @@ private function bookingForm($date)
                         </div>
                         <div class="form-group last-name">
                             <label for="lastName">Last Name:<br></label>
-                            <input class="second" type="text" name="lastName" id="lastName" value="' . ($_POST['lastName'] ?? '') . '" required>
+                            <input class="last" type="text" name="lastName" id="lastName" value="' . ($_POST['lastName'] ?? '') . '" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -246,7 +246,7 @@ private function bookingForm($date)
                     </div>
                 </div>
             </div>
-            <div><button class="submitReservation" type="submit">Submit</button></div>
+            <div class="submitContainer"><button class="submitReservation" type="submit">Submit</button></div>
 
             <img class="leaves-1" src="elements/leaves.png" alt="background-leaves">
             <img class="leaves-2" src="elements/leaves.png" alt="background-leaves">
