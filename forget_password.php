@@ -103,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
             <?php if (!$showVerificationForm) : ?>
                 <form class="form-field" role="form" method="POST">
                     <div class="lock-container"><i class="bx bxs-lock lock-icon"></i></div>
@@ -132,8 +131,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                               <span class='sr-only'>Success:</span>" . $message_success . "</div>";
                     } ?>
                     <div class="bottom-part">
-                        <button type="submit" class="btn" name="submit">Send Email</button>
-                        <div><a href="index.php">Back to Login</a></div>
+                        <a class="btn" href="index.php">Back</a>
+                        <button type="submit" class="btn-2" name="submit">Submit</button>
                     </div>
                 </form>
             <?php else : ?>
@@ -154,6 +153,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
                 </form>
             <?php endif; ?>
-</div>
 </body>
 </html>
