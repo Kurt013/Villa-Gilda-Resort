@@ -128,7 +128,7 @@
           <p class="loc">Reserve</p>
         </a>
       </li>
-      <li>
+      <li class='<?php if ($_SESSION['role'] != 'admin') echo'staff'; ?>'>
         <a href="ourlist.php" class="nav-block <?php 
             if ($_SESSION['role'] == 'admin') {
               echo"nav-admin";

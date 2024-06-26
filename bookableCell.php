@@ -194,11 +194,11 @@ private function bookingForm($date)
                     <div class="name">
                         <div class="form-group first-name">
                             <label for="firstName">First Name:<br></label>
-                            <input type="text" name="firstName" id="firstName" value="' . ($_POST['firstName'] ?? '') . '" required>
+                            <input class="first" type="text" name="firstName" id="firstName" value="' . ($_POST['firstName'] ?? '') . '" required>
                         </div>
                         <div class="form-group last-name">
                             <label for="lastName">Last Name:<br></label>
-                            <input type="text" name="lastName" id="lastName" value="' . ($_POST['lastName'] ?? '') . '" required>
+                            <input class="second" type="text" name="lastName" id="lastName" value="' . ($_POST['lastName'] ?? '') . '" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -221,7 +221,7 @@ private function bookingForm($date)
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="contactNo">Contact No.:<br></label>
+                        <label for="contactNo">Contact Number:<br></label>
                         <input class="contact-text" type="number" name="contactNo" id="contactNo" value="' . ($_POST['contactNo'] ?? '') . '" required>
                     </div>
                 </div>
@@ -246,9 +246,10 @@ private function bookingForm($date)
                     </div>
                 </div>
             </div>
-            <div class="reservation-footer">
-                <button class="submitReservation" type="submit">Submit</button>
-            </div>
+            <div><button class="submitReservation" type="submit">Submit</button></div>
+
+            <img class="leaves-1" src="elements/leaves.png" alt="background-leaves">
+            <img class="leaves-2" src="elements/leaves.png" alt="background-leaves">
         </form>
         <script>
             document.addEventListener("DOMContentLoaded", function() {

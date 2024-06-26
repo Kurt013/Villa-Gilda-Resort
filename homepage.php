@@ -53,6 +53,8 @@
     <div><a href="ourlist.php" class="redirect-button-2">SEE RESERVATION LIST</a></div>  
     </div>
   </div>
+  <img class="border-1" src="elements/homepage-border.png" alt="Bottom Leftmost Border">
+  <img class="border-2" src="elements/homepage-border.png" alt="Bottom Rightmost Border">
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');

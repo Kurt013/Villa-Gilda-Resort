@@ -188,7 +188,7 @@ i + p, .menu-text {
   text-decoration: none;
 }
 
-.list li:nth-child(4) {
+.list .staff {
   padding-bottom: calc(50px * 2);
 }
 
