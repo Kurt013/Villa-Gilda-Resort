@@ -66,15 +66,8 @@ echo $calendar->show();
 
 ?>
   <div class="legends">
-    <div class="left-side">
       <p class="available">Available</p>
       <p class="reserved">Reserved</p>
-    </div>
-    <div class="right-side">
-      <p>Buttons:</p>
-      <p class="deleteReserve"><span><i class="bx bxs-trash legend-del"></i></span>Delete Reservation</p>
-      <p class="bookReserve"><span><i class="bx bx-calendar legend-book"></i></span>Book Reservation</p>
-    </div>
   </div>
 
   <script>

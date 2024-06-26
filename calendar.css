@@ -13,8 +13,8 @@ body {
 }
 
 #calendar {
+    min-height: 425px;
     height: 85%;
-    min-height: 350px;
     font-family: 'Montserrat', sans-serif;
     width: 85%;
     overflow: hidden;
@@ -28,7 +28,7 @@ body {
 
 .box {
     display: flex;
-    flex-basis: 50px;
+    flex: 0 0 50px;
     background-color: #F4CF3A;
 }
 
@@ -115,13 +115,16 @@ h1.title {
 
 .submit {
     cursor: pointer;
-    height: clamp(18px, 2vw, 40px);
-    width: clamp(18px, 2vw, 40px);
+    height: clamp(18px, 2.5vw, 30px);
+    width: clamp(18px, 2.5vw, 30px);
     border-radius: 50%;
     margin: 0 5px 5px 0;
     border: none;
     transition: background-color 0.05s;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .book, .del {
@@ -303,6 +306,7 @@ h1.title {
 }
 
 .legends {
+    flex: 1 0 auto;
     padding: 10px 5px 5px;
     display: flex;
     column-gap: 10px;
@@ -311,12 +315,7 @@ h1.title {
     flex-wrap: wrap;
 }
 
-.left-side {
-    display: flex;
-    flex: 1;
-}
-
-.left-side p::before {
+.legends p::before {
     position: absolute;
     content: '';
     width: 15px;
@@ -326,8 +325,7 @@ h1.title {
     left: 5px;
 }
 
-
-.left-side p {
+.legends p {
     background-color: #F0F1F0;
     color: #226060;
     font-family: 'Spotify Bold';
@@ -344,18 +342,6 @@ h1.title {
 
 .reserved::before {
     background-color: #FF3A40;
-}
-
-.right-side {
-    display: flex;
-    text-wrap: nowrap;
-    align-items: center;
-    column-gap: 10px;
-}
-
-.right-side p {
-    font-size: clamp(12px, 2vw, 16px);
-    display: flex;
 }
 
 .deleteReserve, .bookReserve {

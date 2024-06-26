@@ -34,7 +34,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
   <?php 
@@ -338,7 +337,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     <?php
         while ($row = mysqli_fetch_assoc($result)){
             echo '<tr class="row">
-                <td class="id"><button class="btn toggle-'.$child.'" onclick="toggleSub('.$child.');">+</button><span>'.$number++. '</span></td>
+                <td class="id"><button class="btn toggle-'.$child.' hidden" onclick="toggleSub('.$child.');">+</button><span>'.$number++. '</span></td>
                 <td class="name">'.$row["lastName"] . ", " . $row["firstName"].'</td>
                 <td>'.$row["booking_date"].'</td>
                 <td class="time mobile">'.$row["time_slot"].'</td>
@@ -450,9 +449,9 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         ';
     }
     ?>
-    </body>
 </table>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 function closeMessage() {
     document.getElementById('emailSuccessMessage').style.display = 'none';

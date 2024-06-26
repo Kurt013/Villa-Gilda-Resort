@@ -6,7 +6,7 @@
   }
   
   .login-form {
-    background-image: linear-gradient(var(---dark-blue) 50%, var(---light-blue) 80%);
+    background-image: linear-gradient(#3D7080 50%, #0097B2 80%);
   }
 
   .sun {
@@ -36,7 +36,7 @@
   }
   
   .login-form {
-    background-image: linear-gradient(var(---dark-blue) 50%, var(---light-blue) 80%);
+    background-image: linear-gradient(#3D7080 50%, #0097B2 80%);
   }
 
   .sun {
@@ -116,12 +116,6 @@
   src: url("../fonts/CircularSpotifyText-BookItalic.otf");
 }
 
-:root {
-  ---dark-blue: #3D7080;
-  ---light-blue: #0097B2;
-  ---yellow: #F4D248;
-}
-
 *, ::before, ::after {
   margin: 0;
   padding: 0;
@@ -172,7 +166,7 @@ body {
 
 input {
   font-family: "Spotify Medium";
-  caret-color: var(---dark-blue);
+  caret-color: #3D7080;
 }
 
 .login-form {
@@ -187,7 +181,7 @@ input {
 .login-form::before {
   content: '';
   position: absolute;
-  background-color: var(---dark-blue);
+  background-color:#3D7080;
 }
 
 /* .login-form .field {
@@ -196,7 +190,7 @@ input {
 
 .login-form input:focus {
   outline-width: 0.5px;
-  outline-color: var(---dark-blue);
+  outline-color: #3D7080;
 }
 
 .logo {
@@ -243,7 +237,7 @@ input {
 }
 
 .username, .password {
-  color: var(---dark-blue);
+  color: #3D7080;
   height: 45px;
   width: 80%;
   max-width: 500px;
@@ -288,7 +282,7 @@ input {
 } */
 
 .submit-btn {
-  background-color: var(---yellow);
+  background-color: #F4D248;
   color: white;
   font-family: 'Spotify Black';
   letter-spacing: 5px;
@@ -326,7 +320,7 @@ input {
   position: absolute;
   width: 3em;
   height: 3em;
-  background-color: var(---yellow);
+  background-color: #F4D248;
   border-radius: 50%;
   transform: scale(1.5);
 }
@@ -443,7 +437,7 @@ input {
 
 dialog {
   text-align: center;
-  color: var(---dark-blue);
+  color: #3D7080;
   z-index: 1000;
   position: absolute;
   top: 50%;
@@ -466,7 +460,7 @@ h1 {
 }
 
 .exit {
-  color: var(---dark-blue);
+  color: #3D7080;
   cursor: pointer;
   font-family: 'Spotify Bold';
   font-weight: bold;
@@ -483,7 +477,7 @@ h1 {
 }
 
 .exit:focus {
-  outline-color: var(---yellow);
+  outline-color: #F4D248;
 }
 
 ::backdrop {

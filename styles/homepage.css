@@ -8,13 +8,6 @@
   src: url('../fonts/CircularSpotifyText-BookItalic');
 }
 
-:root {
-  ---dark-blue: #368686;
-  ---blue: #4CABAB;
-  ---light-blue: #0097B2;
-  ---yellow: #F4D248;
-}
-
 body {
   position: relative;
   height: 100vh;

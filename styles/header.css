@@ -18,13 +18,6 @@
   src: url("../fonts/CircularSpotifyText-BookItalic.otf");
 }
 
-:root {
-  ---dark-blue: #368686;
-  ---blue: #4CABAB;
-  ---light-blue: #0097B2;
-  ---yellow: #F4D248;
-}
-
 * {
   font-family: 'Spotify Black';
   padding: 0;
@@ -51,7 +44,7 @@ header {
 
 .first-section {
   align-items: center;
-  background-color: var(---dark-blue);
+  background-color: #368686;
 }
 
 .logo {
@@ -209,7 +202,7 @@ i + p, .menu-text {
 }
 
 .second-div p, .menu-home {
-  color: var(---dark-blue);
+  color: #368686;
 }
 
 .third-div {
