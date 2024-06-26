@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $username = $_POST['username'];
 
     $email_reg = mysqli_real_escape_string($dbconfig, $_POST['email']);
-    $details = mysqli_query($dbconfig, "SELECT `First Name`, `Last Name`, email FROM `user accounts` WHERE email='$email_reg'");
+    $username_reg = mysqli_real_escape_string($dbconfig, $_POST['username']);
+    $details = mysqli_query($dbconfig, "SELECT `First Name`, `Last Name`, email FROM `user accounts` WHERE email='$email_reg' AND `username`='$username_reg'");
     
     if (mysqli_num_rows($details) > 0) {
         mysqli_query($dbconfig, "DELETE FROM forget_password WHERE email='$email_reg'");
@@ -70,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             $message = 'Error sending email: ' . $e->getMessage();
         }
     } else {
-        $message = 'Email address not found.';
+        $message = 'Username and/or email address not found.';
     }
 }
 ?>
