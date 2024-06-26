@@ -10,8 +10,8 @@
 
 body {
   position: relative;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding-top: 90px;
   background-image: linear-gradient(0deg, rgba(89, 155, 63, 0.6), rgba(89, 155, 63, 0.6)), url('../images/homepage-bg.png');
   background-size: cover;

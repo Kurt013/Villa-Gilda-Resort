@@ -103,13 +103,12 @@
           <p class="loc">Home</p>
         </a>
       </li>
-      <li>
+      <li class="
+      <?php if ($_SESSION['role'] != 'admin') echo'invisible'; ?>
+      ">
         <a href='dashboard.php' class='nav-block <?php 
             if ($_SESSION['role'] == 'admin') {
               echo"nav-admin";
-            }
-            else {
-              echo"invisible";
             }
             ?>'>
           <i class='bx bxs-dashboard'></i>
@@ -142,13 +141,12 @@
           <p class="loc">Reservation List</p>
         </a>
       </li>
-        <li>
+        <li class="
+          <?php if ($_SESSION['role'] != 'admin') echo'invisible'; ?>
+        ">
           <a href='staff.php' class='nav-block <?php 
             if ($_SESSION['role'] == 'admin') {
               echo"nav-admin";
-            }
-            else {
-              echo"invisible";
             }
             ?>'>
             <i class='bx bx-user-plus'></i>

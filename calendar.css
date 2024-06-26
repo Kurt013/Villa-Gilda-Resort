@@ -306,7 +306,6 @@ h1.title {
 }
 
 .legends {
-    flex: 1 0 auto;
     padding: 10px 5px 5px;
     display: flex;
     column-gap: 10px;

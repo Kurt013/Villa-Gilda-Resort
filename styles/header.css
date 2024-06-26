@@ -179,7 +179,6 @@ i + p, .menu-text {
 
 }
 
-
 .nav-block, .user-redirect-dup{
   padding: 10px 15px;
   display: flex;
@@ -189,8 +188,12 @@ i + p, .menu-text {
   text-decoration: none;
 }
 
+.list li:nth-child(4) {
+  padding-bottom: calc(50px * 2);
+}
+
 .invisible {
-  visibility: hidden;
+  display: none;
 }
 
 .loc {

@@ -441,11 +441,14 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     } else {
         echo '
             <div class="no-reservation-content">
-                <img src="elements/no-reservation-pic.png" class="no-reservation" alt="Cluster of seashells">
+                <div>
+                    <img src="elements/no-reservation-pic.png" class="no-reservation" alt="Cluster of seashells">
+                </div>
                 <h1>No Reservations Found</h1>
                 <p>It looks like there are no reservations made for the month you selected.</p>
                 <a class="reserve-now" href="reserve.php">RESERVE NOW</a>
             </div>
+            <script>document.querySelector("body").classList.add("no-reservation-page")</script>
         ';
     }
     ?>
