@@ -98,9 +98,7 @@ checkText.innerHTML = 'Change Password';
 
 function generateTrees() {
   const treeContainer = document.getElementById('tree-container');
-  treeContainer.innerHTML = `
-       <img class="tree" src="elements/starting-tree-change-password.png">
-  `;
+  treeContainer.innerHTML = `<img class="tree-1" src="elements/starting-tree-change-password.png">`;
 
 
   const screenWidth = window.innerWidth;
@@ -112,8 +110,6 @@ function generateTrees() {
     tree.className = 'tree';
     treeContainer.appendChild(tree);
   }
-
-  const sizeImage = document.querySelector('.tree').clientWidth;
 }
 
 // Call generateTrees initially and on window resize
