@@ -23,6 +23,7 @@ session_start();
   <link rel="icon" href="images/villa-gilda-logo.png">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/general.css">
   <link rel="stylesheet" type="text/css" href="styles/login.css">
 
   <!-- Boxicon Link -->

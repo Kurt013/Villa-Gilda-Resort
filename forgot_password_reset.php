@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_verification_co
         $message = "Database query failed: " . mysqli_error($dbconfig);
     } else if (mysqli_num_rows($check) != 1) {
         $message = "Invalid verification code.";
+        $_SESSION['message'] = $message;
         header('Location: forget_password.php');
         exit;
       } else {
@@ -103,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   <link rel="icon" href="images/villa-gilda-logo.png">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/general.css">
   <link rel="stylesheet" type="text/css" href="styles/forgot_password_reset.css">
 
   <!-- Boxicon Link -->
@@ -122,32 +124,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <body>
 
 <div class="container">
-    <div class="row">   
-        <div class="col-md-4">
-            <form role="form" method="POST">
-                <label>Please enter your new password</label><br><br>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="pwd" name="password1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="pwd" name="password2" placeholder="Re-type Password">
-                </div>
-                <?php if ($message != "") {
-                    echo "<div class='alert alert-danger' role='alert'>
-                    <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-                    <span class='sr-only'>Error:</span>" . $message . "</div>";
-                } ?>
-                <?php if (isset($message_success)) {
-                    echo "<div class='alert alert-success' role='alert'>
-                    <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>
-                    <span class='sr-only'>Success:</span>" . $message_success . "</div>";
-                } ?>
-                <button type="submit" class="btn btn-primary pull-right" name="submit" style="display: block; width: 100%;">Save Password</button>
-                <label>This link will work only once for a limited time period.</label>
-                <div><a href="index.php">Back to Login</a></div>
-            </form>
+    <form class="password-form" role="form" method="POST">
+        <h1>Reset Password</h1>
+        <div class="group-wrapper">
+            <p>You can now choose a new password for this user account. This password will replace the old one; everything about the user account will remain unchanged.</p>
+            <div class="form-group">
+                <label for="pwd">New Password:</label>
+                <input type="password" class="form-control" id="pwd" name="password1">
+            </div>
+            <div class="form-group">
+                <label for="confirm-pwd">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirm-pwd" name="password2">
+            </div>
         </div>
-    </div>
+        <?php if ($message != "") {
+            echo "<div class='error-message'>" . $message . "</div>";
+        } ?>
+        <?php if (isset($message_success)) {
+            echo "<div class='success-message'>" . $message_success . "</div>";
+        } ?>
+        <div class="bottom-part-3"><button type="submit" class="btn-save" name="submit">Save Password</button></div>
+    </form>
 </div>
 
 </body>

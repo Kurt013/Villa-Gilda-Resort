@@ -13,7 +13,7 @@ body {
 }
 
 #calendar {
-    min-height: 425px;
+    min-height: 485px;
     height: 85%;
     font-family: 'Montserrat', sans-serif;
     width: 85%;
@@ -95,7 +95,7 @@ h1.title {
 
 .cell {
     height: 100%;
-    min-height: 45px;
+    min-height: 55px;
     width: 100%;
     display: flex;
 }
@@ -229,10 +229,6 @@ h1.title {
     right: 0;
     background-color: transparent;
     border: none;
-}
-
-.close-btn:hover {
-    background-color: #FF3A40;
 }
 
 .reservation-body {
@@ -412,6 +408,10 @@ input {
         text-align: end;
     }
 
+    .close-btn:hover {
+        background-color: #FF3A40;
+    }
+
     .submitReservation:hover {
         color: #226060;
         background-color: #F0F1F0;
@@ -443,6 +443,10 @@ input {
 
     .reservation-body {
         font-size: 14px;
+    }
+
+    .close-btn:active {
+        background-color: #FF3A40;
     }
 
     .submitContainer {

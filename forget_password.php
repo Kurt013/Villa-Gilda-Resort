@@ -1,5 +1,8 @@
 <?php
 session_start(); // Start the session at the top
+
+// $message = $_SESSION['message'];
+
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -86,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   <link rel="icon" href="images/villa-gilda-logo.png">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/general.css">
   <link rel="stylesheet" type="text/css" href="styles/forget-password.css">
 
   <!-- Boxicon Link -->
@@ -112,23 +116,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <p>Not to worry, enter the username and email address you registered with and we’ll help you reset your password</p>
                         <div class="input-wrapper">
                             <i class="bx bxs-user icon"></i>
-                            <input class="form-control" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>" placeholder="Username">
+                            <input class="form-control form-border" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>" placeholder="Username" required>
                         </div>
                         <div class="input-wrapper">
                             <i class="bx bxs-envelope icon"></i>
-                            <input class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Email">
+                            <input class="form-control form-border" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Email" required>
                         </div>
                     </div>
 
                     <?php if ($message <> "") {
-                        echo "<div class='alert alert-danger' role='alert'>
-                              <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-                              <span class='sr-only'>Error:</span>" . $message . "</div>";
+                        echo "<div class='error-message'>" . $message . "</div>";
                     } ?>
                     <?php if (isset($message_success)) {
-                        echo "<div class='alert alert-success' role='alert'>
-                              <span class='glyphicon glyphicon-ok' aria-hidden='true'></span>
-                              <span class='sr-only'>Success:</span>" . $message_success . "</div>";
+                        echo "<div class='message-success'>" . $message_success . "</div>";
                     } ?>
                     <div class="bottom-part">
                         <a class="btn" href="index.php">Back</a>
@@ -136,20 +136,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
                 </form>
             <?php else : ?>
-                <form class="form-field" role="form" method="POST" action="forgot_password_reset.php">
-                    <div class="form-group">
-                        <label>Please enter the verification code sent to your email</label>
-                        <input class="form-control" id="verification_code" name="verification_code" placeholder="Verification Code">
-                    </div>
+                <form class="form-field-2" role="form" method="POST" action="forgot_password_reset.php">
+                    <h1>OTP Verification</h1>
+                    <div class="submit-group">
+                        <p>A One-Time Passcode has been sent to your email. Please enter the OTP below to reset your password. </p>
+                        <input maxlength="6" minlength="6" title="Please only enter numbers from 0-9" pattern="[0-9]+" class="form-control-verify" id="verification_code" name="verification_code" placeholder="Enter the OTP" required>
+                        
+                        <?php if ($message <> "") {
+                        echo "<div class='error-message" . $message . "</div>";
+                        } ?>
 
-                    <?php if ($message <> "") {
-                        echo "<div class='alert alert-danger' role='alert'>
-                              <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-                              <span class='sr-only'>Error:</span>" . $message . "</div>";
-                    } ?>
-                    <div class="bottom-part">
-                        <button type="submit" class="btn" name="submit_verification_code">Verify Code</button>
-                        <a href="index.php">Back to Login</a>
+                        <div class="bottom-part-2">
+                            <button type="submit" class="btn-3" name="submit_verification_code">Verify OTP</button>
+                            <p class="btn-4">Didn't receive a code? Please check your spam folder</p>
+                        </div>
                     </div>
                 </form>
             <?php endif; ?>

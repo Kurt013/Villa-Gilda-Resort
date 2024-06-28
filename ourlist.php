@@ -456,11 +456,6 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-function closeMessage() {
-    document.getElementById('emailSuccessMessage').style.display = 'none';
-}
-</script>
-<script>
 $(document).ready(function(){
     $('select[name="status"]').change(function(){
         var booking_id = $(this).closest('form').find('input[name="booking_id"]').val();
@@ -482,6 +477,10 @@ $(document).ready(function(){
         });
     });
 });
+
+function closeMessage() {
+    document.getElementById('emailSuccessMessage').style.display = 'none';
+}
 
 function sendEmail(booking_id, email) {
     $.ajax({
@@ -568,7 +567,7 @@ function onPageReloadOrResize() {
     }
 }
 
-window.addEventListener('load', onPageReloadOrResize);
+onPageReloadOrResize();
 
 window.addEventListener('resize', onPageReloadOrResize);
 </script>

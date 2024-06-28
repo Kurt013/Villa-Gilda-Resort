@@ -11,8 +11,11 @@ body {
   border-radius: 0 0 10px 10px;
   width: 100%;
   margin: auto;
-  gap: 15px;
+}
 
+.field-wrapper {
+  display: grid;
+  gap: 20px;
 }
 
 .form-group label {
@@ -30,6 +33,7 @@ body {
 }
 
 .addStaff-submit {
+  margin-top: 20px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   cursor: pointer;
@@ -136,8 +140,7 @@ i.bxs-trash {
 
 
 @media only screen and (min-width: 992px) {
-  .addStaff {
-    display: grid;
+  .field-wrapper {
     grid-auto-flow: column;
     grid-template-rows: repeat(2, auto);
   }
@@ -147,8 +150,7 @@ i.bxs-trash {
   }
 
   .addStaff-submit {
-    margin-top: 45px;
-
+    margin-top: 40px;
   }
 
   .addStaff-submit:hover {
@@ -178,14 +180,6 @@ i.bxs-trash {
   .addStaff-submit:active {
     color: #4CABAB;
     background-color: #EBF0EA;
-  }
-
-  .addStaff-submit {
-    display: block;
-    margin-left: auto;
-    margin-right: 10px;
-    margin-top: 40px;
-    margin-bottom: 10px;
   }
 
   .icon-staff-size {

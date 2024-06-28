@@ -39,29 +39,35 @@
 <body>
     <div class="form-wrapper">
       <form class="addStaff" action="" method="post">
-        <div class="form-group first">
-          <label for="firstName">First name:</label>
-          <input type="text" name="firstName" class="firstName" id="firstName" placeholder="Enter new staff member's first name" required>
-        </div>
-        <div class="form-group second">
-          <label for="lastName">Last name:</label>
-          <input type="text" name="lastName" class="lastName" id="lastName" placeholder="Enter new staff member's last name" required>
-        </div>
-        <div class="form-group user">
-          <label for="username">Username:</label>
-          <input type="text" name="username" class="username" id="username" placeholder="Enter new staff member's username" required>
-        </div>
-        <div class="form-group password">
-          <label for="password">Password:</label>
-          <input type="password" name="password" class="password" id="password" placeholder="Enter new staff member's password" required>
-        </div>
-        <div class="form-group confirm-pass">
-          <label for="confirm-password">Confirm Password:</label>
-          <input type="password" name="confirm-password" class="confirm-password" id="confirm-password" placeholder="Re-type password" required>
-        </div>
+      <div class="field-wrapper">
+          <div class="form-group first">
+            <label for="firstName">First name:</label>
+            <input type="text" name="firstName" class="firstName" id="firstName" placeholder="Enter new staff member's first name" required>
+          </div>
+          <div class="form-group second">
+            <label for="lastName">Last name:</label>
+            <input type="text" name="lastName" class="lastName" id="lastName" placeholder="Enter new staff member's last name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" name="email" class="email" id="email" placeholder="Enter new staff member's email" required>
+          </div>
+          <div class="form-group user">
+            <label for="username">Username:</label>
+            <input type="text" name="username" class="username" id="username" placeholder="Enter new staff member's username" required>
+          </div>
+          <div class="form-group password">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="password" id="password" placeholder="Enter new staff member's password" required>
+          </div>
+          <div class="form-group confirm-pass">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" name="confirm-password" class="confirm-password" id="confirm-password" placeholder="Re-type password" required>
+          </div>
+      </div>
         <div class="addStaff-container">
           <input type="submit" name="addStaff" value="ADD STAFF" class="addStaff-submit">
-          </div>
+        </div>
       </form>
     </div>
 
@@ -90,6 +96,7 @@
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $username = $_POST['username'];
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
@@ -99,7 +106,7 @@
     if ($confirmPassword === $password) {
       $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
 
-      $sqlAdd = "INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$role}')";
+      $sqlAdd = "INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$email}', '{$role}')";
       try {
         $conn->query($sqlAdd);
       }
