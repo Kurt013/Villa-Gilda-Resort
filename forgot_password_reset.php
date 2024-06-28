@@ -28,7 +28,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_verification_co
         $message_success = "Verification code accepted. Please enter your new password.";
     }
 }
-
+function is_valid_password($password1) {
+    // Length check
+    if (strlen($password1) < 8) {
+        return false;
+    }
+    
+    // Character types check
+    if (!preg_match('/[A-Za-z]/', $password1) || // contains at least one letter
+        !preg_match('/\d/', $password1) ||      // contains at least one number
+        !preg_match('/[^A-Za-z\d]/', $password1) // contains at least one special character
+    ) {
+        return false;
+    }
+    
+    return true;
+}
 // Handle password reset submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   if (isset($_SESSION['email']) && isset($_SESSION['verification_code'])) {
@@ -39,30 +54,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
       $password2 = mysqli_real_escape_string($dbconfig, $_POST['password2']);
 
       if ($password1 == $password2) {
-          $result = mysqli_query($dbconfig, "SELECT * FROM `user accounts` WHERE `email`='$email'");
-          if ($result && mysqli_num_rows($result) == 1) {
-              $row = mysqli_fetch_assoc($result);
-              // Verify if the entered password matches the stored hashed password
-              if (password_verify($password1, $row['Password'])) {
-                  $message = "You cannot reuse the same password.";
-              } else {
-                  // Proceed with updating the password
-                  $password_hash = password_hash($password1, PASSWORD_DEFAULT);
-                  $delete_query = mysqli_query($dbconfig, "DELETE FROM forget_password WHERE email='$email' AND temp_key='$key'");
-                  $update_query = mysqli_query($dbconfig, "UPDATE `user accounts` SET `Password`='$password_hash' WHERE `email`='$email'");
+        if(is_valid_password($password1)){
+            $result = mysqli_query($dbconfig, "SELECT * FROM `user accounts` WHERE `email`='$email'");
+            if ($result && mysqli_num_rows($result) == 1) {
+                $row = mysqli_fetch_assoc($result);
+                // Verify if the entered password matches the stored hashed password
+                if (password_verify($password1, $row['Password'])) {
+                    $message = "You cannot reuse the same password.";
+                } else {
+                    // Proceed with updating the password
+                    $password_hash = password_hash($password1, PASSWORD_DEFAULT);
+                    $delete_query = mysqli_query($dbconfig, "DELETE FROM forget_password WHERE email='$email' AND temp_key='$key'");
+                    $update_query = mysqli_query($dbconfig, "UPDATE `user accounts` SET `Password`='$password_hash' WHERE `email`='$email'");
 
-                  if ($update_query) {
-                      $message_success = "New password has been set for " . $email;
-                      session_unset();
-                      session_destroy();
-                  } else {
-                      $message = "Error updating password: " . mysqli_error($dbconfig);
-                  }
-              }
-          } else {
+                    if ($update_query) {
+                        $message_success = "New password has been set for " . $email;
+                        session_unset();
+                        session_destroy();
+                    } else {
+                        $message = "Error updating password: " . mysqli_error($dbconfig);
+                    }
+                }
+         } else {
               $message = "Error fetching user data.";
           }
       } else {
+            $message = "Password must be 8 characters or more, and include letters, numbers, and special characters";
+      } 
+      }
+      else {
           $message = "Passwords do not match.";
       }
   } else {

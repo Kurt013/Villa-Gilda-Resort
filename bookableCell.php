@@ -216,7 +216,7 @@ private function bookingForm($date)
                         <label for="included">Inclusion:<br></label>
                         <select class="inclusion-text" name="included" id="included" required">
                             <option value="" disabled' . (empty($_POST['included']) ? ' selected' : '') . '>Select an option</option>
-                            <option value="LPG gas and Stove"' . (isset($_POST['included']) && $_POST['included'] === 'LPG gas and Stove' ? ' selected' : '') . '>LPG gas and Stove (+250)</option>
+                            <option value="LPG gas and Stove"' . (isset($_POST['included']) && $_POST['included'] === 'LPG gas and Stove' ? ' selected' : '') . '>LPG gas and Stove (+300)</option>
                             <option value="N/A"' . (isset($_POST['included']) && $_POST['included'] === 'N/A' ? ' selected' : '') . '>N/A</option>
                         </select>
                     </div>
