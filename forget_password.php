@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $username_reg = mysqli_real_escape_string($dbconfig, $_POST['username']);
     $details = mysqli_query($dbconfig, "SELECT `First Name`, `Last Name`, email FROM `user accounts` WHERE email='$email_reg' AND `username`='$username_reg'");
     
+    $detailFetch = $details->fetch_assoc();
+
     if (mysqli_num_rows($details) > 0) {
         mysqli_query($dbconfig, "DELETE FROM forget_password WHERE email='$email_reg'");
         $verification_code = mt_rand(100000, 999999);
@@ -53,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                           a {
                             color: #4EB1CB;
+                            word-break: break-all;
                           }
 
                           body {
@@ -98,20 +101,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                           }
 
                           .verification__code {
-                            font-size: 30px;
-                            color: #226060;
-                            font-weight: bold;
                             letter-spacing: 5px;
+                            font-size: 30px;
+                            font-weight: bold;
                             margin: 40px auto;
                             width: 100%;
                             text-align: center;
                             max-width: 300px;
-                            height: 70px;
-                            padding-top: 15px;
-                            text-wrap: nowrap;
+                            padding: 20px;
                             border-radius: 20px;
                             background-color: #DBDEDA;  
-                          }
+                            color: #226060;
+                            }
 
                           .body-card .last-p {
                             color: #AFADAD;
@@ -159,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             <img class="logo" src="https://scontent.fmnl33-5.fna.fbcdn.net/v/t1.15752-9/448719767_828880522525898_6091539274430163876_n.png?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE6YdCc0x9jPYeyi28KzECuIvAw4C22rBUi8DDgLbasFVBjbjgnw15IgJGzlWW1pYwgBEJMc8tzmog5ZRma_PI2&_nc_ohc=LbHntbutHp4Q7kNvgHKBqfL&_nc_ht=scontent.fmnl33-5.fna&oh=03_Q7cD1QEibZYmJGLG4oiXTvsC_1FDjI23cqQlJP9Zat3KGlPnQg&oe=66A6F266" alt="Villa Gilda Logo">
                           </div>
                           <div class="body-card">
-                            <h1>Hi '.$username.' ,</h1>
+                            <h1>Hi '.$detailFetch['First Name'].' '.$detailFetch['Last Name'].',</h1>
                             <p>We&apos;d been told that you&apos;d like to reset the password for your account.</p>
                             <p>If you made such request, go back to the website and enter the verification code below.</p>
                             <div class="verification__code">'.$verification_code.'</div>
