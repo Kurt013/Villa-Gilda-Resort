@@ -1,6 +1,7 @@
 <?php
 session_start();
 $message = "";
+$modal = false;
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -20,8 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_verification_co
     if (!$check) {
         $message = "Database query failed: " . mysqli_error($dbconfig);
     } else if (mysqli_num_rows($check) != 1) {
-        $message = "Invalid verification code.";
-        $_SESSION['message'] = $message;
         header('Location: forget_password.php');
         exit;
       } else {
@@ -29,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_verification_co
         $message_success = "Verification code accepted. Please enter your new password.";
     }
 }
+
 function is_valid_password($password1) {
     // Length check
     if (strlen($password1) < 8) {
@@ -69,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     $update_query = mysqli_query($dbconfig, "UPDATE `user accounts` SET `Password`='$password_hash' WHERE `email`='$email'");
 
                     if ($update_query) {
+                        $modal = true;
                         $message_success = "New password has been set for " . $email;
                         session_unset();
                         session_destroy();
@@ -146,6 +147,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         <div class="bottom-part-3"><button type="submit" class="btn-save" name="submit">Save Password</button></div>
     </form>
 </div>
+<?php
+if ($modal) {
+echo '<dialog open>
+        <div class="field">
+            <div class="icon-wrapper"><i class="ri-verified-badge-fill"></i></div>
+            <div class="text-group">
+                <h1>Success</h1>
+                <p>Your password has been reset successfully. You can now use your new password to login!</p>
+            </div>
+            <div class="bottom-part">
+                <a class="btn" href="index.php">Back to Login Page</a>
+            </div>
+        </div>
+       </dialog>
+          
+          <script> 
+            dialog = document.querySelector("dialog");
+            dialog.showModal();
+          </script>';
+}
+?>
+
 
 </body>
 </html>
