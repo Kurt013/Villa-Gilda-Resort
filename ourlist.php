@@ -177,8 +177,8 @@ use \Mailjet\Client;
 use \Mailjet\Resources;
 
 // Replace with your Mailjet API credentials
-$apikey = '6b8cdf4ca54d43ee5c75b5e0e66e8b15';
-$apisecret = '2fdf18e2ab4653c4d4e1296e3d775af8';
+$apikey = '8de25420f468ac0e0637dc1a9872bda2';
+$apisecret = '4b88a8e71352e99527617a3a8d39099a';
 
 $mj = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
 
