@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   <title>Villa Gilda Resort || Reset Password</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="images/villa-gilda-logo.png">
+  <link rel="icon" href="images/villa-gilda-logo3.png">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" type="text/css" href="styles/general.css">
