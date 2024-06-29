@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body> 
     <div class="form-wrapper">
       <form class="addStaff" action="" method="post">
       <div class="field-wrapper">
@@ -90,8 +90,24 @@
   
   $conn->query($sql);
 
-
+  
   /* Add Staffs */
+  function is_valid_password($password) {
+    // Length check
+    if (strlen($password) < 8) {
+        return false;
+    }
+    
+    // Character types check
+    if (!preg_match('/[A-Za-z]/', $password) || // contains at least one letter
+        !preg_match('/\d/', $password) ||      // contains at least one number
+        !preg_match('/[^A-Za-z\d]/', $password) // contains at least one special character
+    ) {
+        return false;
+    }
+    
+    return true;
+}
   if (isset($_POST['addStaff'])) {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
@@ -104,20 +120,26 @@
     $role = 'staff';
 
     if ($confirmPassword === $password) {
-      $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
+      if (is_valid_password($password)){
+        $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
 
-      $sqlAdd = "INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$email}', '{$role}')";
-      try {
-        $conn->query($sqlAdd);
-      }
-      catch(mysqli_sql_exception $e) {
+        $sqlAdd = "INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$email}', '{$role}')";
+        try {
+          $conn->query($sqlAdd);
+        }
+        catch(mysqli_sql_exception $e) {
 
-      }
-      // if ($conn->query($sqlAdd) === TRUE) {
-      // Dito dialog
-      // }
+        }
+        // if ($conn->query($sqlAdd) === TRUE) {
+        // Dito dialog
+        // }
+    }else {
+      echo "<div class='error-message'>Password must be 8 characters or more, and include letters, numbers, and special characters</div>";
     }
+  } else {
+    echo "<div class='error-message'>Password do not match!</div>";
   }
+}
 
   /* Show the list of staffs*/
   $sqlShow = 'SELECT ID, `First Name`, `Last Name`, Username FROM `user accounts` WHERE Role = "staff"';
