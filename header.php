@@ -37,7 +37,7 @@
       </label>
     <div class="second-div">
       <i class="bx menu-home" id="menu"></i>
-      <p class="home-text">Home</p>
+      <p class="home-text"></p>
     </div>
     <label class="third-div third-color">
       <input type="checkbox" class="user-prof-toggle" name="toggle-user" onclick="
