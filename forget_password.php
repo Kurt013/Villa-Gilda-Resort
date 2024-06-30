@@ -77,20 +77,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             word-break: break-all;
                           }
 
-                          body > div {
-                            text-align: center;
-                          }
-
-                          .card-container {
-                            width: 100%;
-                            margin: auto;
+                          .card-container  {
                             background-color: #ffffff;
-                            height: 100%;
                           }
 
                           .header-card {
                             text-align: center;
-                            width: 100%;
                             height: 90px;
                             background-image: url("https://scontent.fmnl33-6.fna.fbcdn.net/v/t1.15752-9/449048471_452239437525588_272269953370891782_n.png?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHTy-oQj3Uj41iB2J4xK9LgOvJNqU_Wwy068k2pT9bDLXXgweOat34wwr2glrhynQZyblrvet-tbppoUf5Yy2Jm&_nc_ohc=gtjpG9gbncsQ7kNvgGUC6IX&_nc_ht=scontent.fmnl33-6.fna&oh=03_Q7cD1QF7hSpPEgBw3S-qbjlXY6Sk4qwW0X60UhFM6b327mzD8g&oe=66A6D4CE");
                           }
