@@ -44,7 +44,7 @@
     include('header.php');
   ?>
     <div class="form-wrapper">
-      <form class="addStaff" action="" method="post">
+      <form class="addStaff" method="post">
       <div class="field-wrapper">
           <div class="form-group first">
             <label for="firstName">First name:</label>
@@ -200,7 +200,7 @@
               <p class='username-staff'>{$row['Username']}</p>
             </div>
           </div>
-          <form class='delete' action='' method='post'>
+          <form class='delete' method='post'>
             <input type='hidden' name='deleteID' value='{$row['ID']}'>
             <button type='submit' name='deleteButton' class='delete-button'>
               <i class='bx bxs-trash'></i>
@@ -230,12 +230,13 @@
   ?>
   <script src="popup.js"></script>
   <script>
+    window.addEventListener('DOMContentLoaded', () => {
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
 
     checkTab.classList.add('bx-user-plus');
     checkText.innerHTML = 'Add Staff';
-
+    });
 
     /* Add Active State */
     const userRole = "<?php echo $_SESSION['role']; ?>";

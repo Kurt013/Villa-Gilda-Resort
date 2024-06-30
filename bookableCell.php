@@ -222,7 +222,7 @@ private function bookingForm($date)
                     </div>
                     <div class="form-group">
                         <label for="contactNo">Contact Number:<br></label>
-                        <input class="contact-text" type="number" name="contactNo" id="contactNo" value="' . ($_POST['contactNo'] ?? '') . '" required>
+                        <input class="contact-text" type="number" name="contactNo" id="contactNo" value="' .($_POST['contactNo'] ?? ''). '" required>
                     </div>
                 </div>
                 <div class="second-column">

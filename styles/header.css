@@ -21,8 +21,8 @@ header {
 .first-section {
   align-items: center;
   background-color: #368686;
-  font-family: 'Cocogoose-Bold';
 }
+
 
 .logo {
   margin-top: 5px;
@@ -32,8 +32,9 @@ header {
 }
 
 .first-section h1 {
+  font-family: 'Cocogoose-Bold';
   font-size: 16px;
-  letter-spacing: 3px;
+  letter-spacing: 6px;
 }
 
 .hide {
@@ -53,6 +54,7 @@ header {
   column-gap: 10px;
   display: flex;
   align-items: center;
+  height: 40px;
 }
 
 .menu-field {
@@ -62,7 +64,10 @@ header {
 }
 
 i + p, .menu-text {
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+}
+
+.second-div {
 }
 
 .second-div p {
