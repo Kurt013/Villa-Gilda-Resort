@@ -224,18 +224,11 @@
       $sqlDelete = "DELETE FROM `user accounts` WHERE ID = $deleteID";
       if (!$conn->query($sqlDelete))
         echo "Error deleting record: " . $conn->error;
-<<<<<<< Updated upstream
       header("Refresh: 0");
       exit;
     }
   ?>
-=======
-      header('Refresh: 0');
-  }
-
-  ?>
   <script src="popup.js"></script>
->>>>>>> Stashed changes
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
