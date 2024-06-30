@@ -268,6 +268,9 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                             }
 
                             .card-container {
+                            width: 100%;
+                            max-width: 700px;
+                            margin: auto;
                             background-color: #ffffff;
                             }
 

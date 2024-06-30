@@ -78,6 +78,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                           }
 
                           .card-container  {
+                            width: 100%;
+                            max-width: 700px;
+                            margin: auto;
                             background-color: #ffffff;
                           }
 
