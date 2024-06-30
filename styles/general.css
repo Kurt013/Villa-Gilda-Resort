@@ -18,6 +18,11 @@
   src: url('../fonts/CircularSpotifyText-Bold.otf');
 }
 
+@font-face {
+  font-family: 'Spotify Black';
+  src: url('../fonts/CircularSpotifyText-Black.otf');
+}
+
 
 *, ::before, ::after {
   margin: 0;
