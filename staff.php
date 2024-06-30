@@ -77,103 +77,81 @@
       </form>
     </div>
 
-<!-- 
-  <dialog class="confirm-delete" id="confirmDeleteDialog" open>
-    <div class="header-delete">
-      <h1>Confirm Delete</h1>
-      <button id="exitDialog" class="exit"><i class="bx bx-x"></i></button>
-    </div>
-    <div class="body-delete">
-      <div class="first-half">
-        <div class="exclamation">
-          !
-        </div>
-      </div>
-      <div class="second-half">
-        <div class="first-div">
-          <p class="content" id="deleteConfirmationText">Are you sure you want to delete the staff member with username 'username'?</p>
-        </div>
-        <div class="second-div">
-          <button id="cancelDelete" class="exit">NO</button>
-          <form id="deleteForm" method="post">
-            <input type="hidden" name="deleteID" id="deleteID">
-            <button type="submit" name="delete-confirm" value="delete" class="delete-confirm">DELETE</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </dialog> -->
-
   <?php 
-
-  /* INSERT ADMIN ACCOUNT
-  Username: CelineAlmodovar01
-  Password: VillaGildaResort
-  RUN ONCE!!
-  */
 
   // Establish Connection 
   $conn = new mysqli('localhost', 'root', '', 'villa gilda');
 
-  /*
-  $password = 'VillaGildaResort';
-  $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
-  $sql = "INSERT INTO `user accounts` (`First name`, `Last name`, `Username`, `Password`, `Role`) VALUES ('Celine', 'Almodovar', 'CelineAlmodovar01', '{$encryptedPass}', 'Admin')";
-  
-  $conn->query($sql);
-
-  
-  /* Add Staffs */
   function is_valid_password($password) {
-    // Length check
-    if (strlen($password) < 8) {
+    if (strlen($password) < 8 ||
+        !preg_match('/[A-Za-z]/', $password) ||
+        !preg_match('/\d/', $password) ||
+        !preg_match('/[^A-Za-z\d]/', $password)) {
         return false;
     }
-    
-    // Character types check
-    if (!preg_match('/[A-Za-z]/', $password) || // contains at least one letter
-        !preg_match('/\d/', $password) ||      // contains at least one number
-        !preg_match('/[^A-Za-z\d]/', $password) // contains at least one special character
-    ) {
-        return false;
-    }
-    
     return true;
-}
+  }
+
+  function is_valid_name($name) {
+    return strlen($name) >= 3 && strlen($name) <= 20;
+  }
+
   if (isset($_POST['addStaff'])) {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $username = $_POST['username'];
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
-
     $role = 'staff';
 
+    $emailCheck = $conn->prepare("SELECT * FROM `user accounts` WHERE `email` = ?");
+    $emailCheck->bind_param("s", $email);
+    $emailCheck->execute();
+    $emailResult = $emailCheck->get_result();
+
+    $usernameCheck = $conn->prepare("SELECT * FROM `user accounts` WHERE `Username` = ?");
+    $usernameCheck->bind_param("s", $username);
+    $usernameCheck->execute();
+    $usernameResult = $usernameCheck->get_result();
+
     if ($confirmPassword === $password) {
-      if (is_valid_password($password)){
-        $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
-
-        $sqlAdd = "INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`) VALUES ('{$firstName}', '{$lastName}', '{$username}', '{$encryptedPass}', '{$email}', '{$role}')";
-        try {
-          $conn->query($sqlAdd);
+      if (is_valid_password($password)) {
+        $validName = true;
+        if (!is_valid_name($firstName)) {
+          echo "<div class='error-message'>First name must be between 3 and 20 characters.</div>";
+          $validName = false;
         }
-        catch(mysqli_sql_exception $e) {
-
+        if (!is_valid_name($lastName)) {
+          echo "<div class='error-message'>Last name must be between 3 and 20 characters.</div>";
+          $validName = false;
         }
-        // if ($conn->query($sqlAdd) === TRUE) {
-        // Dito dialog
-        // }
-    }else {
-      echo "<div class='error-message'>Password must be 8 characters or more, and include letters, numbers, and special characters</div>";
+        if ($emailResult->num_rows > 0) {
+          echo "<div class='error-message'>Email already exists!</div>";
+          $validName = false;
+        }
+        if ($usernameResult->num_rows > 0) {
+          echo "<div class='error-message'>Username already exists!</div>";
+          $validName = false;
+        }
+        if ($validName) {
+          $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
+          $sqlAdd = $conn->prepare("INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`) VALUES (?, ?, ?, ?, ?, ?)");
+          $sqlAdd->bind_param("ssssss", $firstName, $lastName, $username, $encryptedPass, $email, $role);
+          try {
+            $sqlAdd->execute();
+          } catch (mysqli_sql_exception $e) {
+            echo "<div class='error-message'>Error: " . $e->getMessage() . "</div>";
+          }
+        }
+      } else {
+        echo "<div class='error-message'>Password must be 8 characters or more, and include letters, numbers, and special characters.</div>";
+      }
+    } else {
+      echo "<div class='error-message'>Passwords do not match!</div>";
     }
-  } else {
-    echo "<div class='error-message'>Password do not match!</div>";
   }
-}
 
-  /* Show the list of staffs*/
   $sqlShow = 'SELECT ID, `First Name`, `Last Name`, Username FROM `user accounts` WHERE Role = "staff"';
   $result = $conn->query($sqlShow);
   $numStaff = mysqli_num_rows($result);
@@ -213,20 +191,17 @@
 
   echo '
       </div>
-
     </div>
   ';
 
-  // Handle deletion logic
   if (isset($_POST['deleteButton'])) {
       $deleteID = $_POST['deleteID'];
-      // Perform deletion query
       $sqlDelete = "DELETE FROM `user accounts` WHERE ID = $deleteID";
       if (!$conn->query($sqlDelete))
         echo "Error deleting record: " . $conn->error;
       header("Refresh: 0");
       exit;
-    }
+  }
   ?>
   <script src="popup.js"></script>
   <script>
@@ -236,8 +211,6 @@
     checkTab.classList.add('bx-user-plus');
     checkText.innerHTML = 'Add Staff';
 
-
-    /* Add Active State */
     const userRole = "<?php echo $_SESSION['role']; ?>";
 
     const currentTabBg = document.querySelector('li:nth-child(5) .nav-admin');
@@ -246,12 +219,11 @@
 
     if (userRole === "admin") {
       currentTabBg.style.backgroundColor = "#52C8C8";
-    }
-    else {
+    } else {
       currentTabBg2.style.backgroundColor = "#F4CB26";
     }
 
-    for (let i=0; i < currentTabLetter.length; i++) {
+    for (let i = 0; i < currentTabLetter.length; i++) {
       currentTabLetter[i].style.color = "#226060";
     }
 
