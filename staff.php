@@ -18,7 +18,7 @@
   <title>Villa Gilda Resort</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="images/villa-gilda-logo.png">
+  <link rel="icon" href="images/villa-gilda-logo3.png">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="styles/general.css">
@@ -235,6 +235,26 @@
 
     checkTab.classList.add('bx-user-plus');
     checkText.innerHTML = 'Add Staff';
+
+
+    /* Add Active State */
+    const userRole = "<?php echo $_SESSION['role']; ?>";
+
+    const currentTabBg = document.querySelector('li:nth-child(5) .nav-admin');
+    const currentTabBg2 = document.querySelector('li:nth-child(5) .nav-staff');
+    const currentTabLetter = document.querySelectorAll('li:nth-child(5) .nav-block > *');
+
+    if (userRole === "admin") {
+      currentTabBg.style.backgroundColor = "#52C8C8";
+    }
+    else {
+      currentTabBg2.style.backgroundColor = "#F4CB26";
+    }
+
+    for (let i=0; i < currentTabLetter.length; i++) {
+      currentTabLetter[i].style.color = "#226060";
+    }
+
   </script>
 </body>
 </html>

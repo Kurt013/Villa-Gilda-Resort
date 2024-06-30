@@ -20,7 +20,7 @@ session_start();
   <title>Villa Gilda Resort</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="images/villa-gilda-logo.png">
+  <link rel="icon" href="images/villa-gilda-logo3.png">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" type="text/css" href="styles/general.css">

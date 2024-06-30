@@ -15,9 +15,10 @@
   <title>Villa Gilda Resort</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="images/villa-gilda-logo.png">
+  <link rel="icon" href="images/villa-gilda-logo3.png">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/general.css">
   <link rel="stylesheet" type="text/css" href="styles/reserve.css">
   <link rel="stylesheet" type="text/css" href="styles/header.css">
 
@@ -85,6 +86,23 @@ echo $calendar->show();
       else if (iden[i].querySelector('.booked'))
         iden[i].classList.add('hasBooked');
 
+    }
+
+    const userRole = "<?php echo $_SESSION['role']; ?>";
+
+    const currentTabBg = document.querySelector('li:nth-child(3) .nav-admin');
+    const currentTabBg2 = document.querySelector('li:nth-child(3) .nav-staff');
+    const currentTabLetter = document.querySelectorAll('li:nth-child(3) .nav-block > *');
+
+    if (userRole === "admin") {
+      currentTabBg.style.backgroundColor = "#52C8C8";
+    }
+    else {
+      currentTabBg2.style.backgroundColor = "#F4CB26";
+    }
+
+    for (let i=0; i < currentTabLetter.length; i++) {
+      currentTabLetter[i].style.color = "#226060";
     }
   </script>
 </body>

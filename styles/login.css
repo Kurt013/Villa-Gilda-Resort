@@ -96,26 +96,6 @@
   }
 }
 
-@font-face {
-  font-family: "Spotify Bold";
-  src: url("../fonts/CircularSpotifyText-Bold.otf");
-}
-
-@font-face {
-  font-family: "Spotify Black";
-  src: url("../fonts/CircularSpotifyText-Black.otf");
-}
-
-@font-face {
-  font-family: "Spotify Medium";
-  src: url("../fonts/CircularSpotifyText-Medium.otf");
-}
-
-@font-face {
-  font-family: "Spotify Book Italic";
-  src: url("../fonts/CircularSpotifyText-BookItalic.otf");
-}
-
 *, ::before, ::after {
   margin: 0;
   padding: 0;
@@ -164,11 +144,6 @@ body {
   position: relative;
 }
 
-input {
-  font-family: "Spotify Medium";
-  caret-color: #3D7080;
-}
-
 .login-form {
   width: 40%;
   text-align: center;
@@ -188,10 +163,6 @@ input {
   padding-right: 2.2em;
 } */
 
-.login-form input:focus {
-  outline-width: 0.5px;
-  outline-color: #3D7080;
-}
 
 .logo {
   width: clamp(170px, 25vw, 220px);
@@ -209,16 +180,10 @@ input {
 }
 
 .username, .password {
-  color: #3D7080;
   height: 45px;
   width: 80%;
   max-width: 500px;
   letter-spacing: 1.5px;
-}
-
-.username::placeholder, .password::placeholder {
-  color: rgb(148, 147, 147);
-  font-family: 'Spotify Black';
 }
 
 /* input[type='password'] {
@@ -256,25 +221,23 @@ input {
 .submit-btn {
   background-color: #F4D248;
   color: white;
-  font-family: 'Spotify Black';
+  font-weight: 800;
+  font-size: 22px;
   letter-spacing: 5px;
   width: 50%; 
   margin-top: 40px;
-  padding: 15px 0;
+  padding: 10px 0;
   min-width: 150px;
   max-width: 220px;
 }
 
-.forgot {
-  margin-bottom: 10px;
-}
-
 .forgot-redirect {
-  text-decoration: none;
+  display: inline-block;
   color: rgba(255, 255, 255, 0.6);
-  font-size: 8px;
-  font-family: 'Spotify Medium';
-  letter-spacing: 3px;
+  font-size: 10px;
+  margin-top: 10px;
+  letter-spacing: 2px;
+  font-weight: 800;
 }
 
 /* Tree icon */

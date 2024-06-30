@@ -5,6 +5,7 @@ body {
 }
 
 .reserve-banner {
+    font-family: 'Spotify Bold';
     background-color: #226060;
     padding: 3px 15px;
     position: absolute;
@@ -13,6 +14,7 @@ body {
 }
 
 #calendar {
+    font-weight: bold;
     min-height: 485px;
     height: 85%;
     font-family: 'Montserrat', sans-serif;

@@ -1,32 +1,9 @@
-@font-face {
-  font-family: 'Cocogoose-Bold';
-  src: url('../fonts/Cocogoose-Pro-Bold-trial.ttf');
-}
-
-@font-face {
-  font-family: 'Cocogoose-Regular';
-  src: url('../fonts/Cocogoose-Pro-Regular-trial.ttf');
-}
-
-@font-face {
-  font-family: 'Circular-Medium';
-  src: url('../fonts/CircularSpotifyText-Medium.otf');
-}
-
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
   color: white;
-  font-family: 'Montserrat', sans-serif;
-}
-
-input, ::placeholder {
-  font-weight: 600;
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 78px;
 }
 
 header {
@@ -114,7 +91,7 @@ i + p, .menu-text {
 }
 
 .wrapper-2 *, .wrapper-pane-2 *{
-  font-family: 'Circular-Medium';
+  font-family: 'Spotify Medium';
   font-weight: normal;
   opacity: 0.8;
 }
@@ -495,5 +472,3 @@ i + p, .menu-text {
   }
 
 }
-
-

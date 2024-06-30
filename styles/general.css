@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'Cocogoose-Bold';
+  src: url('../fonts/Cocogoose-Pro-Bold-trial.ttf');
+}
+
+@font-face {
+  font-family: 'Cocogoose-Regular';
+  src: url('../fonts/Cocogoose-Pro-Regular-trial.ttf');
+}
+
+@font-face {
+  font-family: 'Spotify Medium';
+  src: url('../fonts/CircularSpotifyText-Medium.otf');
+}
+
+@font-face {
+  font-family: 'Spotify Bold';
+  src: url('../fonts/CircularSpotifyText-Bold.otf');
+}
+
+
 *, ::before, ::after {
   margin: 0;
   padding: 0;
@@ -6,6 +27,19 @@
 
 * {
   font-family: 'Montserrat', sans-serif;
+}
+
+input, ::placeholder {
+  font-weight: 600;
+}
+
+input:focus {
+  outline-width: 0.5px;
+  outline-color: #3D7080;
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
 }
 
 /* Reusable error message design */

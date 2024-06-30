@@ -15,9 +15,10 @@ if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
   <title>Villa Gilda Resort</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="images/villa-gilda-logo.png">
+  <link rel="icon" href="images/villa-gilda-logo3.png">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="styles/general.css">
   <link rel="stylesheet" type="text/css" href="styles/change-password.css">
   <link rel="stylesheet" type="text/css" href="styles/header.css">
 
