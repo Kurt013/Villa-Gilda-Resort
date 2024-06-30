@@ -61,3 +61,84 @@
   background-color: #26A237;
 }
 
+/* Additional Button for the above design*/
+
+
+
+/* Reusable confirmation popup */
+/* .confirm-delete {
+  border: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: 100%;
+  margin: 0 10px;
+  background-color: #F0F1F0;
+ }
+
+ .header-delete, .body-delete {
+  padding: 10px;
+ }
+
+ .header-delete {
+  display: flex;
+  background-color: #FF3A40;
+  justify-content: space-between;
+ }
+
+.exit {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.exit-x {
+
+  
+}
+
+.body-delete {
+  display: flex;
+}
+
+.first-half {  
+  flex: 0 0 40px;
+}
+
+.exclamation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FEFEFE;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  background-color: #FF3A40;
+  border-radius: 50%;
+}
+
+.second-half {
+  flex: 1;
+}
+
+ .body-delete p {
+  color: #949191;
+ }
+ 
+ .second-div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+ }
+
+#cancelDelete {
+  color: #A4A0A0;
+}
+
+ .delete-confirm {
+  background-color: #FF3A40;
+  border: none;
+
+} */

@@ -21,6 +21,7 @@
   <link rel="icon" href="images/villa-gilda-logo.png">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/general.css">
   <link rel="stylesheet" type="text/css" href="styles/staff.css">
   <link rel="stylesheet" type="text/css" href="styles/header.css">
 
@@ -39,6 +40,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body> 
+  <?php
+    include('header.php');
+  ?>
     <div class="form-wrapper">
       <form class="addStaff" action="" method="post">
       <div class="field-wrapper">
@@ -73,8 +77,34 @@
       </form>
     </div>
 
+<!-- 
+  <dialog class="confirm-delete" id="confirmDeleteDialog" open>
+    <div class="header-delete">
+      <h1>Confirm Delete</h1>
+      <button id="exitDialog" class="exit"><i class="bx bx-x"></i></button>
+    </div>
+    <div class="body-delete">
+      <div class="first-half">
+        <div class="exclamation">
+          !
+        </div>
+      </div>
+      <div class="second-half">
+        <div class="first-div">
+          <p class="content" id="deleteConfirmationText">Are you sure you want to delete the staff member with username 'username'?</p>
+        </div>
+        <div class="second-div">
+          <button id="cancelDelete" class="exit">NO</button>
+          <form id="deleteForm" method="post">
+            <input type="hidden" name="deleteID" id="deleteID">
+            <button type="submit" name="delete-confirm" value="delete" class="delete-confirm">DELETE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </dialog> -->
+
   <?php 
-    include('header.php');
 
   /* INSERT ADMIN ACCOUNT
   Username: CelineAlmodovar01
@@ -194,10 +224,18 @@
       $sqlDelete = "DELETE FROM `user accounts` WHERE ID = $deleteID";
       if (!$conn->query($sqlDelete))
         echo "Error deleting record: " . $conn->error;
+<<<<<<< Updated upstream
       header("Refresh: 0");
       exit;
     }
   ?>
+=======
+      header('Refresh: 0');
+  }
+
+  ?>
+  <script src="popup.js"></script>
+>>>>>>> Stashed changes
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');

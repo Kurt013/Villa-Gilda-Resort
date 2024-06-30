@@ -149,23 +149,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 </div>
 <?php
 if ($modal) {
-echo '<dialog open>
-        <div class="field">
-            <div class="icon-wrapper"><i class="ri-verified-badge-fill"></i></div>
-            <div class="text-group">
-                <h1>Success</h1>
-                <p>Your password has been reset successfully. You can now use your new password to login!</p>
-            </div>
-            <div class="bottom-part">
-                <a class="btn" href="index.php">Back to Login Page</a>
-            </div>
-        </div>
-       </dialog>
-          
-          <script> 
-            dialog = document.querySelector("dialog");
-            dialog.showModal();
-          </script>';
+    echo '<dialog class="field">
+                <div class="icon-wrapper"><i class="ri-verified-badge-fill"></i></div>
+                <div class="text-group">
+                    <h1>Success</h1>
+                    <p>Your password has been reset successfully. You can now use your new password to login!</p>
+                </div>
+                <div class="bottom-part">
+                    <a class="btn" href="index.php">Back to Login Page</a>
+                </div>
+        </dialog>
+            
+            <script> 
+                dialog = document.querySelector("dialog");
+                dialog.showModal();
+            </script>';
 }
 ?>
 

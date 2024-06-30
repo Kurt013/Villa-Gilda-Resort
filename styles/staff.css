@@ -1,5 +1,6 @@
 body {
   background-color: #419999;
+  position: relative;
 }
 
 .form-wrapper {
@@ -195,4 +196,15 @@ i.bxs-trash {
     font-size: 11px;
   }
 
+}
+
+
+.error-message {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
