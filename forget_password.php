@@ -77,16 +77,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             word-break: break-all;
                           }
 
-                          body {
-                            background-color: #4EB1CB;
-                          }
-
-                          .body > div {
+                          body > div {
                             text-align: center;
                           }
 
                           .card-container {
-                            width: 70%;
+                            width: 100%;
                             margin: auto;
                             background-color: #ffffff;
                             height: 100%;
