@@ -301,7 +301,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                             }
 
                               .view_invoice {
-                            display: inline-block;
+                            display: block;
+                            text-decoration: none;
                             font-size: 30px;
                             color: #FEFEFE;
                             font-weight: bold;
@@ -364,7 +365,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                                 <h1>Booking Invoice</h1>
                                 <p>Hi '.$row_invoice['firstName'].' '.$row_invoice['lastName'].'</p>
                                 <p>Thank you for your reservation at Villa Gilda Resort. Please click the button below to view your receipt.</p>
-                                <a class="view_invoice">VIEW INVOICE</div>
+                                <a href="cid:invoicePDF" class="view_invoice">VIEW INVOICE</a>
                                 <p>Best regards,<br>The Villa Gilda Resort Team</p>
                                 <p class="last-p">If you believe you have received this email in error, please disregard this email or <a class="notif-link" href="https://mail.google.com/mail/?view=cm&to=resortvillagilda@gmail.com&su=Notify%20the%20Resort">notify us.</a></p>
                                 <div class="icon-redirect">
@@ -384,6 +385,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                     ',
                     'Attachments' => [
                         [
+                            'Content-ID' => 'invoicePDF',
                             'ContentType' => 'application/pdf',
                             'Filename' => $invoice_filename,
                             'Base64Content' => base64_encode(file_get_contents($invoice_filename))
@@ -398,14 +400,14 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
             $response = $mj->post(Resources::$Email, ['body' => $body]);
 
             if ($response->success()) {
-                echo '<div id="emailSuccessMessage" class="message-box">
+                echo '<div id="emailSuccessMessage" class="success-message">
                         <div class="message-content">
                             <h1>Receipt sent successfully</h1>
                             <button class="okay-btn" onclick="closeMessage()">Okay</button>
                         </div>
                       </div>';
             } else {
-                echo '<div id="emailSuccessMessage" class="message-box">
+                echo '<div id="emailSuccessMessage" class="error-message">
                         <div class="message-content">
                             <h1>Failed to send receipt!</h1>
                             <button class="okay-btn" onclick="closeMessage()">Okay</button>

@@ -106,7 +106,7 @@ input::placeholder {
 
 
 /* Reusable confirmation popup */
-/* .confirm-delete {
+.confirm-delete {
   border: none;
   position: absolute;
   top: 50%;
@@ -181,4 +181,4 @@ input::placeholder {
   background-color: #FF3A40;
   border: none;
 
-} */
+}
