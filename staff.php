@@ -7,6 +7,8 @@
     exit(); 
   }
 
+  ob_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -192,10 +194,10 @@
       $sqlDelete = "DELETE FROM `user accounts` WHERE ID = $deleteID";
       if (!$conn->query($sqlDelete))
         echo "Error deleting record: " . $conn->error;
-  }
-
+      header("Refresh: 0");
+      exit;
+    }
   ?>
-
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
@@ -206,4 +208,5 @@
 </body>
 </html>
 <?php 
+  ob_end_flush();
 ?>
