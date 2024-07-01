@@ -1,25 +1,16 @@
-// popup.js
+function openDialog(button) {
+  const dialog = document.querySelector('.confirm-popup');
+  const deleteForm = document.getElementById('confirmDeleteForm');
+  const deleteID = button.closest('form').querySelector('input[name="deleteID"]').value;
 
-// Get the confirmation dialog element
-const confirmDeleteDialog = document.getElementById('confirmDeleteDialog');
-
-// Function to open the delete confirmation dialog
-function openDeleteConfirmation(deleteID, username) {
-  const deleteConfirmationText = document.getElementById('deleteConfirmationText');
-  deleteConfirmationText.textContent = `Are you sure you want to delete the staff member with username '${username}'?`;
-
-  const deleteForm = document.getElementById('deleteForm');
-  deleteForm.setAttribute('action', `?deleteID=${deleteID}`);
-
-  confirmDeleteDialog.showModal();
+  deleteForm.querySelector('input[name="deleteID"]').value = deleteID;
+  dialog.showModal();
 }
 
-// Event listener for closing the delete confirmation dialog
-confirmDeleteDialog.querySelector('#exitDialog').addEventListener('click', function() {
-  confirmDeleteDialog.close();
-});
+function closeDialog() {
+  const dialog = document.querySelector('dialog');
+  dialog.close();
+}
 
-// Event listener for cancel button in delete confirmation dialog
-confirmDeleteDialog.querySelector('#cancelDelete').addEventListener('click', function() {
-  confirmDeleteDialog.close();
-});
+const messageDialog = document.querySelector('.message-popup');
+messageDialog.showModal();

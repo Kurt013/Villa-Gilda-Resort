@@ -375,7 +375,7 @@
         <p>!</p>
       </div>
       <div class="right-confirm-body">
-        <p>Are you sure you want to delete the staff member?</p>
+        <p>Are you sure you want to delete this staff member?</p>
       </div>
     </div>
     <div class="confirm-footer">
@@ -389,20 +389,6 @@
 
   <script src="popup.js"></script>
   <script>
-    function openDialog(button) {
-      const dialog = document.querySelector('.confirm-popup');
-      const deleteForm = document.getElementById('confirmDeleteForm');
-      const deleteID = button.closest('form').querySelector('input[name="deleteID"]').value;
-
-      deleteForm.querySelector('input[name="deleteID"]').value = deleteID;
-      dialog.showModal();
-    }
-
-    function closeDialog() {
-      const dialog = document.querySelector('dialog');
-      dialog.close();
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
       const checkTab = document.getElementById('menu');
       const checkText = document.querySelector('.home-text');
@@ -425,9 +411,6 @@
       for (let i = 0; i < currentTabLetter.length; i++) {
         currentTabLetter[i].style.color = "#226060";
       }
-
-      const messageDialog = document.querySelector('.message-popup');
-      messageDialog.showModal();
     });
   </script>
 </body>
