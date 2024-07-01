@@ -115,19 +115,87 @@
       if (is_valid_password($password)) {
         $validName = true;
         if (!is_valid_name($firstName)) {
-          echo "<div class='error-message'>First name must be between 3 and 20 characters.</div>";
+          echo '
+           <dialog class="message-popup error" >
+            <div class="pop-up">
+              <div class="left-side">
+                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+              </div>
+              <div class="right-side">
+                <div class="right-group">
+                  <div class="content">
+                    <h1>Invalid</h1>
+                    <p>First name must be between 3 and 20 characters.</p>
+                  </div>
+                  <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          ';
           $validName = false;
         }
         if (!is_valid_name($lastName)) {
-          echo "<div class='error-message'>Last name must be between 3 and 20 characters.</div>";
+          echo '
+          <dialog class="message-popup error" >
+            <div class="pop-up">
+              <div class="left-side">
+                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+              </div>
+              <div class="right-side">
+                <div class="right-group">
+                  <div class="content">
+                    <h1>Invalid</h1>
+                    <p>Last name must be between 3 and 20 characters.</p>
+                  </div>
+                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          ';
           $validName = false;
         }
         if ($emailResult->num_rows > 0) {
-          echo "<div class='error-message'>Email already exists!</div>";
+          echo '
+          <dialog class="message-popup error" >
+            <div class="pop-up">
+              <div class="left-side">
+                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+              </div>
+              <div class="right-side">
+                <div class="right-group">
+                  <div class="content">
+                    <h1>Invalid</h1>
+                    <p>Email already exists!</p>
+                  </div>
+                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          ';
           $validName = false;
         }
         if ($usernameResult->num_rows > 0) {
-          echo "<div class='error-message'>Username already exists!</div>";
+          echo '
+          <dialog class="message-popup error" >
+            <div class="pop-up">
+              <div class="left-side">
+                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+              </div>
+              <div class="right-side">
+                <div class="right-group">
+                  <div class="content">
+                    <h1>Invalid</h1>
+                    <p>Username already exists!</p>
+                  </div>
+                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          ';
           $validName = false;
         }
         if ($validName) {
@@ -137,17 +205,88 @@
           try {
             $sqlAdd->execute();
           } catch (mysqli_sql_exception $e) {
-            // Handle exception if needed
-            echo "<div class='error-message'>Error: " . $e->getMessage() . "</div>";
+            echo '
+             <dialog class="message-popup error" >
+            <div class="pop-up">
+              <div class="left-side">
+                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+              </div>
+              <div class="right-side">
+                <div class="right-group">
+                  <div class="content">
+                    <h1>Invalid</h1>
+                    <p>Email already exists!</p>
+                  </div>
+                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          ';
+          $validName = false;
+        }
+        if ($usernameResult->num_rows > 0) {
+          echo '
+          <dialog class="message-popup error" >
+            <div class="pop-up">
+              <div class="left-side">
+                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+              </div>
+              <div class="right-side">
+                <div class="right-group">
+                  <div class="content">
+                    <h1>Invalid</h1>
+                    <p>Error: ' . $e->getMessage() . '</p>
+                  </div>
+                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
+          ';
           }
         }
       }
       else {
-        echo "<div class='error-message'>Password must be 8 characters or more, and include letters, numbers, and special characters.</div>";
+        echo '
+          <dialog class="message-popup error" >
+              <div class="pop-up">
+                <div class="left-side">
+                  <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+                </div>
+                <div class="right-side">
+                  <div class="right-group">
+                    <div class="content">
+                      <h1>Invalid</h1>
+                      <p>Password must be 8 characters or more, and include letters, numbers, and special characters.</p>
+                    </div>
+                    <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                  </div>
+                </div>
+              </div>
+            </dialog>
+            ';
       }
-    }
+    } 
     else {
-      echo "<div class='error-message'>Passwords do not match!</div>";
+      echo '
+            <dialog class="message-popup error" >
+              <div class="pop-up">
+                <div class="left-side">
+                  <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+                </div>
+                <div class="right-side">
+                  <div class="right-group">
+                    <div class="content">
+                      <h1>Invalid</h1>
+                      <p>Passwords do not match!</p>
+                    </div>
+                    <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                  </div>
+                </div>
+              </div>
+            </dialog>
+            ';
     }
   }
 
@@ -241,7 +380,7 @@
     }
 
     function closeDialog() {
-      const dialog = document.querySelector('.confirm-popup');
+      const dialog = document.querySelector('dialog');
       dialog.close();
     }
 
@@ -267,6 +406,9 @@
       for (let i = 0; i < currentTabLetter.length; i++) {
         currentTabLetter[i].style.color = "#226060";
       }
+
+      const messageDialog = document.querySelector('.message-popup');
+      messageDialog.showModal();
     });
   </script>
 </body>
