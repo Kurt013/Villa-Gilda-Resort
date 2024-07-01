@@ -335,12 +335,12 @@
               <p class='username-staff'>{$row['Username']}</p>
             </div>
           </div>
-          <form class='delete' method='post'>
+          <div class='delete'>
             <input type='hidden' name='deleteID' value='{$row['ID']}'>
             <button type='button' onclick='openDialog(this)' class='delete-button'>
               <i class='bx bxs-trash'></i>
             </button>
-          </form>
+          </div>
         </div>
       </div>
       ";

@@ -65,12 +65,38 @@ $bookableCell->routeActions();
 
 echo $calendar->show();
 
+
 ?>
   <div class="legends">
       <p class="available">Available</p>
       <p class="reserved">Reserved</p>
   </div>
 
+  <!-- Popup Confirmation Delete -->
+  <dialog class="confirm-popup">
+    <div class="confirm-header">
+      <h1>Confirm Deletion</h1>
+      <button class="exit-btn" onclick="closeDialog()"><i class="bx bx-x"></i></button>
+    </div>
+    <div class="confirm-body">
+      <div class="left-confirm-body">
+        <p>!</p>
+      </div>
+      <div class="right-confirm-body">
+        <p>Are you sure you want to delete the reservation?</p>
+      </div>
+    </div>
+    <div class="confirm-footer">
+      <button class="cancel-btn" onclick="closeDialog()">No</button>
+      <form id="confirmDeleteReservation" method="post">
+        <input type="hidden" name="delete" />
+        <input type="hidden" name="id" />
+        <button value="Delete" type="submit" name="deleteButton" class="delete-btn">Delete</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="popup.js"></script>
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');

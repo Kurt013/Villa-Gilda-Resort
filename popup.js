@@ -1,9 +1,18 @@
 function openDialog(button) {
   const dialog = document.querySelector('.confirm-popup');
   const deleteForm = document.getElementById('confirmDeleteForm');
-  const deleteID = button.closest('form').querySelector('input[name="deleteID"]').value;
+  const deleteID = button.closest('.delete').querySelector('input[name="deleteID"]').value;
 
   deleteForm.querySelector('input[name="deleteID"]').value = deleteID;
+  dialog.showModal();
+}
+
+function openDialog2(button) {
+  const dialog = document.querySelector('.confirm-popup');
+  const deleteForm = document.getElementById('confirmDeleteReservation');
+  const deleteID = button.closest('.delete').querySelector('input[name="id"]').value;
+
+  deleteForm.querySelector('input[name="id"]').value = deleteID;
   dialog.showModal();
 }
 

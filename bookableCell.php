@@ -312,11 +312,10 @@ private function bookingForm($date)
     private function deleteForm($id)
     {
         return '
-            <form onsubmit="return confirm(\'Are you sure to cancel?\');" method="post" action="' . $this->currentURL . '">
-                <input type="hidden" name="delete" />
+            <div class="delete">
                 <input type="hidden" name="id" value="' . $id . '" />
-                <button class="submit" type="submit" value="Delete"><i class="bx bxs-trash del"></i></button>
-            </form>';
+                <button class="submit" onclick="openDialog2(this)" type="button"><i class="bx bxs-trash del"></i></button>
+            </div>';
     }
 }
 ?>
