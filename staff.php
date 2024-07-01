@@ -203,7 +203,26 @@
           $sqlAdd = $conn->prepare("INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`) VALUES (?, ?, ?, ?, ?, ?)");
           $sqlAdd->bind_param("ssssss", $firstName, $lastName, $username, $encryptedPass, $email, $role);
           try {
-            $sqlAdd->execute();
+            if ($sqlAdd->execute()) {
+              echo'
+              <dialog class="message-popup success" >
+                <div class="pop-up">
+                  <div class="left-side">
+                    <div class="left-side-wrapper"><i class="bx bxs-check-circle success-circle"></i></div>
+                  </div>
+                  <div class="right-side">
+                    <div class="right-group">
+                      <div class="content">
+                        <h1>Success</h1>
+                        <p>Staff successfully added</p>
+                      </div>
+                      <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </dialog>
+              ';
+            }
           } catch (mysqli_sql_exception $e) {
             echo '
              <dialog class="message-popup error" >
