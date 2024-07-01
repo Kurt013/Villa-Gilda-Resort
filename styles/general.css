@@ -36,6 +36,9 @@
 
 input, ::placeholder {
   font-weight: 600;
+}
+
+input {
   font-size: 14px;
 }
 
@@ -105,80 +108,106 @@ input::placeholder {
 
 
 
-/* Reusable confirmation popup */
-.confirm-delete {
+/* Confirmation Delete Design */
+.confirm-popup {
   border: none;
-  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 500px;
+  position: absolute;
+  z-index: -1;
   width: 100%;
-  margin: 0 10px;
-  background-color: #F0F1F0;
- }
+  max-width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
- .header-delete, .body-delete {
+.confirm-header, .confirm-body, .confirm-footer {
   padding: 10px;
- }
+}
 
- .header-delete {
-  display: flex;
+.confirm-header {
   background-color: #FF3A40;
+  color: #ffffff; 
+  display: flex;
+  align-items: center;
   justify-content: space-between;
- }
+}
 
-.exit {
+.confirm-header h1 {
+  font-size: 25px;
+}
+
+.exit-btn {
+  font-size: 35px;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  color: #323232;
 }
 
-.exit-x {
-
-  
-}
-
-.body-delete {
+.confirm-body {
   display: flex;
+  height: 100px;
+  background-color: #FEFEFE;
+  column-gap: 10px;
 }
 
-.first-half {  
-  flex: 0 0 40px;
+.left-confirm-body {
+  flex: 0 1 50px;
+  display: flex;
+  justify-content: center;
 }
 
-.exclamation {
+.left-confirm-body p {
+  color: #FEFEFE;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #FEFEFE;
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
   background-color: #FF3A40;
   border-radius: 50%;
+  font-size: 25px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
 }
 
-.second-half {
+.right-confirm-body {
   flex: 1;
 }
 
- .body-delete p {
+.right-confirm-body p {
   color: #949191;
- }
- 
- .second-div {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
- }
+}
 
-#cancelDelete {
+.confirm-footer {
+  background-color: #F0F1F0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.cancel-btn, .delete-btn {
+  padding: 5px 15px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 80px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  border: 2px solid #A4A0A0;
   color: #A4A0A0;
 }
 
- .delete-confirm {
+.delete-btn {
+  color: #FEFEFE;
+  border: 2px solid #FF3A40;
   background-color: #FF3A40;
-  border: none;
-
 }
+
+

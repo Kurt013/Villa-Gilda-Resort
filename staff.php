@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Gilda Resort</title>
 
@@ -29,10 +29,7 @@
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
   <!-- Remixicon Link -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,42 +40,41 @@
   <?php
     include('header.php');
   ?>
-    <div class="form-wrapper">
-      <form class="addStaff" method="post">
+  <div class="form-wrapper">
+    <form class="addStaff" method="post">
       <div class="field-wrapper">
-          <div class="form-group first">
-            <label for="firstName">First name:</label>
-            <input type="text" name="firstName" class="firstName" id="firstName" placeholder="Enter new staff member's first name" required>
-          </div>
-          <div class="form-group second">
-            <label for="lastName">Last name:</label>
-            <input type="text" name="lastName" class="lastName" id="lastName" placeholder="Enter new staff member's last name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" name="email" class="email" id="email" placeholder="Enter new staff member's email" required>
-          </div>
-          <div class="form-group user">
-            <label for="username">Username:</label>
-            <input type="text" name="username" class="username" id="username" placeholder="Enter new staff member's username" required>
-          </div>
-          <div class="form-group password">
-            <label for="password">Password:</label>
-            <input type="password" name="password" class="password" id="password" placeholder="Enter new staff member's password" required>
-          </div>
-          <div class="form-group confirm-pass">
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" name="confirm-password" class="confirm-password" id="confirm-password" placeholder="Re-type password" required>
-          </div>
-      </div>
-        <div class="addStaff-container">
-          <input type="submit" name="addStaff" value="ADD STAFF" class="addStaff-submit">
+        <div class="form-group first">
+          <label for="firstName">First name:</label>
+          <input type="text" name="firstName" class="firstName" id="firstName" placeholder="Enter new staff member's first name" required>
         </div>
-      </form>
-    </div>
+        <div class="form-group second">
+          <label for="lastName">Last name:</label>
+          <input type="text" name="lastName" class="lastName" id="lastName" placeholder="Enter new staff member's last name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" name="email" class="email" id="email" placeholder="Enter new staff member's email" required>
+        </div>
+        <div class="form-group user">
+          <label for="username">Username:</label>
+          <input type="text" name="username" class="username" id="username" placeholder="Enter new staff member's username" required>
+        </div>
+        <div class="form-group password">
+          <label for="password">Password:</label>
+          <input type="password" name="password" class="password" id="password" placeholder="Enter new staff member's password" required>
+        </div>
+        <div class="form-group confirm-pass">
+          <label for="confirm-password">Confirm Password:</label>
+          <input type="password" name="confirm-password" class="confirm-password" id="confirm-password" placeholder="Re-type password" required>
+        </div>
+      </div>
+      <div class="addStaff-container">
+        <input type="submit" name="addStaff" value="ADD STAFF" class="addStaff-submit">
+      </div>
+    </form>
+  </div>
 
   <?php 
-
   // Establish Connection 
   $conn = new mysqli('localhost', 'root', '', 'villa gilda');
 
@@ -141,13 +137,16 @@
           try {
             $sqlAdd->execute();
           } catch (mysqli_sql_exception $e) {
+            // Handle exception if needed
             echo "<div class='error-message'>Error: " . $e->getMessage() . "</div>";
           }
         }
-      } else {
+      }
+      else {
         echo "<div class='error-message'>Password must be 8 characters or more, and include letters, numbers, and special characters.</div>";
       }
-    } else {
+    }
+    else {
       echo "<div class='error-message'>Passwords do not match!</div>";
     }
   }
@@ -180,7 +179,7 @@
           </div>
           <form class='delete' method='post'>
             <input type='hidden' name='deleteID' value='{$row['ID']}'>
-            <button type='submit' name='deleteButton' class='delete-button'>
+            <button type='button' onclick='openDialog(this)' class='delete-button'>
               <i class='bx bxs-trash'></i>
             </button>
           </form>
@@ -190,21 +189,62 @@
   }
 
   echo '
-      </div>
     </div>
+  </div>
   ';
 
   if (isset($_POST['deleteButton'])) {
-      $deleteID = $_POST['deleteID'];
-      $sqlDelete = "DELETE FROM `user accounts` WHERE ID = $deleteID";
-      if (!$conn->query($sqlDelete))
-        echo "Error deleting record: " . $conn->error;
+    $deleteID = $_POST['deleteID'];
+    $sqlDelete = "DELETE FROM `user accounts` WHERE ID = ?";
+    $stmt = $conn->prepare($sqlDelete);
+    $stmt->bind_param("i", $deleteID);
+    if ($stmt->execute()) {
       header("Refresh: 0");
       exit;
+    } else {
+      echo "Error deleting record: " . $conn->error;
+    }
   }
   ?>
+
+  <dialog class="confirm-popup">
+    <div class="confirm-header">
+      <h1>Confirm Deletion</h1>
+      <button class="exit-btn" onclick="closeDialog()"><i class="bx bx-x"></i></button>
+    </div>
+    <div class="confirm-body">
+      <div class="left-confirm-body">
+        <p>!</p>
+      </div>
+      <div class="right-confirm-body">
+        <p>Are you sure you want to delete the staff member?</p>
+      </div>
+    </div>
+    <div class="confirm-footer">
+      <button class="cancel-btn" onclick="closeDialog()">No</button>
+      <form id="confirmDeleteForm" method="post">
+        <input type="hidden" name="deleteID">
+        <button type="submit" name="deleteButton" class="delete-btn">Delete</button>
+      </form>
+    </div>
+  </dialog>
+
   <script src="popup.js"></script>
   <script>
+    function openDialog(button) {
+      const dialog = document.querySelector('.confirm-popup');
+      const deleteForm = document.getElementById('confirmDeleteForm');
+      const deleteID = button.closest('form').querySelector('input[name="deleteID"]').value;
+
+      deleteForm.querySelector('input[name="deleteID"]').value = deleteID;
+      dialog.showModal();
+    }
+
+    function closeDialog() {
+      const dialog = document.querySelector('.confirm-popup');
+      dialog.close();
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       const checkTab = document.getElementById('menu');
       const checkText = document.querySelector('.home-text');
@@ -212,10 +252,8 @@
       checkTab.classList.add('bx-user-plus');
       checkText.innerHTML = 'Add Staff';
 
-
       /* Add Active State */
       const userRole = "<?php echo $_SESSION['role']; ?>";
-
       const currentTabBg = document.querySelector('li:nth-child(5) .nav-admin');
       const currentTabBg2 = document.querySelector('li:nth-child(5) .nav-staff');
       const currentTabLetter = document.querySelectorAll('li:nth-child(5) .nav-block > *');
