@@ -81,7 +81,7 @@ body {
   overflow-x: auto;
 }
 
-p {
+.staff-list p {
   color: #EBF0EA;
 }
 

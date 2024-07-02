@@ -66,6 +66,41 @@ $bookableCell->routeActions();
 echo $calendar->show();
 
 
+if (isset($_POST['submitReservation'])) {
+  echo'
+    <dialog class="reservation-details-form">
+      <button class="exit-btn exit-pos" onclick="closeDialog()"><i class="bx bx-x exit-icon"></i></button>
+      <div class="details-header">
+        <div class="icon-wrapper"><i class="ri-verified-badge-fill"></i></div>
+        <h1>Resort successfully booked!</h1>
+        <p>Please take a look below for the summary of the reservation</p>
+      </div>
+      <div class="details">
+          <div class="detail-group">
+            <p>Name:</p>
+            <p>'.$_POST['firstName'].' '.$_POST['lastName'].'</p>
+          </div>
+          <div class="detail-group">
+            <p>Date and Time:</p>
+            <p>'.$_POST['dateFormatted'].' | '.$_POST['time_slot'].'</p>
+          </div>
+          <div class="detail-group">
+            <p>Total Amount:</p>
+            <p>'.$_POST['amount'].'</p>
+          </div>
+          <div class="detail-group">
+            <p>Status:</p>
+            <p>Pending</p>
+          </div>
+      </div>
+      <div class="details-footer">
+        <button onclick="closeDialog()" class="ok-btn">OK</button>
+      </div>
+    </dialog>
+
+  ';
+}
+
 ?>
   <div class="legends">
       <p class="available">Available</p>
@@ -95,9 +130,9 @@ echo $calendar->show();
       </form>
     </div>
   </dialog>
-
   <script src="popup.js"></script>
   <script>
+
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
 
@@ -130,6 +165,11 @@ echo $calendar->show();
     for (let i=0; i < currentTabLetter.length; i++) {
       currentTabLetter[i].style.color = "#226060";
     }
+
+    <?php if (isset($_POST['submitReservation'])) { ?>
+      const reservationDialog = document.querySelector(".reservation-details-form");
+      reservationDialog.showModal();
+    <?php } ?>
   </script>
 </body>
 </html>

@@ -34,6 +34,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+dialog {
+  z-index: 9999;
+}
+
 input, ::placeholder {
   font-weight: 600;
 }
@@ -149,11 +153,14 @@ input::placeholder {
 }
 
 .exit-btn {
-  font-size: 35px;
   background-color: transparent;
   border: none;
   cursor: pointer;
   color: #323232;
+}
+
+.exit-icon {
+  font-size: 40px !important;
 }
 
 .confirm-body {

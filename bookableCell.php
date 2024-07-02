@@ -187,6 +187,7 @@ private function bookingForm($date)
                     <button type="button" class="close-btn"><i class="bx bx-x"></i></button>
                     <input type="hidden" name="add" value="1" />
                     <input type="hidden" name="date" value="' . $date . '" />
+                    <input type="hidden" name="dateFormatted" value="' . htmlentities($formattedDate) . '" />
                 </div>
             </div>
             <div class="reservation-body">
@@ -246,7 +247,7 @@ private function bookingForm($date)
                     </div>
                 </div>
             </div>
-            <div class="submitContainer"><button class="submitReservation" type="submit">Submit</button></div>
+            <div class="submitContainer"><button name="submitReservation" value="submitReservation" class="submitReservation" type="submit">Submit</button></div>
 
             <img class="leaves-1" src="elements/leaves.png" alt="background-leaves">
             <img class="leaves-2" src="elements/leaves.png" alt="background-leaves">
@@ -289,6 +290,7 @@ private function bookingForm($date)
                 timeSlotSelect.addEventListener("change", updateAmount);
                 includedSelect.addEventListener("change", updateAmount);
                 updateAmount(); // Initialize amount
+
                 const closeBtn = document.querySelector(".close-btn");
                 closeBtn.addEventListener("click", function() {
                     // Redirect back to the calendar page

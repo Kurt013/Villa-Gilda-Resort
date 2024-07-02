@@ -368,7 +368,7 @@
   <dialog class="confirm-popup">
     <div class="confirm-header">
       <h1>Confirm Deletion</h1>
-      <button class="exit-btn" onclick="closeDialog()"><i class="bx bx-x"></i></button>
+      <button class="exit-btn" onclick="closeDialog()"><i class="bx bx-x exit-icon"></i></button>
     </div>
     <div class="confirm-body">
       <div class="left-confirm-body">
