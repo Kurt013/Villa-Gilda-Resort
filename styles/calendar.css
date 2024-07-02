@@ -30,7 +30,7 @@ body {
 
 .box {
     display: flex;
-    flex: 0 0 50px;
+    flex: 0 0 70px;
     background-color: #F4CF3A;
 }
 
@@ -43,7 +43,7 @@ body {
 }
 
 h1.title {
-    font-size: 28px;
+    font-size: 35px;
     font-weight: 800;
     color: #226060;
 }
@@ -54,8 +54,9 @@ h1.title {
     display: flex;
     justify-content: space-between;
     width: 30%;
-    max-width: 120px;
-    border-radius: 15px;
+    height: 60%;
+    max-width: 130px;
+    border-radius: 35px;
 }
 
 .prev, .next {
@@ -66,8 +67,8 @@ h1.title {
     color: #226060;
     background-color: white;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     transition: background-color 0.05s,
         color 0.05s;
 }
@@ -146,7 +147,7 @@ h1.title {
 }
 
 .day-number {
-    font-size: clamp(12px, 2vw, 16px);
+    font-size: clamp(12px, 2vw, 100px);
     padding-left: 5px;
     align-self: center;
     color: #226060;
@@ -438,6 +439,20 @@ input {
 
 
 @media only screen and (max-width: 991px) {
+    h1.title {
+        font-size: 25px;
+    }
+
+    .month-nav {
+        height: 48%;
+        max-width: 120px;
+        border-radius: 15px;
+    }
+    .prev, .next {
+        width: 20px;
+        height: 20px;
+    }
+    
     ul.label li span {
         display: none;
     }
