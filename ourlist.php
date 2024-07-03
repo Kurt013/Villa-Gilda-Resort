@@ -500,7 +500,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     <?php
         while ($row = mysqli_fetch_assoc($result)){
             echo '<tr class="row">
-                <td class="id"><button class="btn toggle-'.$child.' hidden" onclick="toggleSub('.$child.');">+</button><span>2'.$number++. '</span></td>
+                <td class="id"><button class="btn toggle-'.$child.' hidden" onclick="toggleSub('.$child.');">+</button><span>'.$number++. '</span></td>
                 <td class="name">'.$row["lastName"] . ", " . $row["firstName"].'</td>
                 <td>'.$row["booking_date"].'</td>
                 <td class="time mobile">'.$row["time_slot"].'</td>
