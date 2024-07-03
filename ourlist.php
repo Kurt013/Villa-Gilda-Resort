@@ -507,7 +507,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 <td class="tablet">'.$row["included"].'</td>
                 <td class="tablet">'.$row["contactNo"].'</td>
                 <td class="email tablet">'.$row["email"].'</td>
-                <td class="tablet">'.$row["amount"].'.00</td>
+                <td class="tablet">'.$row["amount"].'</td>
                 <td class="tablet">
                     <form method="POST" action="">
                         <input type="hidden" name="booking_id" value="'.$row["id"].'">
