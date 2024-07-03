@@ -400,24 +400,62 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
             $response = $mj->post(Resources::$Email, ['body' => $body]);
 
             if ($response->success()) {
-                echo '<div id="emailSuccessMessage" class="success-message">
-                        <div class="message-content">
-                            <h1>Receipt sent successfully</h1>
-                            <button class="okay-btn" onclick="closeMessage()">Okay</button>
+                echo '
+                <dialog class="message-popup success">
+                    <div class="pop-up">
+                    <div class="left-side">
+                        <div class="left-side-wrapper"><i class="bx bxs-check-circle success-circle"></i></div>
+                    </div>
+                    <div class="right-side">
+                        <div class="right-group">
+                        <div class="content">
+                            <h1>Sent receipt successfully</h1>
                         </div>
-                      </div>';
+                        <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </dialog>
+                ';
             } else {
-                echo '<div id="emailSuccessMessage" class="error-message">
-                        <div class="message-content">
+                echo '
+                <dialog class="message-popup error" >
+                    <div class="pop-up">
+                    <div class="left-side">
+                        <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+                    </div>
+                    <div class="right-side">
+                        <div class="right-group">
+                        <div class="content">
                             <h1>Failed to send receipt!</h1>
-                            <button class="okay-btn" onclick="closeMessage()">Okay</button>
                         </div>
-                      </div>';
+                        <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </dialog>
+                      ';
                 //var_dump($response->getData()); // Output Mailjet API response for debugging
             }
         } catch (Exception $e) {
-            echo '<h1>Error sending email</h1>';
-            echo 'Caught exception: ' . $e->getMessage();
+            echo '
+                <dialog class="message-popup error" >
+                    <div class="pop-up">
+                    <div class="left-side">
+                        <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+                    </div>
+                    <div class="right-side">
+                        <div class="right-group">
+                        <div class="content">
+                            <h1>Error sending email</h1>
+                            <p>Caught exception: '.$e->getMessage().'<p>
+                        </div>
+                        <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </dialog>
+            ';
         }
     }
 }
@@ -462,7 +500,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     <?php
         while ($row = mysqli_fetch_assoc($result)){
             echo '<tr class="row">
-                <td class="id"><button class="btn toggle-'.$child.' hidden" onclick="toggleSub('.$child.');">+</button><span>'.$number++. '</span></td>
+                <td class="id"><button class="btn toggle-'.$child.' hidden" onclick="toggleSub('.$child.');">+</button><span>2'.$number++. '</span></td>
                 <td class="name">'.$row["lastName"] . ", " . $row["firstName"].'</td>
                 <td>'.$row["booking_date"].'</td>
                 <td class="time mobile">'.$row["time_slot"].'</td>
@@ -578,7 +616,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     }
     ?>
 </table>
-
+<script src="popup.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -712,6 +750,10 @@ else {
 for (let i=0; i < currentTabLetter.length; i++) {
   currentTabLetter[i].style.color = "#226060";
 }
+
+const messageDialog = document.querySelector('.message-popup');
+messageDialog.showModal();
+
 </script>
 </body>
 </html>

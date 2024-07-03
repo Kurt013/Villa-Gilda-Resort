@@ -7,8 +7,15 @@ body {
   background-color: #226060;
   padding: 10px 20px;
   position: fixed;
-  top: 79px;
+  top: 77px;
+  font-weight: bold;
   z-index: 10;
+  border-radius: 0 0 10px 10px;
+  left: 15px;
+}
+
+.select-month label {
+  padding-right: 10px;
 }
 
 table {
@@ -16,7 +23,7 @@ table {
   margin: 0 auto;
   margin-top: 80px;
   border-collapse: collapse;
-  border: 3px solid #226060;
+  border: 3px solid #1D5353;
 }
 
 .child td span {
@@ -26,13 +33,18 @@ table {
 th {
   padding: 10px 10px;
   font-weight: 500;
-  background-color: #226060;
+  background-color: #1D5353;
+  font-weight: bold;
+}
+
+th:first-child, td:first-child {
+  text-wrap: nowrap;
 }
 
 .child td:first-child {
   color: white;
   font-weight: bold;
-  background-color: #226060; 
+  background-color: #1D5353; 
 }
 
 .child td {
@@ -42,7 +54,6 @@ th {
 
 .child td * {
   font-size: 14px;
-  color: #000000;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;   
 }
@@ -52,14 +63,13 @@ td {
   padding: 6px 10px;
   text-align: center;
   font-size: 14px;
-  color: #000000;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
-  background-color: #FFFFFF;
+  background-color: #368989;
 }
 
 .row td {
-  border: 3px solid #226060;
+  border: 3px solid #1D5353;
 }
 
 select {
@@ -86,14 +96,11 @@ option {
 }
 
 .btn {
-  margin-bottom: 2px;
-  margin-right: 2px;
-  padding-top: 3px;
-  padding-left: 1px;
   vertical-align: middle;
   font-size: 15px;
   width: 20px;
   height: 20px;
+  margin-right: 5px;
   background-color: #E1B500;
   border-radius: 50%;
   border: none;
@@ -103,7 +110,6 @@ option {
   vertical-align: middle;
   display: inline-block;
   width: 10px;
-  color: black;
 }
 
 .minimize {
@@ -242,9 +248,6 @@ option {
     width: 50%;
   }
 
-  th:first-child, td:first-child {
-    width: 60px;
-  }
 }
 
 
@@ -255,18 +258,18 @@ option {
   .name {
     width: 50%;
   }
+}
 
-  th:first-child, td:first-child {
-    width: 60px;
-  }
+td a {
+  text-decoration: none;
 }
 
 td .fully-paid {
-  color: #226060;
+  color: #F0F1F0;
   font-size: 25px;
 }
 
 td .pending {
-  color: #737373;
+  color: #AFADAD;
   font-size: 25px;
 }
