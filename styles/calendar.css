@@ -145,7 +145,7 @@ h1.title {
 }
 
 .day-number {
-    font-size: clamp(12px, 3vw, 20px);
+    font-size: clamp(12px, 3vw, 30px);
     padding-left: min(5%, 5px);
     align-self: center;
     color: #226060;
