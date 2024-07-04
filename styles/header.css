@@ -445,16 +445,13 @@ i + p, .menu-text {
   }
 
   /* Hover States */
-  .nav-admin:hover {
-    background-color: #52C8C8;
-  }
-
-  .nav-staff:hover {
-    background-color: #F4CB26;
-  }
   
   .nav-block:hover > * {
-    color: #226060;
+    color: #52C8C8;
+  }
+
+  .nav-staff:hover > * {
+    color: #F4CB26;
   }
 
   .redirect:hover {
