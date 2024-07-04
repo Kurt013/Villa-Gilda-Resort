@@ -409,7 +409,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                     <div class="right-side">
                         <div class="right-group">
                         <div class="content">
-                            <h1>Sent receipt successfully</h1>
+                            <h1>Success</h1>
+                            <p>Receipt sent successfully to <strong>'.$row_invoice['email'].'</strong></p>
                         </div>
                         <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
                         </div>
@@ -438,24 +439,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 //var_dump($response->getData()); // Output Mailjet API response for debugging
             }
         } catch (Exception $e) {
-            echo '
-                <dialog class="message-popup error" >
-                    <div class="pop-up">
-                    <div class="left-side">
-                        <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-                    </div>
-                    <div class="right-side">
-                        <div class="right-group">
-                        <div class="content">
-                            <h1>Error sending email</h1>
-                            <p>Caught exception: '.$e->getMessage().'<p>
-                        </div>
-                        <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                        </div>
-                    </div>
-                    </div>
-                </dialog>
-            ';
+            echo '<h1>Error sending email</h1>';
+            echo 'Caught exception: ' . $e->getMessage();
         }
     }
 }
@@ -750,10 +735,6 @@ else {
 for (let i=0; i < currentTabLetter.length; i++) {
   currentTabLetter[i].style.color = "#226060";
 }
-
-const messageDialog = document.querySelector('.message-popup');
-messageDialog.showModal();
-
 </script>
 </body>
 </html>
