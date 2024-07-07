@@ -5,7 +5,7 @@ if (isset($_POST['submit']) || empty($_SESSION['role'])) {
     header('Location: index.php');
     exit(); 
   }
-if (isset($_SESSION['ID']) && isset($_SESSION['username'])) {
+if (isset($_SESSION['ID']) && isset($_SESSION['firstName'])) {
 
  ?>
 <!DOCTYPE html>

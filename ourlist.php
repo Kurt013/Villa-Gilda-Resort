@@ -553,7 +553,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                     Total Amount:
                 </td>
                 <td colspan="3">
-                    '.$row["amount"].'.00
+                    '.$row["amount"].'
                 </td>
             </tr>
             <tr class="child num-'.$child.' hidden">

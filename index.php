@@ -72,7 +72,8 @@ session_start();
             if (password_verify($password, $db_password_hash)) {
                 // Password is correct, start session
                 $_SESSION['ID'] = $id;
-                $_SESSION['username'] = "{$first_name} {$last_name}";
+                $_SESSION['firstName'] = $first_name;
+                $_SESSION['lastName'] = $last_name;
                 $_SESSION['role'] = $role;
 
                 $stmt->close();

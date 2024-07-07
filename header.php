@@ -78,7 +78,7 @@
     <div class="wrapper-2">
       <h2 class="user-username">
         <?php
-          echo $_SESSION['username'];
+          echo "{$_SESSION['firstName']} {$_SESSION['lastName']}";
         ?>
       </h2>
       <p class="user-role">
@@ -187,7 +187,7 @@
     <div class="wrapper-pane-2">
       <h2 class="user-pane-username">
         <?php
-          echo $_SESSION['username'];
+          echo "{$_SESSION['firstName']} {$_SESSION['lastName']}";
         ?>
       </h2>
       <p class="user-pane-role">

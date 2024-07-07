@@ -40,22 +40,34 @@
   <?php 
     include('header.php');
   ?>
-  <div class="homepage-content">
-    <div class="homepage-logo"><img class="home-logo" src="images/villa-gilda-logo2.png" alt="Villa Gilda Logo"></div>
-    <div class="redirect-section">
-    <?php 
+    <div class="desc-content">
+      <div class="content-wrapper">
+        <img class="home-logo" src="images/villa-gilda-logo3.png" alt="Villa Gilda Logo">
+        <h1>Good day, <?php echo ($_SESSION['role'] == 'admin') ?
+                              "<span style='color: #F4D248;'>{$_SESSION['firstName']}&nbsp;!</span>" : "<span style='color: #52C8C8;'>{$_SESSION['firstName']}&nbsp;!</span>"; ?></h1>
+                      <?php echo ($_SESSION['role'] == 'admin') ?
+                      "<p>Ready to get started? Manage reservations, update bookings, and oversee resort operations in just a few clicks.</p>" :
+                      "<p>Ready to get started? Manage bookings with ease and create new reservations.</p>"?>
+      </div>
+<?php 
         if ($_SESSION['role'] == 'admin') {
           echo"
-          <div><a href='dashboard.php' class='redirect-button-3'>MONITOR DASHBOARD</a></div>
+          <div><a href='dashboard.php' class='redirect-button'>MONITOR DASHBOARD</a></div>
           ";
         }
     ?>  
-    <div><a href="reserve.php" class="redirect-button-1">MANAGE RESERVATIONS</a></div>
-    <div><a href="ourlist.php" class="redirect-button-2">SEE RESERVATION LIST</a></div>  
+      <div><a href="reserve.php" class="redirect-button">MANAGE RESERVATIONS</a></div>
+      <div><a href="ourlist.php" class="redirect-button">SEE RESERVATION LIST</a></div>  
     </div>
-  </div>
-  <img class="border-1" src="elements/homepage-border.png" alt="Bottom Leftmost Border">
-  <img class="border-2" src="elements/homepage-border.png" alt="Bottom Rightmost Border">
+    <div class="homepage-images">
+      <img class="resort-image" src="images/homepage.png" alt="resort-place">
+    </div>
+
+    <div class="border-wrapper">
+        <div class="yellow-border"></div>
+        <div class="blue-border"></div>
+      </div>
+
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
