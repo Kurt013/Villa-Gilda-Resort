@@ -259,7 +259,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                             margin: 0;
                             padding: 0;
                             box-sizing: border-box;
-                            font-family: "Montserrat", sans-serif;
+                            font-family: "Montserrat", "Helvetica", sans-serif;
                             }
 
                             a {
