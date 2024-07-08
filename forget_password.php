@@ -44,13 +44,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     'TextPart' => "$username's Verification Code: $verification_code",
                     'HTMLPart' =>
           '<html>
-                  <head>
-                    <style>
+              <head>
+                  <style>
                       * {
                         margin: 0;
                         padding: 0;
                         box-sizing: border-box;
-                        font-family: "Montserrat", "Helvetica", sans-serif;
+                        font: 14px / 1.2 "Montserrat", "Helvetica", sans-serif;
                       }
 
                       a {
@@ -83,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                       .body-card h1 {
                         font-size: 18px;
+                        font-weight: bold;
                         color: #226060;
                       }
 

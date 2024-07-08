@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
           $message = "Passwords do not match.";
       }
   } else {
-      $message = "Session expired or invalid. Please try again.";
+      header('Location: index.php');
   }
 }
 ?>

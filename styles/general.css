@@ -39,6 +39,10 @@ dialog {
   z-index: 9999;
 }
 
+dialog:focus {
+  outline: none;
+}
+
 input, ::placeholder, select, option {
   font-weight: 600;
 }

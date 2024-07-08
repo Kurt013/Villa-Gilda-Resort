@@ -252,14 +252,14 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 'The Villa Gilda Resort Team',
 
                     'HTMLPart' => '
-                <html>
+                    <html>
                     <head>
                         <style>
                             * {
                             margin: 0;
                             padding: 0;
                             box-sizing: border-box;
-                            font-family: "Montserrat", "Helvetica", sans-serif;
+                            font: 16px / 1.2 "Montserrat", "Helvetica", sans-serif;
                             }
 
                             a {
@@ -291,6 +291,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                             }
 
                             .body-card h1 {
+                            font-size: 32px;
+                            font-weight: bold;
                             text-align: center;
                             color: #226060;
                             }
@@ -302,17 +304,13 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 
                               .view_invoice {
                             display: block;
-                            text-decoration: none;
-                            font-size: 30px;
-                            color: #FEFEFE;
+                            font-size: 22px;
                             font-weight: bold;
-                            margin: 40px auto;
-                            width: 100%;
                             text-align: center;
-                            max-width: 300px;
-                            padding: 20px;
-                            border-radius: 20px;
-                            background-color: #4EB1CB;  
+                            padding: 10px;
+                            border-left: 3px solid rgb(128, 128, 128);
+                            background-color: rgb(240, 240, 240);
+                            color: rgb(128, 128, 128);
                             }
 
                             .body-card .last-p {
@@ -365,7 +363,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                                 <h1>Booking Invoice</h1>
                                 <p>Hi '.$row_invoice['firstName'].' '.$row_invoice['lastName'].'</p>
                                 <p>Thank you for your reservation at Villa Gilda Resort. Please click the button below to view your receipt.</p>
-                                <a href="cid:invoicePDF" class="view_invoice">VIEW INVOICE</a>
+                                <p class="view_invoice">Please click the attachment below to view your receipt</p>
                                 <p>Best regards,<br>The Villa Gilda Resort Team</p>
                                 <p class="last-p">If you believe you have received this email in error, please disregard this email or <a class="notif-link" href="https://mail.google.com/mail/?view=cm&to=resortvillagilda@gmail.com&su=Notify%20the%20Resort">notify us.</a></p>
                                 <div class="icon-redirect">
@@ -382,7 +380,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                         </div>
                     </body>
                 </html>
-                    ',
+
+                ',
                     'Attachments' => [
                         [
                             'Content-ID' => 'invoicePDF',
