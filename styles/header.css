@@ -34,7 +34,7 @@ header {
 .first-section h1 {
   font-family: 'Cocogoose-Bold';
   font-size: 16px;
-  letter-spacing: 6px;
+  letter-spacing: 3px;
 }
 
 .hide {
@@ -50,6 +50,7 @@ header {
 }
 
 .menu-field, .second-div, .third-div {
+  font-size: 17px;
   padding: 5px;
   column-gap: 10px;
   display: flex;
