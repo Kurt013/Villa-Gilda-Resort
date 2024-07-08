@@ -42,14 +42,17 @@
   ?>
     <div class="desc-content">
       <div class="content-wrapper">
-        <img class="home-logo" src="images/villa-gilda-logo3.png" alt="Villa Gilda Logo">
-        <h1>Good day, <?php echo ($_SESSION['role'] == 'admin') ?
-                              "<span style='color: #F4D248;'>{$_SESSION['firstName']}&nbsp;!</span>" : "<span style='color: #52C8C8;'>{$_SESSION['firstName']}&nbsp;!</span>"; ?></h1>
-                      <?php echo ($_SESSION['role'] == 'admin') ?
-                      "<p>Ready to get started? Manage reservations, update bookings, and oversee resort operations in just a few clicks.</p>" :
-                      "<p>Ready to get started? Manage bookings with ease and create new reservations.</p>"?>
+        <div class="image-wrapper"><img class="home-logo" src="images/villa-gilda-logo3.png" alt="Villa Gilda Logo"></div>
+        <div class="text-wrapper">
+          <h1>Good day, <?php echo ($_SESSION['role'] == 'admin') ?
+                                "<span style='color: #F4D248;'>{$_SESSION['firstName']}&nbsp;!</span>" : "<span style='color: #52C8C8;'>{$_SESSION['firstName']}&nbsp;!</span>"; ?></h1>
+                        <?php echo ($_SESSION['role'] == 'admin') ?
+                        "<p>Ready to get started? Manage reservations, update bookings, and oversee resort operations in just a few clicks.</p>" :
+                        "<p>Ready to get started? Manage bookings with ease and create new reservations.</p>"?>
+          
+        </div>
       </div>
-<?php 
+      <?php 
         if ($_SESSION['role'] == 'admin') {
           echo"
           <div><a href='dashboard.php' class='redirect-button'>MONITOR DASHBOARD</a></div>
@@ -64,10 +67,9 @@
     </div>
 
     <div class="border-wrapper">
-        <div class="yellow-border"></div>
-        <div class="blue-border"></div>
-      </div>
-
+      <div class="yellow-border"></div>
+      <div class="blue-border"></div>
+    </div>
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');

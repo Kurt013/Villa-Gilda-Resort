@@ -56,6 +56,10 @@ input::placeholder {
   color: rgba(0, 0, 0, 0.3);
 }
 
+button, input[type="submit"] {
+  cursor: pointer;
+}
+
 /* Reusable error message design */
 .visibility {
   visibility: hidden;
