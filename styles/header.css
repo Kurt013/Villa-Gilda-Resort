@@ -311,10 +311,10 @@ i + p, .menu-text {
   .navigation-pane {
     overflow-y: auto;
     z-index: 1001;
-    top: 38px;
+    top: 36px;
     left: 0;
     width: 100%;
-    height: calc(100% - 38px);
+    height: calc(100% - 36px);
     position: fixed;
   }
 
@@ -340,16 +340,12 @@ i + p, .menu-text {
   }
 
   /* Active States */
-  .nav-admin:active {
-    background-color: #52C8C8;
+  .nav-block:active > * {
+    color: #52C8C8;
   }
 
-  .nav-staff:active {
-    background-color: #F4CB26;
-  }
-  
-  .nav-block:active > * {
-    color: #226060;
+  .nav-staff:active > * {
+    color: #F4CB26;
   }
 
   .redirect:active {
@@ -361,11 +357,11 @@ i + p, .menu-text {
   }
 
   .redirect-alternate:active {
-    background-color: #226060;
+    background-color: #EBF0EA;
   }
 
   .redirect-alternate:active > * {
-    color: #EBF0EA;    
+    color: #226060;    
   }
   
   .menu-disappear {
