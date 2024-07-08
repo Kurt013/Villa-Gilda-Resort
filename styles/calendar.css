@@ -151,13 +151,6 @@ h1.title {
     color: #226060;
 }
 
-
-@media only screen and (max-width: 418px) {
-    .label {
-        font-size: 14px;
-    }
-}
-
 .past {
     background-color: #CCCCCC;
 }
@@ -177,8 +170,16 @@ h1.title {
 }
 
 .reservation_form * {
-    color: #226060;
+    color: black;
     font-family: "Montserrat", sans-serif;
+}
+
+.reservation_form label {
+    color: #226060;
+}
+
+.reservation_form input, .reservation_form select {
+    margin-top: 5px;
 }
 
 .reservation-header {
@@ -289,7 +290,7 @@ input {
 }
 
 .reservation-body input, .reservation-body select {
-    padding: 8px 5px;
+    padding: 8px 10px;
     border-radius: 0;
     border: 2px solid #226060;
 }

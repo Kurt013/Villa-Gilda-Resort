@@ -39,7 +39,7 @@ dialog {
   z-index: 9999;
 }
 
-input, ::placeholder {
+input, ::placeholder, select, option {
   font-weight: 600;
 }
 
