@@ -368,6 +368,12 @@ body {
   .custom-shape-divider-bottom-1717433957 svg {
     height: 100px;
   }  
+
+  .submit-btn:hover{
+    border: 3px solid #F4CB26;
+    background-color: #F4CB26;
+    color: #EFF1EF;
+  }
 }
 
 dialog {
