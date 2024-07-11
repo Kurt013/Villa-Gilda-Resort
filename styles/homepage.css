@@ -11,8 +11,6 @@
 body {
   display: flex;
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
   padding-top: 90px;
   background-color: #2D7474;
   /* padding-left: 350px; */
@@ -109,6 +107,8 @@ body {
   }
 
   body {
+    min-height: 100vh;
+    min-height: 100dvh;
     flex-direction: column;
   }
 
@@ -143,6 +143,11 @@ body {
 @media only screen and (min-width: 992px) {
   .redirect-button:hover {
     background-color: #4CABAB;
+  }
+
+  body {
+    height: 100vh;
+    height: 100dvh;
   }
 
   .desc-content {
