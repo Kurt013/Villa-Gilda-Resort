@@ -23,7 +23,6 @@ header {
   background-color: #226060;
 }
 
-
 .logo {
   margin-top: 5px;
   margin-left: 15px;
@@ -108,12 +107,9 @@ i + p, .menu-text {
 
 .navigation-pane, .pane {
   visibility: none;
-  transform: translateY(-105%);
-  transition: transform 0.5s;
 }
 
 .show {
-  transform: translateY(0);
   visibility: visible;
 }
 
@@ -314,6 +310,7 @@ i + p, .menu-text {
     background-color: transparent !important;
   }
 
+  
   .third-div, .menu-text, .div-2, .first-section h1 {
     display: none;
   }
@@ -326,6 +323,14 @@ i + p, .menu-text {
     width: 100%;
     height: calc(100% - 36px);
     position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .show {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .user-detail {  
@@ -406,6 +411,14 @@ i + p, .menu-text {
     display: none;
   }
 
+  .navigation-pane, .pane {
+    transform: translateY(-105%);
+  }
+
+  .pane {
+    transition: 0.3s;
+  }
+
   .navigation-pane {
     width: 340px;
     left: 0;
@@ -414,6 +427,11 @@ i + p, .menu-text {
     height: calc(100% - 77px);
     position: fixed;
     overflow-y: auto;
+    transition: transform 0.5s;
+  }
+
+  .show {
+    transform: translateY(0);
   }
 
   .navigation-pane-admin::after {

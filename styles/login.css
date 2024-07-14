@@ -1,3 +1,19 @@
+/* Layering of Items */
+.username-field, .password-field, .forgot, .login{
+  z-index: 10;
+}
+
+.custom-shape-divider-bottom-1717433957, .login-form::before { 
+  z-index: 8;
+}
+
+.tree-1, .tree-2 {
+  z-index: 6;
+}
+
+.sun {
+  z-index: 4;
+}
 
 
 @media only screen and (max-width: 767px) {
@@ -117,7 +133,6 @@
   }
 }
 
-
 body {
   background-image: url('../images/login-bg-2.png');
   background-position: -25px 20px;
@@ -223,22 +238,6 @@ body {
   font-weight: 800;
 }
 
-/* Layering of Items */
-.username-field, .password-field, .forgot, .login{
-  z-index: 10;
-}
-
-.custom-shape-divider-bottom-1717433957, .login-form::before { 
-  z-index: 8;
-}
-
-.tree-1, .tree-2 {
-  z-index: 6;
-}
-
-.sun {
-  z-index: 4;
-}
 
 /* Tree icon */
 .tree-1, .tree-2 {
