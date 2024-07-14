@@ -213,10 +213,6 @@ option {
     display: none;
   }
 
-  .show {
-    display: none;
-  }
-
   .reserve-now:hover {
     color: #E1B500;
     background-color: #EBF0EA;

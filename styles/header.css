@@ -2,6 +2,10 @@
   color: white;
 }
 
+:focus {
+  outline-color: #226060;
+}
+
 body {
   padding-top: 78px;
 }
@@ -11,7 +15,6 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
 }
 
 .first-section, .second-section {
@@ -98,23 +101,24 @@ i + p, .menu-text {
   opacity: 0.8;
 }
 
+.navigation-pane, .pane {
+  opacity: 0;
+}
+
 .navigation-pane {
   background-color: #226060;
   cursor: default;
   z-index: 1001;
-
-}
-
-.navigation-pane, .pane {
-  visibility: none;
-}
-
-.show {
-  visibility: visible;
+  transition: opacity 0.3s, transform 0.5s;
 }
 
 .pane {
+  transition: opacity 0.3s, transform 0.3s;
   z-index: 1001;
+}
+
+.show {
+  opacity: 1;
 }
 
 .navigation-pane-admin::before, .navigation-pane-admin::after {
@@ -161,8 +165,11 @@ i + p, .menu-text {
   font-size: 16px;
 }
 
-.user-role, .user-pane-role {
+.user-role {
   font-style: italic;
+}
+
+.user-role, .user-pane-role {
   text-transform: capitalize;
 }
 
@@ -229,7 +236,7 @@ i + p, .menu-text {
 .user-pane {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  padding: 15px 20px;
   column-gap: 14px;
 }
 
@@ -244,14 +251,14 @@ i + p, .menu-text {
 }
 
 .wrapper-size {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
 }
 
 .user-2 {
   margin-top: 15px;
   font-size: 35px;
-  transform: scale(1.8);
+  transform: scale(2);
   color: #419999;
 }
 
@@ -264,7 +271,8 @@ i + p, .menu-text {
 }
 
 .user-pane-username, .user-pane-role {
-  font-size: 12px;
+  font-size: 14px;
+  opacity: 0.65;
 }
 
 .user-list {
@@ -275,7 +283,7 @@ i + p, .menu-text {
   display: flex;
   align-items: center;
   column-gap: 10px;
-  padding: 10px 10px;
+  padding: 15px 10px;
   width: 100%;
   text-decoration: none;
   border: none;
@@ -300,6 +308,10 @@ i + p, .menu-text {
 }
 
 @media only screen and (max-width: 991px) {
+  header {
+    z-index: 1001;
+  }
+
   .first-section {
     justify-content: center;
   }
@@ -323,14 +335,6 @@ i + p, .menu-text {
     width: 100%;
     height: calc(100% - 36px);
     position: fixed;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-
-  .show {
-    opacity: 1;
-    pointer-events: auto;
   }
 
   .user-detail {  
@@ -390,6 +394,12 @@ i + p, .menu-text {
 }
 
 @media only screen and (min-width: 992px) {
+  header {
+    z-index: 9999;
+  }
+
+  
+
   .second-section {
     grid-template-columns: 140px 1fr 50px;
     align-items: center;
@@ -415,8 +425,9 @@ i + p, .menu-text {
     transform: translateY(-105%);
   }
 
-  .pane {
-    transition: 0.3s;
+
+  .show {
+    transform: translateY(0);
   }
 
   .navigation-pane {
@@ -427,12 +438,9 @@ i + p, .menu-text {
     height: calc(100% - 77px);
     position: fixed;
     overflow-y: auto;
-    transition: transform 0.5s;
   }
 
-  .show {
-    transform: translateY(0);
-  }
+
 
   .navigation-pane-admin::after {
     height: 45px;
