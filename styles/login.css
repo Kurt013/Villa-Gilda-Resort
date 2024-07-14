@@ -96,28 +96,7 @@
   }
 }
 
-*, ::before, ::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* Layering of Items */
-.username-field, .password-field, .forgot, .login{
-  z-index: 10;
-}
-
-.custom-shape-divider-bottom-1717433957, .login-form::before { 
-  z-index: 8;
-}
-
-.tree-1, .tree-2 {
-  z-index: 6;
-}
-
-.sun {
-  z-index: 4;
-}
 
 @media only screen and (max-width: 991px) {
   .custom-shape-divider-bottom-1717433957, .login-form::before { 
@@ -130,6 +109,11 @@
   
   .sun {
     z-index: -8;
+  }
+
+  .submit-btn:active{
+    background-color: #F4CB26;
+    color: #EFF1EF;
   }
 }
 
@@ -165,7 +149,7 @@ body {
 
 
 .logo {
-  width: clamp(170px, 25vw, 220px);
+  width: clamp(170px, 25vw, 190px);
 }
 
 .username-field + .password-field {
@@ -237,6 +221,23 @@ body {
   margin-top: 10px;
   letter-spacing: 2px;
   font-weight: 800;
+}
+
+/* Layering of Items */
+.username-field, .password-field, .forgot, .login{
+  z-index: 10;
+}
+
+.custom-shape-divider-bottom-1717433957, .login-form::before { 
+  z-index: 8;
+}
+
+.tree-1, .tree-2 {
+  z-index: 6;
+}
+
+.sun {
+  z-index: 4;
 }
 
 /* Tree icon */
@@ -369,7 +370,6 @@ body {
   }  
 
   .submit-btn:hover{
-    border: 3px solid #F4CB26;
     background-color: #F4CB26;
     color: #EFF1EF;
   }

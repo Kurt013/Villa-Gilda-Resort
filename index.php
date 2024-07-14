@@ -1,17 +1,7 @@
 <?php
 session_start();
-
-
-    // echo "<dialog open>
-    //         <p>The pass</p>
-    //         <button id='exit' class='exit'>X</button>
-    //       </dialog>
-          
-    //       <script> 
-    //         dialog = document.querySelector('dialog');
-    //         dialog.showModal();
-    //       </script>";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +25,7 @@ session_start();
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-<form action='' method="post" class="login-form">
+<form method="post" class="login-form">
     <div><img src="images/villa-gilda-logo2.png" class="logo" alt="Villa Gilda Resort Logo"></div>   
     <p class='error-message visibility'>The password or username you entered is incorrect. Please try again. </p>
     

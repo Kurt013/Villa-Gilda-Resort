@@ -58,7 +58,7 @@
     </label>
 </header>
 <!--Left Navigation Bar-->
-<div class="navigation-pane hide <?php 
+<div class="navigation-pane <?php 
         if ($_SESSION['role'] == 'admin') {
           echo"navigation-pane-admin";
         }
@@ -175,7 +175,7 @@
 </div>
 
 <!-- Right Side Bar -->
-<div class="pane hide">
+<div class="pane">
   <div class="user-pane">
     <div class="wrapper-pane wrapper-size"><i class="bx bxs-user user-2 <?php 
       if ($_SESSION['role'] == 'admin') {
@@ -220,7 +220,7 @@ const checkToggle = document.querySelector('.user-prof-toggle');
 
 function showMenu(togglePara) {
   const toggleMenu = document.querySelector(togglePara);
-  toggleMenu.classList.toggle('hide');
+  toggleMenu.classList.toggle('show');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let openLeft = false;
     let openRight = false;
 
-    // Event listener to hide panes and update toggle button appearance
+    // Event listener to show panes and update toggle button appearance
     window.addEventListener('click', function(event) {
         const navigationPane = document.querySelector('.navigation-pane');
         const userPane = document.querySelector('.pane');
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Check if click occurred outside navigation pane or its toggle button
         if (!navigationPane.contains(event.target) && !menuToggle.contains(event.target)) {
-            navigationPane.classList.add('hide');
+            navigationPane.classList.remove('show');
             // Update toggle button appearance
             const icon = document.querySelector('.change');
             const menuColor = document.querySelector('.menu-color');
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Check if click occurred outside user pane or its toggle button
         if (!userPane.contains(event.target) && !userToggle.contains(event.target)) {
-            userPane.classList.add('hide');
+            userPane.classList.remove('show');
             // Update toggle button appearance
             const changeBtnUser = document.querySelector('.third-color');
             const checkToggle = document.querySelector('.user-prof-toggle');
