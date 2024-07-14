@@ -103,6 +103,7 @@ i + p, .menu-text {
 
 .navigation-pane, .pane {
   opacity: 0;
+  pointer-events: none;
 }
 
 .navigation-pane {
@@ -119,6 +120,7 @@ i + p, .menu-text {
 
 .show {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .navigation-pane-admin::before, .navigation-pane-admin::after {

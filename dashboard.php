@@ -258,16 +258,7 @@ $conn->close();
 </head>
 
 <body>
-    <?php include('header.php');
-    ?>
-
-    <script>
-        const checkTab = document.getElementById('menu');
-        const checkText = document.querySelector('.home-text');
-
-        checkTab.classList.add('bxs-dashboard');
-        checkText.innerHTML = 'Dashboard';
-    </script>
+    <?php include('header.php'); ?>
 
     <div class="select-wrapper">
         <form class="select-month" method="POST" action="">
@@ -431,6 +422,13 @@ $conn->close();
                 },
             }
         });
+
+
+    const checkTab = document.getElementById('menu');
+    const checkText = document.querySelector('.home-text');
+
+    checkTab.classList.add('bxs-dashboard');
+    checkText.innerHTML = 'Dashboard';
 
     const userRole = "<?php echo $_SESSION['role']; ?>";
 
