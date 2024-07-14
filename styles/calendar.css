@@ -72,6 +72,10 @@ h1.title {
         color 0.05s;
 }
 
+.prev i, .next i {
+    color: #226060;
+}
+
 .box-content {
     flex: 1;
     display: flex;

@@ -153,8 +153,9 @@ i + p, .menu-text {
   font-size: 16px;
 }
 
-.user-role {
+.user-role, .user-pane-role {
   font-style: italic;
+  text-transform: capitalize;
 }
 
 .user-detail {
@@ -256,10 +257,6 @@ i + p, .menu-text {
 
 .user-pane-username, .user-pane-role {
   font-size: 12px;
-}
-
-.user-pane-role {
-  font-style: italic;
 }
 
 .user-list {
@@ -401,6 +398,7 @@ i + p, .menu-text {
     width: 340px;
     left: 0;
     top: 77px;
+    box-shadow: 3px 0 5px rgb(0, 0, 0, 0.5);
     height: calc(100% - 77px);
     position: fixed;
     overflow-y: auto;
@@ -424,6 +422,7 @@ i + p, .menu-text {
 
   .pane {
     top: 77px;
+    box-shadow: -3px 2px 5px rgb(0, 0, 0, 0.5);
     right: 0;
     width: 280px;
   }

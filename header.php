@@ -16,7 +16,7 @@
           if (toggleCheck.checked) {
             icon.classList.remove('bxs-down-arrow');
             icon.classList.add('bxs-up-arrow');
-            menuColor.style.backgroundColor = '#226060';
+            menuColor.style.backgroundColor = '#368989';
             menuIcon.remove('bx-menu');
             menuIcon.add('bx-x');
             openLeft = true;
@@ -46,7 +46,7 @@
         showMenu('.pane');
 
         if (checkToggle.checked) {
-          changeBtnUser.style.backgroundColor = '#226060';
+          changeBtnUser.style.backgroundColor = '#368989';
           openRight = true;
         }
         else {

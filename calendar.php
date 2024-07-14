@@ -160,8 +160,8 @@ class Calendar
             '<div class="header">' .
             '<h1 class="title">' . date('F Y', strtotime($this->currentYear . '-' . $this->currentMonth . '-1')). '</h1>' .
             '<div class="month-nav">'.
-            '<a class="prev" href="' . $this->naviHref . '?month=' . sprintf('%02d', $preMonth) . '&year=' . $preYear . '">&lt;</a>' .
-            '<a class="next" href="' . $this->naviHref . '?month=' . sprintf("%02d", $nextMonth) . '&year=' . $nextYear . '">&gt;</a>' .
+            '<a class="prev" href="' . $this->naviHref . '?month=' . sprintf('%02d', $preMonth) . '&year=' . $preYear . '"><i class="bx bx-chevron-left"></i></a>' .
+            '<a class="next" href="' . $this->naviHref . '?month=' . sprintf("%02d", $nextMonth) . '&year=' . $nextYear . '"><i class="bx bx-chevron-right"></i></a>' .
             '</div>'.
             '</div>';
     }

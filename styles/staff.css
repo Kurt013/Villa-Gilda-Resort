@@ -33,6 +33,11 @@ body {
   padding: 10px 10px;
 }
 
+.addStaff-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .addStaff-submit {
   margin-top: 20px;
   font-family: 'Montserrat', sans-serif;
@@ -157,11 +162,6 @@ i.bxs-trash {
   .addStaff-submit:hover {
     color: #4CABAB;
     background-color: #EBF0EA;
-  }
-
-  .addStaff-container {
-    display: flex;
-    justify-content: flex-end;
   }
 
   .delete-button:hover {

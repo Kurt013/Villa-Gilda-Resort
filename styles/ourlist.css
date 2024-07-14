@@ -18,6 +18,11 @@ body {
   padding-right: 10px;
 }
 
+.select-month select {
+  width: 120px;
+  text-align-last: center;
+}
+
 table {
   width: 95%;
   margin: 0 auto;
@@ -168,7 +173,7 @@ option {
 .no-reservation-content p {
   font-weight: 700;
   max-width: 480px;
-  font-size: clamp(14px, 2vw, 22px);
+  font-size: clamp(16px, 2vw, 22px);
   padding-bottom: 22px;
 }
 
