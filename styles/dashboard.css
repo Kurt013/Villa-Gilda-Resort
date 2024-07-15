@@ -68,6 +68,9 @@ body {
 
 .statistics-desc .box {
   flex: 1 0 30%;
+  display: flex;
+  flex-direction: column;
+  row-gap: min(1vw, 5px);
 }
 
 .box p, .visual-box p {
@@ -79,7 +82,6 @@ body {
 .box p:last-child {
   font-family: 'Spotify Black';
   font-size: 1.5625rem;
-  margin-top: 0.4375rem;
 }
 
 .visual-box p:last-child {
@@ -113,14 +115,16 @@ body {
   background-color: #F4CB26;
 }
 
+
 .visual-wrapper {
   border-radius: 1.5625rem 1.5625rem 0 0;
-  padding: 1.25rem 1.875rem;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  padding-right: 10px;
 }
 
 .visual-desc {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   column-gap: 20px;
   height: 100%;
@@ -130,6 +134,7 @@ body {
 .line-sizing {
   width: calc(100% - 250px);
   min-width: 300px;
+  min-height: 180px;
 }
 
 .visual-box{
@@ -138,7 +143,6 @@ body {
   background-color: #52C8C8;
   display: flex;
   flex-direction: column;
-  /* flex-wrap: wrap; */
   justify-content: center;
   align-items: center;
   row-gap: 0.75rem;
@@ -171,6 +175,15 @@ body {
 @media only screen and (min-width: 992px) {
   body {
     height: 100vh;
+  }
+
+  .box .desc-title {
+    font-size: calc(1vh + 0.4vw);
+    text-wrap: nowrap;
+  }
+
+  .box p:last-child {
+    font-size: 3vh;
   }
 
   .statistics-desc {
@@ -241,7 +254,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 540px) {
   .select-wrapper {
     width: 130px;
     left: 40px;

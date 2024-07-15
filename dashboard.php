@@ -284,27 +284,27 @@ $conn->close();
                 <!-- <h3>Statistics for <?php echo date('F', mktime(0, 0, 0, $current_month, 10)); ?></h3> -->
                 <div class="box box-1">
                     <i class='bx bx-timer'></i>
-                    <p>Total pending payment:</p>
+                    <p class="desc-title">Total pending payment</p>
                     <p><?php echo $total_pending; ?></p>
                 </div>
                 <div class="box box-2">
                     <i class="bx bx-calendar"></i>
-                    <p>Total reservations:</p>
+                    <p class="desc-title">Total reservations</p>
                     <p><?php echo $total_reservations; ?></p>
                 </div>
                 <div class="box box-3">
                     <i class='bx bxs-bookmark'></i>
-                    <p>Total available days:</p>
+                    <p class="desc-title">Total available days</p>
                     <p><?php echo $available_days; ?></p>
                 </div>
                 <div class="box box-4">
                     <i class='bx bx-money'></i>
-                    <p>Total earnings:</p>
+                    <p class="desc-title">Total earnings</p>
                     <p><?php echo $total_earnings; ?></p>
                 </div>
                 <div class="box box-5">
                     <i class='bx bx-credit-card'></i>
-                    <p>Pending Payment:</p>
+                    <p class="desc-title">Pending Payment</p>
                     <p><?php echo $pending_payment; ?></p>
                 </div>
             </div>
