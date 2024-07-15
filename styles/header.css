@@ -199,6 +199,10 @@ i + p, .menu-text {
   text-decoration: none;
 }
 
+.nav-block *, .nav-staff * {
+  transition: color 0.3s;
+}
+
 .list .staff {
   padding-bottom: calc(50px * 2);
 }
@@ -297,10 +301,12 @@ i + p, .menu-text {
 }
 
 .redirect-alternate {
+  transition: background-color 0.3s;
   background-color: #226060;
 }
 
 .redirect-alternate > * {
+  transition: color 0.3s;
   color: #EBF0EA;
 }
 
