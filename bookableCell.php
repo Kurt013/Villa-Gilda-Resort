@@ -204,7 +204,7 @@ private function bookingForm($date)
                     </div>
                     <div class="form-group">
                         <label for="time_slot">Time Slot:<br></label>
-                        <select class="select-text" name="time_slot" id="time_slot" required">
+                        <select class="select-text" name="time_slot" id="time_slot" required>
                             <option value="" disabled selected>Select a time slot</option>
                             <option value="8am - 5pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '8am - 5pm' ? ' selected' : '') . '>8am - 5pm</option>
                             <option value="12nn - 8pm"' . (isset($_POST['time_slot']) && $_POST['time_slot'] === '12nn - 8pm' ? ' selected' : '') . '>12nn - 8pm</option>
@@ -215,7 +215,7 @@ private function bookingForm($date)
                     </div>
                     <div class="form-group">
                         <label for="included">Inclusion:<br></label>
-                        <select class="inclusion-text" name="included" id="included" required">
+                        <select class="inclusion-text" name="included" id="included" required>
                             <option value="" disabled' . (empty($_POST['included']) ? ' selected' : '') . '>Select an option</option>
                             <option value="LPG gas and Stove"' . (isset($_POST['included']) && $_POST['included'] === 'LPG gas and Stove' ? ' selected' : '') . '>LPG gas and Stove (+300)</option>
                             <option value="N/A"' . (isset($_POST['included']) && $_POST['included'] === 'N/A' ? ' selected' : '') . '>N/A</option>
@@ -223,7 +223,7 @@ private function bookingForm($date)
                     </div>
                     <div class="form-group">
                         <label for="contactNo">Contact Number:<br></label>
-                        <input class="contact-text" type="number" name="contactNo" id="contactNo" value="' .($_POST['contactNo'] ?? ''). '" required>
+                        <input class="contact-text" type="text"  title="Please only enter numbers from 0-9" name="contactNo" id="contactNo" maxlength="11" minlength="11" pattern="[0-9]+" value="' .($_POST['contactNo'] ?? ''). '" required>
                     </div>
                 </div>
                 <div class="second-column">

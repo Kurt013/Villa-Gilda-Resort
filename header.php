@@ -246,8 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const menuIcon = document.querySelector('.menu-icon').classList;
             const toggleCheck = document.querySelector('.menu-toggle');
 
-            icon.classList.remove('bxs-up-arrow');
-            icon.classList.add('bxs-down-arrow');
+            icon.classList.remove('down');
             menuColor.style.backgroundColor = '#4CABAB';
             menuIcon.remove('bx-x');
             menuIcon.add('bx-menu');
