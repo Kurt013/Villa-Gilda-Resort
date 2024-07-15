@@ -391,7 +391,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                             <div class="body-card">
                                 <h1>Booking Invoice</h1>
                                 <p>Hi '.$row_invoice['firstName'].' '.$row_invoice['lastName'].'</p>
-                                <p>Thank you for your reservation at Villa Gilda Resort. Please click the button below to view your receipt.</p>
+                                <p>Thank you for your reservation at Villa Gilda Resort.</p>
                                 <p class="view_invoice">Please click the attachment below to view your receipt</p>
                                 <p>Best regards,<br>The Villa Gilda Resort Team</p>
                                 <p class="last-p">If you believe you have received this email in error, please disregard this email or <a class="notif-link" href="https://mail.google.com/mail/?view=cm&to=resortvillagilda@gmail.com&su=Notify%20the%20Resort">notify us.</a></p>
