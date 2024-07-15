@@ -37,7 +37,6 @@ body {
   display: inline-block;
   max-width: 320px;
   min-width: 180px;
-  width: 60%;
   text-align: center;
   background-color: #2D7474;
   color: #EBF0EA;
@@ -92,6 +91,10 @@ body {
 }
 
 @media only screen and (max-width: 991px) {
+  .redirect-button {
+    width: 60%;
+  }
+  
   .redirect-button:active {
     background-color: #4CABAB;
   }
@@ -131,6 +134,10 @@ body {
 }
 
 @media only screen and (min-width: 992px) {
+  .redirect-button {
+    width: 100%;
+  }
+  
   .redirect-button:hover {
     background-color: #4CABAB;
   }
