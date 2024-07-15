@@ -113,8 +113,16 @@ body {
 }
 
 .info * {
-  font-size: clamp(12px, 3vw, 16px);
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: bold;
+  filter: drop-shadow(1.6px 1px 0px rgba(240, 241, 240, 0.4));
 }
+
+.username-staff {
+  font-weight: 600;
+  font-style: italic;
+}
+
 
 .list-prof {
   display: flex;
@@ -130,11 +138,6 @@ body {
 
 .icon-staff-size {
   font-size: clamp(18px, 10vw, 45px) !important;
-}
-
-.username-staff {
-  font-weight: 700;
-  font-style: italic;
 }
 
 .delete-button {

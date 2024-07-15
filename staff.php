@@ -331,7 +331,7 @@
               <i class='bx bxs-user user-2 user-staff icon-staff-size'></i>
             </div>
             <div class='info'>
-              <p>{$row['First Name']} {$row['Last Name']}</td>
+              <p class='info-name'>{$row['First Name']} {$row['Last Name']}</td>
               <p class='username-staff'>{$row['Username']}</p>
             </div>
           </div>
