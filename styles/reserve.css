@@ -10,7 +10,7 @@
   max-width: 700px;
 }
 
-.exit-btn {
+.exit-btn2 {
   transition: background-color 0.3s;
 }
 
@@ -118,11 +118,11 @@
 
 /*Responsiveness*/
 @media only screen and (min-width: 992px) {
-  .exit-btn:hover {
+  .exit-btn2:hover {
     background-color: #E7191F;
   }
 
-  .exit-btn:hover .exit-icon {
+  .exit-btn2:hover .exit-icon {
     color: #EBF0EA;
   }
 

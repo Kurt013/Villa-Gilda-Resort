@@ -69,7 +69,7 @@ echo $calendar->show();
 if (isset($_POST['submitReservation'])) {
   echo'
     <dialog class="reservation-details-form">
-      <button class="exit-btn exit-pos" onclick="closeDialog()"><i class="bx bx-x exit-icon"></i></button>
+      <button class="exit-btn2 exit-pos" onclick="closeDialog()"><i class="bx bx-x exit-icon"></i></button>
       <div class="details-header">
         <div class="icon-wrapper"><i class="ri-verified-badge-fill"></i></div>
         <h1>Resort successfully booked!</h1>
