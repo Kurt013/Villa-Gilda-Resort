@@ -7,8 +7,9 @@ body {
 .reserve-banner {
     font-family: 'Spotify Bold';
     background-color: #226060;
-    padding: 3px 15px;
+    padding: 8px 15px;
     position: absolute;
+    font-size: 18px;
     left: 30px;
     border-radius: 0 0 10px 10px;
 }
@@ -38,12 +39,14 @@ body {
     display: flex;
     margin: 0 auto;
     width: 90%;
-    justify-content: space-between;
     align-items: center;
+    column-gap: 10px;
 }
 
 h1.title {
-    font-size: 35px;
+    flex: 1;
+    text-wrap: nowrap;
+    font-size: clamp(25px, 4vw, 35px);
     font-weight: 800;
     color: #226060;
 }
@@ -53,7 +56,7 @@ h1.title {
     padding: 5px;
     display: flex;
     justify-content: space-between;
-    width: 30%;
+    width: 40%;
     max-width: 130px;
     border-radius: 35px;
 }
@@ -68,12 +71,12 @@ h1.title {
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    transition: background-color 0.05s,
-        color 0.05s;
+    transition: background-color 0.2s;
 }
 
 .prev i, .next i {
     color: #226060;
+    transition: color 0.2s;
 }
 
 .box-content {
@@ -125,7 +128,7 @@ h1.title {
     width: clamp(18px, 2.5vw, 30px);
     border-radius: 50%;
     border: none;
-    transition: background-color 0.05s;
+    transition: background-color 0.3s;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -133,6 +136,7 @@ h1.title {
 }
 
 .book, .del {
+    transition: color 0.3s;
     font-size: clamp(12px, 2vw, 20px);
 }
 
@@ -164,7 +168,7 @@ h1.title {
     background-color: #FFDE59;
     width: 90%;
     max-height: 90%;
-    z-index: 3000;
+    z-index: 99999;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -426,14 +430,17 @@ input {
 
     .prev:hover, .next:hover {
         background-color: #F4CF3A;
-        color: #F0F1F0;
+    }
+
+    .prev:hover i, .next:hover i {
+        color: white;
     }
 
     .hasOpen .submit:hover {
         background-color: #04723D;
     }
     
-    .hasBooked .submit:hover, .submit:hover .del {
+    .hasBooked .submit:hover {
         background-color: #B6050A;
     }
 
@@ -443,16 +450,7 @@ input {
 }
 
 
-@media only screen and (max-width: 991px) {
-    h1.title {
-        font-size: 25px;
-    }
-
-    .prev, .next {
-        width: 20px;
-        height: 20px;
-    }
-    
+@media only screen and (max-width: 991px) {    
     ul.label li span {
         display: none;
     }
@@ -509,6 +507,9 @@ input {
 
     .prev:active, .next:active {
         background-color: #F4CF3A;
+    }
+
+    .prev-active i, .next:active i {
         color: #F0F1F0;
     }
 
@@ -516,7 +517,7 @@ input {
         background-color: #04723D;
     }
     
-    .hasBooked .submit:active, .submit:active .del {
+    .hasBooked .submit:active {
         background-color: #B6050A;
     }
 

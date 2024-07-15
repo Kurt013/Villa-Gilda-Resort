@@ -418,7 +418,3 @@ h1 {
 .exit:focus {
   outline-color: #F4D248;
 }
-
-::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}

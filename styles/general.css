@@ -34,12 +34,16 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+
 dialog {
-  border: none;
   z-index: 9999;
 }
 
-dialog:focus {
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+dialog :focus {
   outline: none;
 }
 
@@ -63,6 +67,7 @@ input::placeholder {
 button, input[type="submit"] {
   cursor: pointer;
 }
+
 
 /* Reusable error message design */
 .visibility {
