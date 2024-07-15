@@ -47,8 +47,8 @@ body {
   background-color: #4CABAB;
   border: none;
   padding: 10px 30px;
-  transition: background-color 0.05s,
-    color 0.05s;
+  transition: background-color 0.2s,
+    color 0.2s;
 }
 
 .list-title {
@@ -98,7 +98,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 70px;
+  flex: 0 1 70px;
   font-size: 25px;
   background-color:#368686;
 }
@@ -109,7 +109,11 @@ body {
   column-gap: 15px;
   justify-content: space-between;   
   align-items: center;
-  padding: 10px 15px 10px 25px;
+  padding: 18px 15px 18px 25px;
+}
+
+.info * {
+  font-size: clamp(12px, 3vw, 16px);
 }
 
 .list-prof {
@@ -120,12 +124,12 @@ body {
 
 .staff-size {
   flex: 0 0 auto;
-  width: 80px;
-  height: 80px;
+  width: clamp(50px, 15vw, 80px);
+  height: clamp(50px, 15vw, 80px);
 }
 
 .icon-staff-size {
-  font-size: 50px !important;
+  font-size: clamp(18px, 10vw, 45px) !important;
 }
 
 .username-staff {
@@ -136,12 +140,13 @@ body {
 .delete-button {
   background-color: #226060;
   border: none;
-  padding: clamp(16px, 2vw, 24px);
+  padding: clamp(10px, 2vw, 15px);
   border-radius: 50%;
+  transition: background-color 0.25s;
 }
 
 i.bxs-trash {
-  font-size: clamp(25px, 2vw, 30px);
+  font-size: clamp(25px, 6vw, 40px);
 }
 
 
@@ -149,6 +154,7 @@ i.bxs-trash {
   .field-wrapper {
     grid-auto-flow: column;
     grid-template-rows: repeat(2, auto);
+    row-gap: 40px;
   }
 
   .addStaff {
@@ -178,23 +184,12 @@ i.bxs-trash {
     padding: 20px;
   }
 
+
   .addStaff-submit:active {
     color: #4CABAB;
     background-color: #EBF0EA;
   }
 
-  .icon-staff-size {
-    font-size: 30px !important;
-  }
-
-  .staff-size {
-    flex: 0 0 auto;
-    width: 50px;
-    height: 50px;
-  }
-  .staff-info{
-    font-size: 11px;
-  }
 
 }
 
