@@ -32,11 +32,11 @@ body {
 }
 
 .redirect-button {
+  text-wrap: nowrap;
   margin-top: min(5%, 20px);
   display: inline-block;
-  max-width: 280px;
-  min-width: 250px;
-  width: 100%;
+  max-width: 320px;
+  min-width: 180px;
   text-align: center;
   background-color: #2D7474;
   color: #EBF0EA;
@@ -44,7 +44,7 @@ body {
   text-decoration: none;
   border: 4px solid #EBF0EA;
   border-radius: 30px;
-  padding: 12px 0;
+  padding: 12px;
   font-weight: 900;
   transition: background-color 0.25s;
 }
@@ -91,6 +91,10 @@ body {
 }
 
 @media only screen and (max-width: 991px) {
+  .redirect-button {
+    width: 60%;
+  }
+  
   .redirect-button:active {
     background-color: #4CABAB;
   }
@@ -130,6 +134,10 @@ body {
 }
 
 @media only screen and (min-width: 992px) {
+  .redirect-button {
+    width: 100%;
+  }
+  
   .redirect-button:hover {
     background-color: #4CABAB;
   }

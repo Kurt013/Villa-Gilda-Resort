@@ -225,7 +225,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <body>
             <?php if (!$showVerificationForm) : ?>
                 <form class="form-field" role="form" method="POST">
-                    <div class="lock-container"><i class="bx bxs-lock lock-icon"></i></div>
+                    <div class="lock-container"><i class="bx bx-lock lock-icon"></i></div>
 
                     <div class="form-group">
                         <h1>Forgot Your Password?</h1>
