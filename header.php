@@ -14,18 +14,20 @@
           showMenu('.navigation-pane');
           //For desktops
           if (toggleCheck.checked) {
-            icon.classList.remove('bxs-down-arrow');
-            icon.classList.add('bxs-up-arrow');
+            // icon.classList.remove('bxs-down-arrow');
+            // icon.classList.add('bxs-up-arrow');
             menuColor.style.backgroundColor = '#368989';
+            icon.classList.add('down');
             menuIcon.remove('bx-menu');
             menuIcon.add('bx-x');
             openLeft = true;
           }
           else {
-            icon.classList.remove('bxs-up-arrow');
-            icon.classList.add('bxs-down-arrow');
+            // icon.classList.remove('bxs-up-arrow');
+            // icon.classList.add('bxs-down-arrow');
             menuColor.style.backgroundColor = '#4CABAB';
             menuIcon.remove('bx-x');
+            icon.classList.remove('down');
             menuIcon.add('bx-menu');
             openLeft = false;
           }

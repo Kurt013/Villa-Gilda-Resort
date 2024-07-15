@@ -87,6 +87,14 @@ i + p, .menu-text {
   font-size: 30px;
 }
 
+.div-2 i {
+  transition: transform 0.3s;
+}
+
+.down {
+  transform: rotate(-180deg);
+}
+
 .change {
   font-size: 22px;
 }
