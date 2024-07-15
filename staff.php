@@ -389,7 +389,7 @@
 
   <script src="popup.js"></script>
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const checkTab = document.getElementById('menu');
       const checkText = document.querySelector('.home-text');
 

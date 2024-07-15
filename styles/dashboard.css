@@ -178,7 +178,7 @@ body {
   }
 
   .box .desc-title {
-    font-size: calc(1vh + 0.4vw);
+    font-size: calc(1vh + 0.5vw);
     text-wrap: nowrap;
   }
 
@@ -209,6 +209,11 @@ body {
 @media only screen and (max-width: 991px) {
   :root {
     font-size: 12px;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   .statistics-desc {

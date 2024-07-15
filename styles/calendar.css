@@ -239,6 +239,11 @@ h1.title {
     right: 0;
     background-color: transparent;
     border: none;
+    transition: background-color 0.2s;
+}
+
+.close-btn .bx-x {
+    font-size: clamp(12px, 10vw, 45px);
 }
 
 .reservation-body {
@@ -316,6 +321,7 @@ input {
     font-size: clamp(20px, 2vw, 25px);
     background-color: #226060;
     border: none;
+    transition: background-color 0.2s;
 }
 
 .leaves-1, .leaves-2 {

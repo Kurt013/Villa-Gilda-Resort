@@ -190,8 +190,8 @@ option {
   padding: 10px 25px;
   border-radius: 30px;
   font-weight: 900;
-  transition: background-color 0.05,
-          color 1s;
+  transition: background-color 0.2s,
+          color 0.2s;
 }
 
 
@@ -230,7 +230,7 @@ option {
     right: 0;
     position: absolute;
   } */
-  .reserve-now:hover {
+  .reserve-now:active {
     color: #E1B500;
     background-color: #EBF0EA;
   }

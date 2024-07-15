@@ -347,6 +347,7 @@ $conn->close();
             },
             options: {
                 maintainAspectRatio: false,
+                responsive: true,
                 legend: {
                     onClick: (e) => e.stopPropagation(),
                     display: true,
@@ -404,6 +405,7 @@ $conn->close();
             },
             options: {
                 cutoutPercentage: 50, // Add this option for the donut hole
+                responsive: true,
                 legend: {
                     onClick: (e) => e.stopPropagation(),
                     display: true,
