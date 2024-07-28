@@ -201,6 +201,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Gilda Resort || Forgot Password</title>
 
+  <meta name="robots" content="noindex, nofollow" />
+
   <!-- Favicon -->
   <link rel="icon" href="images/villa-gilda-logo3.png">
 
