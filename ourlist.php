@@ -219,7 +219,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
             "contactNo" => $row_invoice["contactNo"],
             "invoice_date" => date('d-m-Y'),
             "invoice_no" => str_pad($row_invoice["id"], 7, '0', STR_PAD_LEFT),
-            "amount" => $row_invoice["balance_amount"],
+            "amount" => $row_invoice["amount"],
         ];
 
         $products_info = [
@@ -236,37 +236,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 
         $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
         $pdf->Output('F', $invoice_filename);
-    }
-        else if ($status == 'deposited') {
 
-            $result_invoice = $conn->query("SELECT * FROM bookings WHERE id = $booking_id");
-            $row_invoice = $result_invoice->fetch_assoc();
-    
-            $info = [
-                "Name" => $row_invoice["lastName"] . ', ' . $row_invoice["firstName"],
-                "contactNo" => $row_invoice["contactNo"],
-                "invoice_date" => date('d-m-Y'),
-                "invoice_no" => str_pad($row_invoice["id"], 7, '0', STR_PAD_LEFT),
-                "amount" => $row_invoice["deposit_amount"],
-            ];
-    
-            $products_info = [
-                [
-                    "booking_date" => $row_invoice["booking_date"],
-                    "time_slot" => $row_invoice["time_slot"],
-                    "included" => $row_invoice["included"],
-                ]
-            ];
-    
-            $pdf = new PDF();
-            $pdf->AddPage();
-            $pdf->body($info, $products_info);
-    
-            $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
-            $pdf->Output('F', $invoice_filename);
-        }
-        if ($status == 'fully paid' || $status == 'deposited') {
-            $body = [
+        $body = [
             'Messages' => [
                 [
                     'From' => [
@@ -530,7 +501,6 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                         <label for="status"></label>
                         <select id="status" name="status" onchange="this.form.submit()">
                             <option value="pending" '.($row["status"] == "pending" ? "selected" : "").'>Pending</option>
-                            <option value="deposited" '.($row["status"] == "deposited" ? "selected" : "").'>Deposited</option>
                             <option value="fully paid" '.($row["status"] == "fully paid" ? "selected" : "").'>Fully Paid</option>
                             <option value="cancelled" '.($row["status"] == "cancelled" ? "selected" : "").'>Cancelled</option>
                         </select>
@@ -539,9 +509,6 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 <td class="tablet">';
             if ($row["status"] === "fully paid") {
                 echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
-            }
-            else if ($row["status"] === "deposited") {
-                echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill deposited"></i></a>';
             }
             else {
                 echo "<i class='ri-receipt-fill pending'></i>";
@@ -601,7 +568,6 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                         <label for="status"></label>
                         <select id="status" name="status" onchange="this.form.submit()">
                             <option value="pending" '.($row["status"] == "pending" ? "selected" : "").'>Pending</option>
-                            <option value="deposited" '.($row["status"] == "deposited" ? "selected" : "").'>Deposited</option>
                             <option value="fully paid" '.($row["status"] == "fully paid" ? "selected" : "").'>Fully Paid</option>
                             <option value="cancelled" '.($row["status"] == "cancelled" ? "selected" : "").'>Cancelled</option>
                         </select>
@@ -614,9 +580,6 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 <td colspan="3">';
                     if ($row["status"] == "fully paid") {
                         echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
-                    }
-                    else if ($row["status"] === "deposited") {
-                        echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill deposited"></i></a>';
                     }
                 else {
                     echo "<i class='ri-receipt-fill pending'></i>";
