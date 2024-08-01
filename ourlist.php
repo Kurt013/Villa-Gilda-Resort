@@ -240,8 +240,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
         $filePath = $directory . $invoice_filename;
 
-        $pdf->Output('F', $invoice_filename);
-
+        $pdf->Output('F', $filePath);
 
         try {
             $mail->isSMTP();                                            // Send using SMTP
