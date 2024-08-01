@@ -8,13 +8,13 @@ $username = 'root';
 $password = '';
 $database = 'villa gilda';
 $dbconfig = mysqli_connect($host, $username, $password, $database) or die("An error occurred when connecting to the database");
-require 'vendor/autoload.php';
-use \Mailjet\Client;
-use \Mailjet\Resources;
-    
-$apikey = '8de25420f468ac0e0637dc1a9872bda2';
-$apisecret = '4b88a8e71352e99527617a3a8d39099a';
-$mj = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php'; // Adjust the path as needed if you're not using Composer
+
+$mail = new PHPMailer(true);
 
 $message = "";
 $showVerificationForm = false;
@@ -34,16 +34,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         mysqli_query($dbconfig, "DELETE FROM forget_password WHERE email='$email_reg'");
         $verification_code = mt_rand(100000, 999999);
         $sql_insert = mysqli_query($dbconfig, "INSERT INTO forget_password(email, temp_key) VALUES('$email_reg', '$verification_code')");
-      
-          $body = [
-            'Messages' => [
-                [
-                    'From' => ['Email' => 'resortvillagilda@gmail.com'],
-                    'To' => [['Email' => $email_reg]],
-                    'Subject' => 'Verification Code --- DO NOT SHARE!',
-                    'TextPart' => "$username's Verification Code: $verification_code",
-                    'HTMLPart' =>
-          '<html>
+
+          try {
+                //Server settings
+                $mail->isSMTP();                                            // Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     // Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                $mail->Username   = 'ResortVillaGilda@gmail.com';               // SMTP username
+                $mail->Password   = '@CelineAlmodovar';                        // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;     
+                
+                // Sender and recipient settings
+                $mail->setFrom('resortvillagilda@donotreply.com', 'Villa Gilda Resort');
+                $mail->addAddress($detailFetch['email'], $detailFetch[`First Name`]);
+
+                $mail->isHTML(true);
+                $mail->Subject = 'Verification Code -- DO NOT SHARE';
+                
+                $mail->Body = '<html>
               <head>
                   <style>
                       * {
@@ -171,21 +180,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
                   </body>
                 </html>
-                ',
-              ]
-            ]
-          ];
-            try {
-                $response = $mj->post(Resources::$Email, ['body' => $body]);
-                if ($response->success()) {
-                    $message_success = 'Email sent successfully';
-                    $showVerificationForm = true;
-                    $_SESSION['email'] = $email_reg;
-                    $_SESSION['verification_code'] = $verification_code;
+                ';
+
+                // Send the email
+                if(!$mail->send()){
+                  $message = 'Failed to send email: ' . $mail->ErrorInfo;
                 } else {
-                    $message = 'Failed to send email';
-                    var_dump($response->getData());
+                  $message_success = 'Email sent successfully';
+                  $showVerificationForm = true;
+                  $_SESSION['email'] = $email_reg;
+                  $_SESSION['verification_code'] = $verification_code;
                 }
+
             } catch (Exception $e) {
                 $message = 'Error sending email: ' . $e->getMessage();
             }

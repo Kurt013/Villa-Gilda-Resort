@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Gilda Resort</title>
 
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" contxent="noindex, nofollow" />
 
   <!-- Favicon -->
   <link rel="icon" href="images/villa-gilda-logo3.png">
@@ -175,15 +175,12 @@ class PDF extends FPDF
     }
 }
 
-require 'vendor/autoload.php';
-use \Mailjet\Client;
-use \Mailjet\Resources;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// Replace with your Mailjet API credentials
-$apikey = '8de25420f468ac0e0637dc1a9872bda2';
-$apisecret = '4b88a8e71352e99527617a3a8d39099a';
+require 'vendor/autoload.php'; // Adjust the path as needed if you're not using Composer
 
-$mj = new Client($apikey, $apisecret, true, ['version' => 'v3.1']);
+$mail = new PHPMailer(true);
 
 if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     $status = $_POST['status'];
@@ -237,24 +234,24 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
         $pdf->Output('F', $invoice_filename);
 
-        $body = [
-            'Messages' => [
-                [
-                    'From' => [
-                        'Email' => 'resortvillagilda@gmail.com'
-                    ],
-                    'To' => [
-                        [
-                            'Email' => $row_invoice['email']
-                        ]
-                    ],
-                    'Subject' => 'Your Booking Invoice',
-                    'TextPart' => 'Thank you for your reservation at Villa Gilda Resort. Please find your receipt attached.' . "\n\n" .
-                'Best regards,' . "\n" .
-                'The Villa Gilda Resort Team',
 
-                    'HTMLPart' => '
-                    <html>
+        try {
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'ResortVillaGilda@gmail.com';               // SMTP username
+            $mail->Password   = '@CelineAlmodovar';                        // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;     
+            
+            // Sender and recipient settings
+            $mail->setFrom('resortvillagilda@donotreply.com', 'Villa Gilda Resort');
+            $mail->addAddress($row_invoice['email'], $row_invoice['firstName']);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Your Booking Invoice';
+            
+            $mail->Body = '<html>
                     <head>
                         <style>
                             * {
@@ -363,7 +360,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                             </div>
                             <div class="body-card">
                                 <h1>Booking Invoice</h1>
-                                <p>Hi '.$row_invoice['firstName'].' '.$row_invoice['lastName'].'</p>
+                                <p>Hi '.htmlspecialchars($row_invoice['firstName']).' '.htmlspecialchars($row_invoice['lastName']).'</p>
                                 <p>Thank you for your reservation at Villa Gilda Resort.</p>
                                 <p class="view_invoice">Please click the attachment below to view your receipt</p>
                                 <p>Best regards,<br>The Villa Gilda Resort Team</p>
@@ -383,24 +380,29 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                     </body>
                 </html>
 
-                ',
-                    'Attachments' => [
-                        [
-                            'Content-ID' => 'invoicePDF',
-                            'ContentType' => 'application/pdf',
-                            'Filename' => $invoice_filename,
-                            'Base64Content' => base64_encode(file_get_contents($invoice_filename))
-                        ]
-                    ]
-                ]
-            ]
-        ];
+                ';
 
-        try {
-            // Send email via Mailjet API
-            $response = $mj->post(Resources::$Email, ['body' => $body]);
+                $mail -> addAttachment($invoice_filename);
 
-            if ($response->success()) {
+            if (!$mail->send()) {
+                echo '
+                <dialog class="message-popup error" >
+                    <div class="pop-up">
+                    <div class="left-side">
+                        <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+                    </div>
+                    <div class="right-side">
+                        <div class="right-group">
+                        <div class="content">
+                            <h1>Failed to send receipt!</h1>
+                        </div>
+                        <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                        </div>
+                    </div>
+                    </div>
+                </dialog>
+                      ';
+            } else {
                 echo '
                 <dialog class="message-popup success">
                     <div class="pop-up">
@@ -419,29 +421,25 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                     </div>
                 </dialog>
                 ';
-            } else {
-                echo '
-                <dialog class="message-popup error" >
-                    <div class="pop-up">
-                    <div class="left-side">
-                        <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-                    </div>
-                    <div class="right-side">
-                        <div class="right-group">
-                        <div class="content">
-                            <h1>Failed to send receipt!</h1>
-                        </div>
-                        <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                        </div>
-                    </div>
-                    </div>
-                </dialog>
-                      ';
-                //var_dump($response->getData()); // Output Mailjet API response for debugging
             }
         } catch (Exception $e) {
-            echo '<h1>Error sending email</h1>';
-            echo 'Caught exception: ' . $e->getMessage();
+            echo '
+            <dialog class="message-popup error" >
+                <div class="pop-up">
+                <div class="left-side">
+                    <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+                </div>
+                <div class="right-side">
+                    <div class="right-group">
+                    <div class="content">
+                        <h1>Error: '.$e->getMessage().'</h1>
+                    </div>
+                    <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
+                    </div>
+                </div>
+                </div>
+            </dialog>
+                  ';
         }
     }
 }
