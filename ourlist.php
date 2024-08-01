@@ -232,9 +232,12 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         $pdf->AddPage();
         $pdf->body($info, $products_info);
 
-        // $directory = dirname(__FILE__) . '/invoices/';
-        $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
+        $directory = __DIR__ . '/invoices/';
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
 
+        $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
         $filePath = $directory . $invoice_filename;
 
         $pdf->Output('F', $invoice_filename);
