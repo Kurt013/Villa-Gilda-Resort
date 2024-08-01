@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Villa Gilda Resort</title>
 
-  <meta name="robots" contxent="noindex, nofollow" />
+  <meta name="robots" content="noindex, nofollow" />
 
   <!-- Favicon -->
   <link rel="icon" href="images/villa-gilda-logo3.png">
@@ -201,8 +201,9 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         }
     } else {
         // If status is fully paid, update the status in the database
-        $update_sql = "UPDATE bookings SET status = '$status' WHERE id = $booking_id;";
-        $conn->query($update_sql);
+        $update_sql = $conn->prepare("UPDATE bookings SET status = ? WHERE id = ?");
+        $update_sql->bind_param("si", $status, $booking_id);
+        $update_sql->execute();
     }
 
     // If status is fully paid, generate the invoice
@@ -231,7 +232,11 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         $pdf->AddPage();
         $pdf->body($info, $products_info);
 
+        // $directory = dirname(__FILE__) . '/invoices/';
         $invoice_filename = 'invoice_'.$row_invoice["id"].'.pdf';
+
+        $filePath = $directory . $invoice_filename;
+
         $pdf->Output('F', $invoice_filename);
 
 
