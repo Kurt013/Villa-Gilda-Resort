@@ -17,10 +17,10 @@ $pending_payment = 0;
 $reserved_days = [];
 
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "villa gilda";
+$servername = $_ENV['DB_HOST'] ?? "localhost";
+$username = $_ENV['DB_USER'] ?? "root";
+$password = $_ENV['DB_PASS'] ?? "";
+$dbname = $_ENV['DB_NAME'] ?? "villa gilda";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection

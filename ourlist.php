@@ -61,32 +61,34 @@ $selected_month = $current_month;
 $cancelled_count = 0;
 $deleted_count = 0;
 
+// Determine the selected month
 if (isset($_POST['month'])) {
-    // If month is selected, filter bookings for that month
-    $selected_month = $_POST['month'];
-    $_POST['selected_month'] = $selected_month; // Store the selected month
-    $sql = "SELECT * FROM bookings WHERE MONTH(booking_date) = $selected_month ORDER BY booking_date DESC;";
+    $selected_month = (int)$_POST['month'];  // Cast to integer for safety
+    $_POST['selected_month'] = $selected_month; // Store selected month
 } else {
-    // If form is not submitted, default to current month
-    $selected_month = isset($_POST['selected_month']) ? $_POST['selected_month'] : $current_month; // Get the stored or current month
-    $sql = "SELECT * FROM bookings WHERE MONTH(booking_date) = $selected_month ORDER BY booking_date DESC;";
+    $selected_month = isset($_POST['selected_month']) ? (int)$_POST['selected_month'] : $current_month;
 }
 
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "villa gilda";
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
+$conn = new mysqli(
+    $_ENV['DB_HOST'] ?? "localhost",
+    $_ENV['DB_USER'] ?? "root",
+    $_ENV['DB_PASS'] ?? "",
+    $_ENV['DB_NAME'] ?? "villa gilda"
+);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$result = mysqli_query($conn, $sql);
+// Prepare statement securely
+$stmt = $conn->prepare("SELECT * FROM bookings WHERE MONTH(booking_date) = ? ORDER BY booking_date DESC");
+$stmt->bind_param("i", $selected_month);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Get the number of rows
 if ($result) {
-    // Get the number of rows in the result set
-    $resultCheck = mysqli_num_rows($result);
+    $resultCheck = $result->num_rows;
 }
 
 class PDF extends FPDF
@@ -183,34 +185,70 @@ require 'vendor/autoload.php'; // Adjust the path as needed if you're not using 
 $mail = new PHPMailer(true);
 
 if (isset($_POST['status']) && isset($_POST['booking_id'])) {
-    $status = $_POST['status'];
-    $booking_id = $_POST['booking_id'];
-    $cancelled_bookings = array();
-    $update_sql = "UPDATE bookings SET status = '$status' WHERE id = $booking_id;";
-    if ($status == 'cancelled') {
-        $delete_sql = "DELETE FROM bookings WHERE id = $booking_id;";
-        if ($conn->query($delete_sql) === TRUE) {
-            // Increment the cancelled count
-            $cancelled_count++;
-            $deleted_count++;
-        // Store cancelled booking information
-        $cancelled_booking_info = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM bookings WHERE id = $booking_id"));
-        array_push($cancelled_bookings, $cancelled_booking_info);
+    $status = $_POST['status'] ?? '';
+    $booking_id = $_POST['booking_id'] ?? 0;
+
+    // Cast booking_id to integer to prevent injection
+    $booking_id = (int)$booking_id;
+
+    // Array to store cancelled booking info
+    $cancelled_bookings = [];
+
+    // 1) Fetch booking info first
+    $stmt_select = $conn->prepare("SELECT * FROM bookings WHERE id = ?");
+    $stmt_select->bind_param("i", $booking_id);
+    $stmt_select->execute();
+    $result = $stmt_select->get_result();
+    $booking_info = $result->fetch_assoc();
+    $stmt_select->close();
+
+    if (!$booking_info) {
+        echo "Booking not found.";
+        exit;
+    }
+
+    // 2) Update status
+    $stmt_update = $conn->prepare("UPDATE bookings SET status = ? WHERE id = ?");
+    $stmt_update->bind_param("si", $status, $booking_id);
+    if ($stmt_update->execute() === false) {
+        echo "Error updating booking: " . $stmt_update->error;
+        $stmt_update->close();
+        exit;
+    }
+    $stmt_update->close();
+
+    // 3) If cancelled, delete booking
+    if ($status === 'cancelled') {
+        $stmt_delete = $conn->prepare("DELETE FROM bookings WHERE id = ?");
+        $stmt_delete->bind_param("i", $booking_id);
+        if ($stmt_delete->execute()) {
+            // Store cancelled booking info
+            $cancelled_bookings[] = $booking_info;
+
+            // You can also increment counters if needed
+            $cancelled_count = 1; // or increment if looped
+            $deleted_count = 1;
         } else {
-            echo "Error deleting record: " . $conn->error;
+            echo "Error deleting booking: " . $stmt_delete->error;
         }
+        $stmt_delete->close();
     } else {
         // If status is fully paid, update the status in the database
         $update_sql = $conn->prepare("UPDATE bookings SET status = ? WHERE id = ?");
         $update_sql->bind_param("si", $status, $booking_id);
         $update_sql->execute();
+        $update_sql->close();
     }
 
     // If status is fully paid, generate the invoice
     if ($status == 'fully paid') {
 
-        $result_invoice = $conn->query("SELECT * FROM bookings WHERE id = $booking_id");
+        $stmt = $conn->prepare("SELECT * FROM bookings WHERE id = ?");
+        $stmt->bind_param("i", $booking_id); // "i" = integer
+        $stmt->execute();
+        $result_invoice = $stmt->get_result();
         $row_invoice = $result_invoice->fetch_assoc();
+        $stmt->close();
 
         $info = [
             "Name" => $row_invoice["lastName"] . ', ' . $row_invoice["firstName"],
@@ -243,17 +281,18 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
         $pdf->Output('F', $filePath);
 
         try {
-            $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     // Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'ResortVillaGilda@gmail.com';               // SMTP username
-            $mail->Password   = '@CelineAlmodovar';                        // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;     
-            
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host       = $_ENV['SMTP_SERVER'] ?? 'smtp.gmail.com';   // Fallback if env not set
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $_ENV['SMTP_USERNAME'] ?? '';                  // SMTP username from .env
+            $mail->Password   = $_ENV['SMTP_PASSWORD'] ?? '';                  // SMTP password from .env
+            $mail->SMTPSecure = $_ENV['SMTP_ENCRYPTION'] ?? 'tls';             // tls or ssl
+            $mail->Port       = $_ENV['SMTP_PORT'] ?? 587;                     // Port from env, default 587
+                
             // Sender and recipient settings
-            $mail->setFrom('resortvillagilda@donotreply.com', 'Villa Gilda Resort');
-            $mail->addAddress($row_invoice['email'], $row_invoice['firstName']);
+            $mail->setFrom($_ENV['SMTP_USERNAME'], $_ENV['APP_NAME']);
+            $mail->addAddress($detailFetch['email']);
 
             $mail->isHTML(true);
             $mail->Subject = 'Your Booking Invoice';

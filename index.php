@@ -32,58 +32,50 @@ session_start();
     <p class='error-message visibility'>The password or username you entered is incorrect. Please try again. </p>
     
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Validate and sanitize username
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    if (empty($username)) {
+    if (empty($username) || empty($password)) {
         displayErrorDialog();
-    } else {
-        $password = $_POST['password']; // For demonstration purposes; validate/sanitize as needed
-
-        // Connect to database (replace with your actual database credentials)
-        $conn = new mysqli('localhost', 'root', '', 'villa gilda');
-
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        // Prepare statement
-        $stmt = $conn->prepare("SELECT ID, `First name`, `Last name`, Username, Password, Role FROM `user accounts` WHERE Username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows == 1) {
-            // Bind result variables
-            $stmt->bind_result($id, $first_name, $last_name, $db_username, $db_password_hash, $role);
-            $stmt->fetch();
-
-            // Verify password
-            if (password_verify($password, $db_password_hash)) {
-                // Password is correct, start session
-                $_SESSION['ID'] = $id;
-                $_SESSION['firstName'] = $first_name;
-                $_SESSION['lastName'] = $last_name;
-                $_SESSION['role'] = $role;
-
-                $stmt->close();
-                $conn->close();
-                header("Location: homepage.php"); // Redirect to homepage or another secure page
-                exit();
-            } else {
-                displayErrorDialog();
-            }
-        } else {
-            displayErrorDialog();
-        }
-
-        // Close statement and connection
-        $stmt->close();
-        $conn->close();
+        exit;
     }
+
+    $conn = new mysqli(
+        $_ENV['DB_HOST'] ?? 'localhost',
+        $_ENV['DB_USER'] ?? 'root',
+        $_ENV['DB_PASS'] ?? '',
+        $_ENV['DB_NAME'] ?? 'villa gilda'
+    );
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $stmt = $conn->prepare("SELECT ID, `First name`, `Last name`, Username, Password, Role FROM `user accounts` WHERE Username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        if (password_verify($password, $row['Password'])) {
+            session_regenerate_id(true); // prevent session fixation
+            $_SESSION['ID'] = $row['ID'];
+            $_SESSION['firstName'] = $row['First name'];
+            $_SESSION['lastName'] = $row['Last name'];
+            $_SESSION['role'] = $row['Role'];
+
+            header("Location: homepage.php");
+            exit;
+        }
+    }
+
+    displayErrorDialog(); // generic error message
+
+    $stmt->close();
+    $conn->close();
 }
+
 ?>  
     <div class="username-field"><input class="username" placeholder="Enter your username" type="text" name="username" readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly','');" required></div>
     <div class="password-field">
