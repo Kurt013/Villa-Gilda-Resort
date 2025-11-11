@@ -76,7 +76,12 @@
 
   <?php 
   // Establish Connection 
-  $conn = new mysqli('localhost', 'root', '', 'villa gilda');
+  $conn = new mysqli(
+      $_ENV['DB_HOST'] ?? 'localhost',
+      $_ENV['DB_USER'] ?? 'root',
+      $_ENV['DB_PASS'] ?? '',
+      $_ENV['DB_NAME'] ?? 'villa gilda'
+  );
 
   function is_valid_password($password) {
     if (strlen($password) < 8 ||
@@ -93,220 +98,62 @@
   }
 
   if (isset($_POST['addStaff'])) {
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $username = $_POST['username'];
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $firstName = trim($_POST['firstName']);
+    $lastName = trim($_POST['lastName']);
+    $username = trim($_POST['username']);
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
     $role = 'staff';
 
-    $emailCheck = $conn->prepare("SELECT * FROM `user accounts` WHERE `email` = ?");
-    $emailCheck->bind_param("s", $email);
-    $emailCheck->execute();
-    $emailResult = $emailCheck->get_result();
 
-    $usernameCheck = $conn->prepare("SELECT * FROM `user accounts` WHERE `Username` = ?");
-    $usernameCheck->bind_param("s", $username);
-    $usernameCheck->execute();
-    $usernameResult = $usernameCheck->get_result();
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
-    if ($confirmPassword === $password) {
-      if (is_valid_password($password)) {
-        $validName = true;
-        if (!is_valid_name($firstName)) {
-          echo '
-           <dialog class="message-popup error" >
-            <div class="pop-up">
-              <div class="left-side">
-                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-              </div>
-              <div class="right-side">
-                <div class="right-group">
-                  <div class="content">
-                    <h1>Invalid</h1>
-                    <p>First name must be between 3 and 20 characters.</p>
-                  </div>
-                  <button onclick="closeDialog()" onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                </div>
-              </div>
-            </div>
-          </dialog>
-          ';
-          $validName = false;
-        }
-        if (!is_valid_name($lastName)) {
-          echo '
-          <dialog class="message-popup error" >
-            <div class="pop-up">
-              <div class="left-side">
-                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-              </div>
-              <div class="right-side">
-                <div class="right-group">
-                  <div class="content">
-                    <h1>Invalid</h1>
-                    <p>Last name must be between 3 and 20 characters.</p>
-                  </div>
-                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                </div>
-              </div>
-            </div>
-          </dialog>
-          ';
-          $validName = false;
-        }
-        if ($emailResult->num_rows > 0) {
-          echo '
-          <dialog class="message-popup error" >
-            <div class="pop-up">
-              <div class="left-side">
-                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-              </div>
-              <div class="right-side">
-                <div class="right-group">
-                  <div class="content">
-                    <h1>Invalid</h1>
-                    <p>Email already exists!</p>
-                  </div>
-                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                </div>
-              </div>
-            </div>
-          </dialog>
-          ';
-          $validName = false;
-        }
-        if ($usernameResult->num_rows > 0) {
-          echo '
-          <dialog class="message-popup error" >
-            <div class="pop-up">
-              <div class="left-side">
-                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-              </div>
-              <div class="right-side">
-                <div class="right-group">
-                  <div class="content">
-                    <h1>Invalid</h1>
-                    <p>Username already exists!</p>
-                  </div>
-                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                </div>
-              </div>
-            </div>
-          </dialog>
-          ';
-          $validName = false;
-        }
-        if ($validName) {
-          $encryptedPass = password_hash($password, PASSWORD_BCRYPT);
-          $sqlAdd = $conn->prepare("INSERT INTO `user accounts` (`First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`) VALUES (?, ?, ?, ?, ?, ?)");
-          $sqlAdd->bind_param("ssssss", $firstName, $lastName, $username, $encryptedPass, $email, $role);
-          try {
-            if ($sqlAdd->execute()) {
-              echo'
-              <dialog class="message-popup success" >
-                <div class="pop-up">
-                  <div class="left-side">
-                    <div class="left-side-wrapper"><i class="bx bxs-check-circle success-circle"></i></div>
-                  </div>
-                  <div class="right-side">
-                    <div class="right-group">
-                      <div class="content">
-                        <h1>Success</h1>
-                        <p>Staff successfully added</p>
-                      </div>
-                      <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </dialog>
-              ';
-            }
-          } catch (mysqli_sql_exception $e) {
-            echo '
-             <dialog class="message-popup error" >
-            <div class="pop-up">
-              <div class="left-side">
-                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-              </div>
-              <div class="right-side">
-                <div class="right-group">
-                  <div class="content">
-                    <h1>Invalid</h1>
-                    <p>Email already exists!</p>
-                  </div>
-                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                </div>
-              </div>
-            </div>
-          </dialog>
-          ';
-          $validName = false;
-        }
-        if ($usernameResult->num_rows > 0) {
-          echo '
-          <dialog class="message-popup error" >
-            <div class="pop-up">
-              <div class="left-side">
-                <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-              </div>
-              <div class="right-side">
-                <div class="right-group">
-                  <div class="content">
-                    <h1>Invalid</h1>
-                    <p>Error: ' . $e->getMessage() . '</p>
-                  </div>
-                  <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                </div>
-              </div>
-            </div>
-          </dialog>
-          ';
-          }
-        }
-      }
-      else {
-        echo '
-          <dialog class="message-popup error" >
-              <div class="pop-up">
-                <div class="left-side">
-                  <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-                </div>
-                <div class="right-side">
-                  <div class="right-group">
-                    <div class="content">
-                      <h1>Invalid</h1>
-                      <p>Password must be 8 characters or more, and include letters, numbers, and special characters.</p>
-                    </div>
-                    <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                  </div>
-                </div>
-              </div>
-            </dialog>
-            ';
-      }
-    } 
-    else {
-      echo '
-            <dialog class="message-popup error" >
-              <div class="pop-up">
-                <div class="left-side">
-                  <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
-                </div>
-                <div class="right-side">
-                  <div class="right-group">
-                    <div class="content">
-                      <h1>Invalid</h1>
-                      <p>Passwords do not match!</p>
-                    </div>
-                    <button onclick="closeDialog()" class="exit-btn"><i class="bx bx-x exit"></i></button>
-                  </div>
-                </div>
-              </div>
-            </dialog>
-            ';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      displayErrorDialog("Invalid email address");
+      exit;
     }
+
+    // Duplicate checks (prepared statements)
+    $stmt = $conn->prepare("SELECT 1 FROM `user accounts` WHERE `email` = ? OR `Username` = ?");
+    $stmt->bind_param("ss", $email, $username);
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows > 0) {
+        displayErrorDialog("Email or Username already exists!");
+        $stmt->close();
+        exit;
+    }
+    $stmt->close();
+
+    // Validate password match
+    if ($password !== $confirmPassword) {
+        displayErrorDialog("Passwords do not match!");
+        exit;
+    }
+
+    // Validate password strength
+    if (!is_valid_password($password)) {
+        displayErrorDialog("Password must be 8+ chars, include letters, numbers, special chars.");
+        exit;
+    }
+
+    // Validate names
+    if (!is_valid_name($firstName) || !is_valid_name($lastName)) {
+        displayErrorDialog("First/Last name must be 3-20 characters.");
+        exit;
+    }
+
+    // Insert user
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    $stmt = $conn->prepare("INSERT INTO `user accounts` (`First Name`,`Last Name`,Username,Password,email,Role) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $firstName, $lastName, $username, $hashedPassword, $email, $role);
+    try {
+        $stmt->execute();
+        displaySuccessDialog("Staff successfully added");
+    } catch (mysqli_sql_exception $e) {
+        displayErrorDialog("Error adding staff: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
+    }
+    $stmt->close();
   }
 
   $sqlShow = 'SELECT ID, `First Name`, `Last Name`, Username FROM `user accounts` WHERE Role = "staff"';
@@ -363,6 +210,57 @@
       echo "Error deleting record: " . $conn->error;
     }
   }
+
+
+  // Helper functions
+  function displayErrorDialog($message) {
+      echo '
+      <dialog class="message-popup error">
+          <div class="pop-up">
+              <div class="left-side">
+                  <div class="left-side-wrapper"><i class="bx bxs-x-circle error-circle"></i></div>
+              </div>
+              <div class="right-side">
+                  <div class="right-group">
+                      <div class="content">
+                          <h1>Invalid</h1>
+                          <p>' . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . '</p>
+                      </div>
+                      <button onclick="this.closest(\'dialog\').close(); this.closest(\'dialog\').remove();" class="exit-btn">
+                          <i class="bx bx-x exit"></i>
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </dialog>
+      ';
+  }
+
+  function displaySuccessDialog($message) {
+      echo '
+      <dialog class="message-popup success">
+          <div class="pop-up">
+              <div class="left-side">
+                  <div class="left-side-wrapper"><i class="bx bxs-check-circle success-circle"></i></div>
+              </div>
+              <div class="right-side">
+                  <div class="right-group">
+                      <div class="content">
+                          <h1>Success</h1>
+                          <p>' . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . '</p>
+                      </div>
+                      <button onclick="this.closest(\'dialog\').close(); this.closest(\'dialog\').remove();" class="exit-btn">
+                          <i class="bx bx-x exit"></i>
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </dialog>
+      ';
+  }
+
+
+
   ?>
 
   <dialog class="confirm-popup">
