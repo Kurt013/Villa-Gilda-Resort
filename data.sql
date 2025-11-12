@@ -7,6 +7,10 @@
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
+--
+-- Database: `villa gilda`
+--
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -46,9 +50,15 @@ CREATE TABLE `user accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `user accounts` (`ID`, `First Name`, `Last Name`, `Username`, `Password`, `email`, `Role`, `temp_key`) VALUES
-(1, '', '', 'admin', '$2y$10$i4AJYPnZtV6AceEys9gik.jdG/TK/JPf/h3tsFlgNdo2Lz0K2yfCu', 'kurtvincentalmodovar65@gmail.com', 'admin', ''),
-(49, 'Lucky', 'Casubha', 'lucky123', '$2y$10$GaKUafnRXb5H/.HgnvLROep.R1UOCEfOxlugLy9EeGj47ZhlN0FCG', 'casubhalucky1@gmail.com', 'staff', ''),
-(50, 'Jeruh', 'Fornal', 'jeruh123', '$2y$10$1Qm8aJJan1YZKnDL/84MB.ySJaJj1eo2nOR5om1GKA8h1PeoCRbfK', 'jeruh@gmail.com', 'staff', ''),
+-- Password: @Admin123
+(1, 'Kurt Vincent', 'Almodovar', 'kurt123', '$2a$12$x4KSJElOpGXbv509pvC6Xu/RZlTsKvqISRje7pDnu2WWPvuzCsGC2', 'kurtvincentalmodovar65@gmail.com', 'admin', ''),
+
+-- Password: @User123
+(2, 'Lucky', 'Casubha', 'lucky123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'casubhalucky5@gmail.com', 'staff', ''),
+(3, 'Jeruh', 'Fornal', 'jeruh123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'jeruhasis@gmail.com', 'staff', ''),
+(4, 'Lauriene Jade', 'Barroso', 'lauriene123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'laurienejadebarroso@gmail.com', 'staff', ''),
+(5, 'Zofia Dennise', 'Juan', 'zof123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'zofiadennisejuan@gmail', 'staff', ''),
+(6, 'Era Dane', 'Par', 'era123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'par.eradane@gmail.com', 'staff', ''),
 
 -- Modify the primary keys
 ALTER TABLE `user accounts`
