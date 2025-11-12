@@ -53,9 +53,9 @@
 
 <?php
 include('header.php');
-include 'Calendar.php';
-include 'Booking.php';
-include 'BookableCell.php';
+include 'calendar.php';
+include 'booking.php';
+include 'bookableCell.php';
  
  
 $booking = new Booking(
