@@ -33,11 +33,27 @@ cd Villa-Gilda-Resort
 
 - Place the project folder inside the htdocs directory of XAMPP.
 
+3. **Install PHP dependencies**:
+
+- Make sure you have Composer installed, then run:
+
+```bash
+composer install
+```
+
 3. **Database setup**:
 
 - Open phpMyAdmin at ```http://localhost/phpmyadmin``` and create a database (e.g., `villa gilda`).
 
 - Import the provided SQL schema if available (.sql file in the repo).
+
+---
+
+## ⚙️ Environment Variables
+
+Before running the project, copy `.env.example` to `.env` and add your keys:
+
+> Make sure `.env` is ignored in Git (`.gitignore`) to keep your keys private.
 
 ---
 
