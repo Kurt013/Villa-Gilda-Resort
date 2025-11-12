@@ -427,7 +427,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                     <body>
                         <div class="card-container">
                             <div class="header-card">
-                                <img class="logo" src="https://scontent.fmnl33-5.fna.fbcdn.net/v/t1.15752-9/448719767_828880522525898_6091539274430163876_n.png?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE6YdCc0x9jPYeyi28KzECuIvAw4C22rBUi8DDgLbasFVBjbjgnw15IgJGzlWW1pYwgBEJMc8tzmog5ZRma_PI2&_nc_ohc=LbHntbutHp4Q7kNvgHKBqfL&_nc_ht=scontent.fmnl33-5.fna&oh=03_Q7cD1QEibZYmJGLG4oiXTvsC_1FDjI23cqQlJP9Zat3KGlPnQg&oe=66A6F266" alt="Villa Gilda Logo">
+                                <img class="logo" src="https://raw.githubusercontent.com/Kurt013/Villa-Gilda-Resort/refs/heads/main/images/villa-gilda-logo.png" alt="Villa Gilda Logo">
                             </div>
                             <div class="body-card">
                                 <h1>Booking Invoice</h1>
