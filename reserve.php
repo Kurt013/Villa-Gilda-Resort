@@ -1,4 +1,12 @@
 <?php 
+  require __DIR__ . '/vendor/autoload.php';
+
+  use Dotenv\Dotenv;
+
+  // Load .env first
+  $dotenv = Dotenv::createImmutable(__DIR__);
+  $dotenv->load();
+
   session_start();
 
   if (isset($_POST['submit']) || empty($_SESSION['role'])) {
@@ -51,10 +59,10 @@ include 'BookableCell.php';
  
  
 $booking = new Booking(
-    'villa gilda',
-    'localhost',
-    'root',
-    ''
+    $_ENV['DB_NAME'] ?? 'villa gilda',
+    $_ENV['DB_HOST'] ?? 'localhost',
+    $_ENV['DB_USER'] ?? 'root',
+    $_ENV['DB_PASS'] ?? ''
 );
  
 $bookableCell = new BookableCell($booking);
