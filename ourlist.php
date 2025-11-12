@@ -51,6 +51,12 @@
     include('header.php');
     require 'fpdf/fpdf.php';
   ?>
+
+  <!-- Loader used when changing status -->
+  <div id="statusLoader" class="loader-overlay" aria-hidden="true" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+  </div>
+
   <script>
     const checkTab = document.getElementById('menu');
     const checkText = document.querySelector('.home-text');
@@ -249,7 +255,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
     }
 
     // If status is fully paid, generate the invoice
-    if ($status == 'fully paid') {
+    if ($status == 'fully paid' || $status == 'deposited') {
 
         $stmt = $conn->prepare("SELECT * FROM bookings WHERE id = ?");
         $stmt->bind_param("i", $booking_id); // "i" = integer
@@ -300,7 +306,18 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 
             // Sender and recipient settings
             $mail->setFrom($_ENV['SMTP_USERNAME'], $_ENV['APP_NAME']);
-            $mail->addAddress($detailFetch['email']);
+
+            // Determine and validate recipient email
+            $recipientEmail = $row_invoice['email'] ?? $booking_info['email'] ?? '';
+            if (!filter_var($recipientEmail, FILTER_VALIDATE_EMAIL)) {
+                throw new Exception('Invalid recipient email: ' . htmlspecialchars($recipientEmail));
+            }
+            $mail->addAddress($recipientEmail);
+
+            // make sure the invoice file exists (use absolute path created earlier)
+            if (!is_file($filePath) || !is_readable($filePath)) {
+                throw new Exception('Could not access file: ' . basename($filePath));
+            }
 
             $mail->isHTML(true);
             $mail->Subject = 'Your Booking Invoice';
@@ -330,7 +347,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                             .header-card {
                             text-align: center;
                             height: 90px;
-                            background-image: url("https://scontent.fmnl33-6.fna.fbcdn.net/v/t1.15752-9/449048471_452239437525588_272269953370891782_n.png?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHTy-oQj3Uj41iB2J4xK9LgOvJNqU_Wwy068k2pT9bDLXXgweOat34wwr2glrhynQZyblrvet-tbppoUf5Yy2Jm&_nc_ohc=gtjpG9gbncsQ7kNvgGUC6IX&_nc_ht=scontent.fmnl33-6.fna&oh=03_Q7cD1QF7hSpPEgBw3S-qbjlXY6Sk4qwW0X60UhFM6b327mzD8g&oe=66A6D4CE");
+                            background-image: url("https://raw.githubusercontent.com/Kurt013/Villa-Gilda-Resort/refs/heads/main/images/forgot-pw-bg.png");
                             }
 
                             .logo {
@@ -420,8 +437,8 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                                 <p>Best regards,<br>The Villa Gilda Resort Team</p>
                                 <p class="last-p">If you believe you have received this email in error, please disregard this email or <a class="notif-link" href="https://mail.google.com/mail/?view=cm&to=resortvillagilda@gmail.com&su=Notify%20the%20Resort">notify us.</a></p>
                                 <div class="icon-redirect">
-                                    <a href="https://www.facebook.com/profile.php?id=100092186237360"><img class="icon facebook" src="https://scontent.fmnl9-3.fna.fbcdn.net/v/t1.15752-9/448805439_1033824851691076_1924524101978291005_n.png?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeE9aPRH_OGP0V0aJCnFpQkPEDWtl9pklFYQNa2X2mSUVomkxi-0lupO9jucL73DWWrv9hh_LvmB2yLwLuIjefU9&_nc_ohc=TsTB9zB4jLgQ7kNvgGSQWqG&_nc_ht=scontent.fmnl9-3.fna&oh=03_Q7cD1QE_069nPaOOI8Rzn--Jybq7xY8MU05G2WRV1G3WVrgd-w&oe=66A7C320"/></a>
-                                    <a href="mailto:resortvillagilda@gmail.com"><img class="icon gmail" src="https://scontent.fmnl9-3.fna.fbcdn.net/v/t1.15752-9/448665658_1005997041102081_7020963237239717707_n.png?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHE3_QUTfqAlZQW0Rswo88XGtPR5f8vZN8a09Hl_y9k31S3U4Gm_a6p7llRzxhqFwpjlpw6oeY4LEbkxg1KoMnL&_nc_ohc=kU_V_p-0oD4Q7kNvgFQNKIz&_nc_ht=scontent.fmnl9-3.fna&oh=03_Q7cD1QFx3CUFMyd_D6tKluLkL7xxQt7OyuHRMIptfVyF0AxQEA&oe=66A7C3D9"/></a>
+                                    <a href="https://www.facebook.com/profile.php?id=100092186237360"><img class="icon facebook" src="https://raw.githubusercontent.com/Kurt013/Villa-Gilda-Resort/refs/heads/main/images/facebook-icon.png"/></a>
+                                    <a href="mailto:resortvillagilda@gmail.com"><img class="icon gmail" src="https://raw.githubusercontent.com/Kurt013/Villa-Gilda-Resort/refs/heads/main/images/mail-icon.png"/></a>
                                 </div>
                             </div>
                             <hr>
@@ -436,7 +453,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 
                 ';
 
-                $mail -> addAttachment($invoice_filename);
+                $mail->addAttachment($filePath, $invoice_filename);
 
             if (!$mail->send()) {
                 echo '
@@ -551,7 +568,7 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                         <input type="hidden" name="booking_id" value="'.$row["id"].'">
                         <input type="hidden" name="month" value="'.$selected_month.'">
                         <label for="status"></label>
-                        <select id="status" name="status" onchange="this.form.submit()">
+                        <select id="status" name="status">
                             <option value="pending" '.($row["status"] == "pending" ? "selected" : "").'>Pending</option>
                             <option value="deposited" '.($row["status"] == "deposited" ? "selected" : "").'>Deposited</option>
                             <option value="fully paid" '.($row["status"] == "fully paid" ? "selected" : "").'>Fully Paid</option>
@@ -561,15 +578,18 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 </td>
                 <td class="tablet">';
             if ($row["status"] === "fully paid") {
-                echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
+                echo '<a href="./invoices/invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
             }
             else if ($row["status"] === "deposited") {
-                echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill deposited"></i></a>';
+                echo '<a href="./invoices/invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill deposited"></i></a>';
             }
             else {
                 echo "<i class='ri-receipt-fill pending'></i>";
             }
 
+            // Receipt cell (use consistent relative path and show link only if file exists)
+            $invoiceRel = './invoices/invoice_'.$row["id"].'.pdf';
+            $invoicePath = __DIR__ . '/invoices/invoice_' . $row["id"] . '.pdf';
 
             echo'</td>
             </tr>
@@ -635,15 +655,11 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                     Receipt:
                 </td>
                 <td colspan="3">';
-                    if ($row["status"] == "fully paid") {
-                        echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
+                    if (file_exists($invoicePath)) {
+                        echo '<a href="'.$invoiceRel.'" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill '.($row["status"] == "fully paid" ? "fully-paid" : "deposited").'"></i></a>';
+                    } else {
+                        echo "<i class='ri-receipt-fill pending'></i>";
                     }
-                    else if ($row["status"] === "deposited") {
-                        echo '<a href="invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill deposited"></i></a>';
-                    }
-                else {
-                    echo "<i class='ri-receipt-fill pending'></i>";
-                }
                 echo'</td>
             </tr>';
         }
@@ -666,22 +682,42 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-    $('select[name="status"]').change(function(){
-        var booking_id = $(this).closest('form').find('input[name="booking_id"]').val();
-        var month = $(this).closest('form').find('input[name="month"]').val();
-        var status = $(this).val();
-        
+    // helper: show/hide loader and toggle selects
+    function showStatusLoader() {
+        $('#statusLoader').addClass('show').attr('aria-hidden', 'false');
+        $('select[name="status"]').prop('disabled', true);
+    }
+    function hideStatusLoader() {
+        $('#statusLoader').removeClass('show').attr('aria-hidden', 'true');
+        $('select[name="status"]').prop('disabled', false);
+    }
+
+    $('select[name="status"]').on('change', function(e){
+        e.preventDefault(); // prevent any native submit
+        var $select = $(this);
+        var booking_id = $select.closest('form').find('input[name="booking_id"]').val();
+        var month = $select.closest('form').find('input[name="month"]').val();
+        var status = $select.val();
+
+        // show loader and disable inputs
+        showStatusLoader();
+
         console.log("Booking ID: " + booking_id + ", Month: " + month + ", Status: " + status); 
         
         $.ajax({
             url: '', 
             method: 'POST',
-            data: {booking_id: booking_id, status: status},
+            data: {booking_id: booking_id, status: status, month: month},
             success: function(response){
                 console.log('Status updated successfully.');
+                // reload to reflect changes
+                location.reload();
             },
             error: function(xhr, status, error){
                 console.error('Error occurred while updating status: ' + error);
+                // re-enable UI so user can retry
+                hideStatusLoader();
+                alert('An error occurred updating status. Please try again.');
             }
         });
     });
