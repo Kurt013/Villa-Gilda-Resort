@@ -58,7 +58,7 @@ INSERT INTO `user accounts` (`ID`, `First Name`, `Last Name`, `Username`, `Passw
 (3, 'Jeruh', 'Fornal', 'jeruh123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'jeruhasis@gmail.com', 'staff', ''),
 (4, 'Lauriene Jade', 'Barroso', 'lauriene123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'laurienejadebarroso@gmail.com', 'staff', ''),
 (5, 'Zofia Dennise', 'Juan', 'zof123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'zofiadennisejuan@gmail', 'staff', ''),
-(6, 'Era Dane', 'Par', 'era123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'par.eradane@gmail.com', 'staff', ''),
+(6, 'Era Dane', 'Par', 'era123', '$2a$12$tg0iXkRdsCXeS7tguRegt.OocYk4NTdNuqNEvXk1yzuEYY3M14r2a', 'par.eradane@gmail.com', 'staff', '');
 
 -- Modify the primary keys
 ALTER TABLE `user accounts`
@@ -81,7 +81,5 @@ ALTER TABLE `user accounts`
 
 ALTER TABLE forget_password
   MODIFY COLUMN id INT(11) NOT NULL AUTO_INCREMENT;
-
-
 
 COMMIT;
