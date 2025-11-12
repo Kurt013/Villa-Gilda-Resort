@@ -1,4 +1,12 @@
 <?php 
+    require __DIR__ . '/vendor/autoload.php';
+
+    use Dotenv\Dotenv;
+
+    // Load .env first
+    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+
   session_start();
 
   if (isset($_POST['submit']) || empty($_SESSION['role'])) {
