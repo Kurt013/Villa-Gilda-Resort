@@ -1,11 +1,20 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+// Load .env first
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 session_start();
+
 $message = "";
 $modal = false;
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'villa gilda'; // Adjusted to remove the space
+$host = $_ENV['DB_HOST'] ?? 'localhost';
+$username = $_ENV['DB_USER'] ?? 'root';
+$password = $_ENV['DB_PASS'] ?? '';
+$database = $_ENV['DB_NAME'] ?? 'villa gilda'; // Adjusted to remove the space
 $dbconfig = mysqli_connect($host, $username, $password, $database);
 
 if (!$dbconfig) {
