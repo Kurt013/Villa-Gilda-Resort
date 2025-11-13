@@ -577,13 +577,18 @@ if (isset($_POST['status']) && isset($_POST['booking_id'])) {
                 </form>
                 </td>
                 <td class="tablet">';
-            if ($row["status"] === "fully paid") {
-                echo '<a href="./invoices/invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill fully-paid"></i></a>';
-            }
-            else if ($row["status"] === "deposited") {
-                echo '<a href="./invoices/invoice_'.$row["id"].'.pdf" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')"><i class="ri-receipt-fill deposited"></i></a>';
-            }
-            else {
+                
+           if ($row["status"] === "fully paid" || $row["status"] === "deposited") {
+                $invoiceRel = 'view_invoice.php?file=invoice_'.$row["id"].'.pdf';
+                $invoicePath = __DIR__ . '/invoices/invoice_' . $row["id"] . '.pdf';
+                if (file_exists($invoicePath)) {
+                    echo '<a href="'.$invoiceRel.'" target="_blank" onclick="sendEmail('.$row["id"].', \''.$row["email"].'\')">
+                            <i class="ri-receipt-fill '.($row["status"] == "fully paid" ? "fully-paid" : "deposited").'"></i>
+                        </a>';
+                } else {
+                    echo "<i class='ri-receipt-fill pending'></i>";
+                }
+            } else {
                 echo "<i class='ri-receipt-fill pending'></i>";
             }
 
